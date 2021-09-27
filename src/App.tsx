@@ -3,7 +3,7 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Content} from "./components/Content/Content";
 import {Footer} from "./components/Footer/Footer";
-import {BrowserRouter} from "react-router-dom";
+import {BrowserRouter, HashRouter} from "react-router-dom";
 import {stateType} from "./redux/state";
 
 //types
@@ -19,7 +19,7 @@ function App(props: AppPropsType) {
     const [way, setWay] = useState<wayType>(1)
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div id='appWrapper'>
                 {way === 0 ? <Header setWay={setWay}/> :
                     <>
@@ -30,7 +30,7 @@ function App(props: AppPropsType) {
                         <Footer/>
                     </>}
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 
