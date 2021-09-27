@@ -1,0 +1,14 @@
+.like {
+    display: inline-block;
+}
+
+.like > * {
+    width: 20%;
+    font-size: inherit;
+}
+
+.like > .btn {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: white;
+}

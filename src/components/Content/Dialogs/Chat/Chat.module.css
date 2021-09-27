@@ -1,0 +1,25 @@
+.you {
+    padding: 5px;
+    text-align: end;
+    background-color: rgba(10, 10, 10, .4);
+}
+
+.you > * {
+    display: inline-block;
+}
+
+.notYou > * {
+    display: inline-block;
+}
+
+.notYou {
+    padding: 5px;
+    text-align: start;
+    background-color: rgba(10, 10, 10, .3);
+}
+
+.you img, .notYou img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}

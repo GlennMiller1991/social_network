@@ -1,0 +1,46 @@
+#content {
+    background-color: white;
+    padding-left: 3%;
+    padding-right: 3%;
+    width: 55%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 70% 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas:
+    'nava nava'
+    'post sidebar';
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+}
+
+#content > * {
+    box-shadow: 2px -2px 9px 3px rgba(40, 40, 32, 0.3);
+    background-color: #edeef0;
+
+}
+
+
+#nava {
+    grid-area: nava;
+    align-self: center;
+    border-radius: 0 0 15px 15px;
+}
+
+#contentContent {
+    grid-area: post;
+    justify-self: center;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+}
+
+#sidebar {
+    grid-area: sidebar;
+    justify-self: center;
+    width: 100%;
+    border-radius: 15px 15px 0 0;
+}
+
+#general {
+    margin: 8px 15px;
+}

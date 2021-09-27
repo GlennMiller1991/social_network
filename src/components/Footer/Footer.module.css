@@ -1,0 +1,19 @@
+#footer {
+    width: 70%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    box-shadow: 2px -2px 9px 3px rgba(40, 40, 32, 0.3);
+    border-radius: 15px 15px 0 0;
+}
+
+#footer img {
+    height: 100px;
+}
+
+#footer ul {
+    list-style: none;
+}
+

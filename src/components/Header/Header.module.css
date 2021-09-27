@@ -1,0 +1,32 @@
+#header {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .95);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+}
+
+#textContainer {
+    width: 40%;
+    heigth: 20%;
+    color: white;
+    text-align: center;
+}
+
+#enterBtn {
+    width: 100px;
+    height: 100px;
+    margin-top: 10px;
+}
+
+#imgBtn {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}

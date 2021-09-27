@@ -1,0 +1,28 @@
+.txt {
+    width: 98%;
+    height: 150px;
+    margin: 0 auto;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 10px;
+    border: 1px solid black;
+    resize: none;
+}
+
+.btn {
+    border: 1px solid black;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: white;
+}
+
+.btn:active {
+    background-color: #edeef0;
+    opacity: .9;
+    border-bottom: 3px solid black;
+}
+
+.error {
+    color: #9a1c1c;
+}
