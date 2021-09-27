@@ -7,7 +7,6 @@ import {BrowserRouter} from "react-router-dom";
 import {stateType} from "./redux/state";
 
 //types
-type TestType = string
 export type wayType = 0 | 1
 type AppPropsType = {
     state: stateType
