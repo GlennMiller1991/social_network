@@ -18,14 +18,10 @@ const post: PostType = {
     postId: v1(),
 }
 
-const changeLikesCount = (value: boolean, postId: string) => {
-    alert('from changeLikesCount with love')
-}
-
 export const DefaultPost = () => <Post postId={post.postId}
                                        postDate={post.postDate}
                                        postLikes={post.postLikes}
                                        postPhoto={post.postPhoto}
                                        postText={post.postText}
-                                       changeLikesCount={changeLikesCount}
+                                       changeLikesCount={action('changeLikesCount')}
 />
