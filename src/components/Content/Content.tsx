@@ -4,7 +4,7 @@ import {Nava} from "./Nava/Nava";
 import {Posts} from "./Posts/Posts";
 import {Sidebar} from "./Sidebar/Sidebar";
 import {Dialogs} from "./Dialogs/Dialogs";
-import {Route} from 'react-router-dom';
+import {Redirect, Route} from 'react-router-dom';
 import {Best} from "./Best/Best";
 import {ShareStory} from "./ShareStory/ShareStory";
 import {Profile} from "./Profile/Profile";
@@ -25,7 +25,8 @@ export const Content: React.FC<ContentPropsType> = (props) => {
             <div id={styles.nava}><Nava/></div>
             <div id={styles.contentContent}>
                 <div id={styles.general}>
-                    <Route exact path='/'
+                    <Route path={'/'} exact render={() => <Redirect to={'/main'}/>}/>
+                    <Route path='/main'
                            render={() => <Posts state={props.state.postsPage}
                                                 changeLikesCount={props.changeLikesCount}/>}/>
                     <Route path='/best' component={Best}/>
