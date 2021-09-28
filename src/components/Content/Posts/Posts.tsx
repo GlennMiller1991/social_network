@@ -1,12 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
 import classes from './Posts.module.css';
 import {Post} from "./Post/Post";
-import {postsPageType} from "../../../redux/state";
+import {actionsType, postsPageType} from "../../../redux/state";
 
 //types
 type PostsPropsType = {
     state: postsPageType
-    changeLikesCount: (value: boolean, postId: string) => void
+    dispatch: (action: actionsType) => void
 }
 
 
@@ -21,15 +21,6 @@ export const Posts: React.FC<PostsPropsType> = (props) => {
     }
 
     //filter
-    const stringToNumber = (string: string) => {
-        const newString = string.split('.');
-        let sum = 0
-        for (let i in newString) {
-            console.log(i)
-            sum += Number(i)
-        }
-        return sum
-    }
     const postsForRender = props.state.posts
     if (sort === 'rate') {
         postsForRender.sort((postA, postB) => {
@@ -40,7 +31,6 @@ export const Posts: React.FC<PostsPropsType> = (props) => {
             return postA.postLikes > postB.postLikes ? 1 : -1
         })
     } else if (sort === 'rate today') {
-
     }
 
 
@@ -63,7 +53,7 @@ export const Posts: React.FC<PostsPropsType> = (props) => {
                                   postDate={post.postDate}
                                   postLikes={post.postLikes}
                                   postId={post.postId}
-                                  changeLikesCount={props.changeLikesCount}/>
+                                  dispatch={props.dispatch}/>
                         </div>
                     )
                 })}
