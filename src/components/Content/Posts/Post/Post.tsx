@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './Post.module.css';
 import {LikesCount} from "./LikesCount/LikesCount";
-import {actionsType} from "../../../../redux/store";
+import {actionsType} from "../../../../redux/redux_store";
 
 //types
 export type PostType = {

@@ -1,6 +1,7 @@
-import {actionsType, addPostActionType, changeLikesCoundActionType, postsPageType} from "./store";
+import {postsPageType} from "./store";
 import {v1} from "uuid";
 import {PostType} from "../components/Content/Posts/Post/Post";
+import {actionsType, addPostActionType, changeLikesCoundActionType} from "./redux_store";
 
 const CHANGE_LIKES_COUNT = "CHANGE-LIKES-COUNT";
 const ADD_POST = "ADD-POST"

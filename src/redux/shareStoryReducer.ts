@@ -1,4 +1,5 @@
-import {actionsType, shareStoryPageType} from "./store";
+import {shareStoryPageType} from "./store";
+import {actionsType} from "./redux_store";
 
 const CHANGE_SHARE_STORY_TEXT = 'CHANGE-SHARE-STORY-TEXT'
 export const changeShareStoryTextActionCreator = (text: string): actionsType => {

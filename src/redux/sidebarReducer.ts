@@ -1,5 +1,6 @@
-import {actionsType, sideBarType} from "./store";
+import {sideBarType} from "./store";
 import {v1} from "uuid";
+import {actionsType} from "./redux_store";
 
 const initialState = {
     tags: [

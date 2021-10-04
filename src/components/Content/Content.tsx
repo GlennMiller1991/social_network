@@ -8,7 +8,8 @@ import {Redirect, Route} from 'react-router-dom';
 import {Best} from "./Best/Best";
 import {ShareStory} from "./ShareStory/ShareStory";
 import {Profile} from "./Profile/Profile";
-import {actionsType, stateType} from "../../redux/store";
+import {stateType} from "../../redux/store";
+import {actionsType} from "../../redux/redux_store";
 
 //types
 type ContentPropsType = {

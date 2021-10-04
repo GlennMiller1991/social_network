@@ -1,8 +1,9 @@
 import React, {ChangeEvent, LegacyRef, useState} from 'react';
 import styles from './ShareStory.module.css';
-import {actionsType, shareStoryPageType} from "../../../redux/store";
+import {shareStoryPageType} from "../../../redux/store";
 import {changeShareStoryTextActionCreator} from "../../../redux/shareStoryReducer";
 import {addPostActionCreator} from "../../../redux/postsReducer";
+import {actionsType} from "../../../redux/redux_store";
 
 type ShareStoryPropsType = {
     dispatch: (action: actionsType) => void

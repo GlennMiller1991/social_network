@@ -4,7 +4,8 @@ import {Header} from "./components/Header/Header";
 import {Content} from "./components/Content/Content";
 import {Footer} from "./components/Footer/Footer";
 import {HashRouter} from "react-router-dom";
-import {actionsType, stateType} from "./redux/store";
+import {actionsType} from "./redux/redux_store";
+import {stateType} from "./redux/store";
 
 //types
 export type wayType = 0 | 1

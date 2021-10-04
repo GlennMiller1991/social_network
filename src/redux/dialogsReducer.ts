@@ -1,5 +1,6 @@
-import {actionsType, dialogsPageType} from "./store";
+import {dialogsPageType} from "./store";
 import {v1} from "uuid";
+import {actionsType} from "./redux_store";
 
 const initialState: dialogsPageType = {
     chat: [
