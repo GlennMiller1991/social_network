@@ -23,5 +23,5 @@ export const DefaultPost = () => <Post postId={post.postId}
                                        postLikes={post.postLikes}
                                        postPhoto={post.postPhoto}
                                        postText={post.postText}
-                                       changeLikesCount={action('changeLikesCount')}
+                                       dispatch={action('changeLikesCount')}
 />

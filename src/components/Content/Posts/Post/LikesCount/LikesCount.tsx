@@ -1,10 +1,11 @@
 import React from "react";
 import styles from './LikesCount.module.css'
+import {actionsType} from "../../../../../redux/state";
 
 //types
 type LikesCountPropsType = {
     likesCount: number
-    changeLikesCount: (value: boolean, postId: string) => void
+    dispatch: (action: actionsType) => void
     postId: string
 }
 
@@ -12,7 +13,7 @@ export const LikesCount: React.FC<LikesCountPropsType> = (props) => {
 
     //callbacks
     const changeLikesCountHandler = (change: boolean, postId: string) => {
-        props.changeLikesCount(change, postId)
+        props.dispatch({type: "CHANGE-LIKES-COUNT", postId: postId, value: change})
     }
 
     //return
