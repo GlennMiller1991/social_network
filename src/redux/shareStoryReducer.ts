@@ -1,20 +1,18 @@
-import {actionsType, postsPageType} from "./state";
-import {PostType} from "../components/Content/Posts/Post/Post";
-import {v1} from "uuid";
+import {actionsType, shareStoryPageType} from "./store";
 
-const ADD_POST = "ADD-POST"
+const CHANGE_SHARE_STORY_TEXT = 'CHANGE-SHARE-STORY-TEXT'
+export const changeShareStoryTextActionCreator = (text: string): actionsType => {
+    return {type: CHANGE_SHARE_STORY_TEXT, shareStoryText: text}
+}
 
-export const shareStoryReducer = (state: postsPageType, action: actionsType): postsPageType => {
-    switch (action.type) {
-        case ADD_POST:
-            const newPost: PostType = {
-                postText: action.postMessage,
-                postPhoto: 'https://helo',
-                postDate: `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}}`,
-                postLikes: 0,
-                postId: v1()
-            }
-            state.posts.push(newPost)
+const initialState = {
+    storyText: ''
+}
+
+export const shareStoryReducer = (state: shareStoryPageType = initialState, action: actionsType) => {
+    switch(action.type) {
+        case CHANGE_SHARE_STORY_TEXT:
+            state.storyText = action.shareStoryText
             return state
         default:
             return state

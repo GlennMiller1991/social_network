@@ -1,5 +1,5 @@
 import React from 'react'
-import {tagType} from "../../../../../redux/state";
+import {tagType} from "../../../../../redux/store";
 
 type TagPropsType = tagType
 

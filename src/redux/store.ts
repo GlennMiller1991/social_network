@@ -4,6 +4,7 @@ import {v1} from "uuid";
 import {OpenDialogPropsType} from "../components/Content/Dialogs/OpenDialog/OpenDialog";
 import {postsReducer} from "./postsReducer";
 import {shareStoryReducer} from "./shareStoryReducer";
+import {actionsType} from "./redux_store";
 
 //types
 export type bestPostType = {
@@ -34,22 +35,10 @@ export type stateType = {
     shareStoryPage: shareStoryPageType
     sideBar: sideBarType
 }
-//action types
-type changeLikesCoundActionType = {
-    type: 'CHANGE-LIKES-COUNT'
-    value: boolean
-    postId: string
-}
-type addPostActionType = {
-    type: 'ADD-POST'
-    postMessage: string
-}
-export type actionsType = addPostActionType | changeLikesCoundActionType
 
 export type storeType = {
     _state: stateType
     _renderEntireTree: (store: storeType) => void
-    changeShareStoryText: (shareStoreText: string) => void
     subscribe: (observer: (store: storeType) => void) => void
     getState: () => stateType
     dispatch: (action: actionsType) => void
@@ -165,10 +154,6 @@ export const store: storeType = {
     _renderEntireTree() {
         console.log('state was changed')
     },
-    changeShareStoryText(shareStoryText) {
-        this._state.shareStoryPage.storyText = shareStoryText
-        this._renderEntireTree(this)
-    },
     subscribe(observer) {
         this._renderEntireTree = observer
     },
@@ -177,7 +162,7 @@ export const store: storeType = {
     },
     dispatch(action: actionsType) {
         store._state.postsPage = postsReducer(store._state.postsPage, action)
-        store._state.postsPage = shareStoryReducer(store._state.postsPage, action)
+        store._state.shareStoryPage = shareStoryReducer(store._state.shareStoryPage, action)
         store._renderEntireTree(this)
     }
 }

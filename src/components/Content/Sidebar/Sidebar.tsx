@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Sidebar.module.css';
 import {BestPosts} from "./BestPosts/BestPosts";
 import {Tags} from "./Tags/Tags";
-import {sideBarType} from "../../../redux/state";
+import {sideBarType} from "../../../redux/store";
 
 type SidebarPropsType = {
     state: sideBarType

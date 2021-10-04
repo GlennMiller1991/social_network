@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './Dialogs.module.css'
 import {Chat, ChatType} from "./Chat/Chat";
 import {OpenDialog} from "./OpenDialog/OpenDialog";
-import {dialogsPageType} from "../../../redux/state";
+import {dialogsPageType} from "../../../redux/store";
 
 //types
 type FilterType = 'you' | 'notYou' | 'all'

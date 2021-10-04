@@ -1,11 +1,12 @@
-import React, {ChangeEvent, LegacyRef, MouseEventHandler, useState} from 'react';
+import React, {ChangeEvent, LegacyRef, useState} from 'react';
 import styles from './ShareStory.module.css';
-import {actionsType, shareStoryPageType} from "../../../redux/state";
+import {actionsType, shareStoryPageType} from "../../../redux/store";
+import {changeShareStoryTextActionCreator} from "../../../redux/shareStoryReducer";
+import {addPostActionCreator} from "../../../redux/postsReducer";
 
 type ShareStoryPropsType = {
     dispatch: (action: actionsType) => void
     state: shareStoryPageType
-    changeShareStoryText: (text: string) => void
 }
 
 //components
@@ -18,12 +19,12 @@ export const ShareStory: React.FC<ShareStoryPropsType> = (props) => {
 
     //callbacks
     const onClickCallback = () => {
-        props.dispatch({type: 'ADD-POST', postMessage: ref.current ? ref.current.value : ''})
-        props.changeShareStoryText('')
+        props.dispatch(addPostActionCreator(ref.current ? ref.current.value : ''))
+        props.dispatch(changeShareStoryTextActionCreator(''))
     }
 
     const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.changeShareStoryText(event.currentTarget.value)
+        props.dispatch(changeShareStoryTextActionCreator(event.currentTarget.value))
     }
 
     //return

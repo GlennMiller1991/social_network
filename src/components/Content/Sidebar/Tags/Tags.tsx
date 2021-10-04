@@ -1,6 +1,6 @@
 import styles from "../Sidebar.module.css";
 import React from "react";
-import {tagType} from "../../../../redux/state";
+import {tagType} from "../../../../redux/store";
 import {Tag} from "./Tag/Tag";
 
 type TagsPropsType = {
