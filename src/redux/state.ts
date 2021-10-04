@@ -32,29 +32,19 @@ export type stateType = {
     shareStoryPage: shareStoryPageType
     sideBar: sideBarType
 }
-//action types
-type changeLikesCoundActionType = {
-    type: 'CHANGE-LIKES-COUNT'
-    value: boolean
-    postId: string
-}
-type addPostActionType = {
-    type: 'ADD-POST'
-    postMessage: string
-}
-export type actionsType = addPostActionType | changeLikesCoundActionType
 
 export type storeType = {
     _state: stateType
     _renderEntireTree: (store: storeType) => void
     changeShareStoryText: (shareStoreText: string) => void
+    addPost: (postMessage: string) => void
+    changeLikesCount: (value: boolean, postId: string) => void
     subscribe: (observer: (store: storeType) => void) => void
     getState: () => stateType
-    dispatch: (action: actionsType) => void
 }
 
 export const store: storeType = {
-    _state: {
+    _state : {
         postsPage: {
             posts: [
                 {
@@ -167,34 +157,65 @@ export const store: storeType = {
         this._state.shareStoryPage.storyText = shareStoryText
         this._renderEntireTree(this)
     },
+    addPost(postMessage) {
+        const newPost: PostType = {
+            postText: postMessage,
+            postPhoto: 'https://helo',
+            postDate: `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}}`,
+            postLikes: 0,
+            postId: v1()
+        }
+        this._state.postsPage.posts.push(newPost)
+        this._renderEntireTree(this)
+    },
+    changeLikesCount(value, postId) {
+        const obj = this._state.postsPage.posts.find((post) => post.postId === postId)
+        if (obj) {
+            value ? obj.postLikes++ : obj.postLikes--
+            this._renderEntireTree(this);
+        }
+    },
     subscribe(observer) {
         this._renderEntireTree = observer
     },
     getState() {
         return this._state
     },
-    dispatch(action: actionsType) {
-        switch (action.type) {
-            case "ADD-POST":
-                const newPost: PostType = {
-                    postText: action.postMessage,
-                    postPhoto: 'https://helo',
-                    postDate: `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}}`,
-                    postLikes: 0,
-                    postId: v1()
-                }
-                this._state.postsPage.posts.push(newPost)
-                this._renderEntireTree(this)
-                break;
-            case "CHANGE-LIKES-COUNT":
-                const obj = this._state.postsPage.posts.find((post) => post.postId === action.postId)
-                if (obj) {
-                    action.value ? obj.postLikes++ : obj.postLikes--
-                    this._renderEntireTree(this);
-                }
-                break
-            default:
-                break
-        }
-    }
 }
+
+/*//functions
+let renderEntireTree = (state: stateType) => {
+    console.log('state was changed')
+}*/
+/*
+
+export const subscribe = (observer: (state: stateType) => void) => {
+    renderEntireTree = observer
+}
+*/
+
+/*export const changeLikesCount = (value: boolean, postId: string) => {
+    const obj = state.postsPage.posts.find((post) => post.postId === postId)
+    if (obj) {
+        value ? obj.postLikes++ : obj.postLikes--
+        renderEntireTree(state);
+    }
+}*/
+
+/*export const addPost = (postMessage: string) => {
+    const newPost: PostType = {
+        postText: postMessage,
+        postPhoto: 'https://helo',
+        postDate: `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}}`,
+        postLikes: 0,
+        postId: v1()
+    }
+    state.postsPage.posts.push(newPost)
+    renderEntireTree(state)
+}*/
+
+/*
+export const changeShareStoryText = (shareStoryText: string) => {
+    state.shareStoryPage.storyText = shareStoryText
+    renderEntireTree(state)
+}*/

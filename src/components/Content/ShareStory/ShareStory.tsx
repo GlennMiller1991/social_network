@@ -1,9 +1,9 @@
 import React, {ChangeEvent, LegacyRef, MouseEventHandler, useState} from 'react';
 import styles from './ShareStory.module.css';
-import {actionsType, shareStoryPageType} from "../../../redux/state";
+import {shareStoryPageType} from "../../../redux/state";
 
 type ShareStoryPropsType = {
-    dispatch: (action: actionsType) => void
+    addPost: (postMessage: string) => void
     state: shareStoryPageType
     changeShareStoryText: (text: string) => void
 }
@@ -18,7 +18,7 @@ export const ShareStory: React.FC<ShareStoryPropsType> = (props) => {
 
     //callbacks
     const onClickCallback = () => {
-        props.dispatch({type: 'ADD-POST', postMessage: ref.current ? ref.current.value : ''})
+        props.addPost(ref.current ? ref.current.value : '')
         props.changeShareStoryText('')
     }
 

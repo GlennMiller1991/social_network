@@ -8,12 +8,13 @@ import {Redirect, Route} from 'react-router-dom';
 import {Best} from "./Best/Best";
 import {ShareStory} from "./ShareStory/ShareStory";
 import {Profile} from "./Profile/Profile";
-import {actionsType, stateType} from "../../redux/state";
+import {stateType} from "../../redux/state";
 
 //types
 type ContentPropsType = {
     state: stateType
-    dispatch: (action: actionsType) => void
+    addPost: (postMessage: string) => void
+    changeLikesCount: (value: boolean, postId: string) => void
     changeShareStoryText: (text: string) => void
 }
 
@@ -27,11 +28,11 @@ export const Content: React.FC<ContentPropsType> = (props) => {
                     <Route path={'/'} exact render={() => <Redirect to={'/main'}/>}/>
                     <Route path='/main'
                            render={() => <Posts state={props.state.postsPage}
-                                                dispatch={props.dispatch}/>}/>
+                                                changeLikesCount={props.changeLikesCount}/>}/>
                     <Route path='/best' component={Best}/>
                     <Route path='/share' render={() => <ShareStory state={props.state.shareStoryPage}
                                                                    changeShareStoryText={props.changeShareStoryText}
-                                                                   dispatch={props.dispatch}/>}/>
+                                                                   addPost={props.addPost}/>}/>
                     <Route path='/profile' component={Profile}/>
                     <Route path='/dialogs'
                            render={() => <Dialogs state={props.state.dialogsPage}/>}/>

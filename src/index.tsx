@@ -9,7 +9,8 @@ const renderEntireTree = (store: storeType) => {
     ReactDOM.render(
         <React.StrictMode>
             <App state={store.getState()}
-                 dispatch={store.dispatch.bind(store)}
+                 changeLikesCount={store.changeLikesCount.bind(store)}
+                 addPost={store.addPost.bind(store)}
                  changeShareStoryText={store.changeShareStoryText.bind(store)}/>
         </React.StrictMode>,
         document.getElementById('root')

@@ -3,15 +3,16 @@ import './App.css';
 import {Header} from "./components/Header/Header";
 import {Content} from "./components/Content/Content";
 import {Footer} from "./components/Footer/Footer";
-import {HashRouter} from "react-router-dom";
-import {actionsType, stateType} from "./redux/state";
+import {BrowserRouter, HashRouter} from "react-router-dom";
+import {stateType} from "./redux/state";
 
 //types
 export type wayType = 0 | 1
 type AppPropsType = {
     state: stateType
+    changeLikesCount: (value: boolean, postId: string) => void
     changeShareStoryText: (text: string) => void
-    dispatch: (action: actionsType) => void
+    addPost: (text: string) => void
 }
 
 function App(props: AppPropsType) {
@@ -23,7 +24,8 @@ function App(props: AppPropsType) {
                 {way === 0 ? <Header setWay={setWay}/> :
                     <>
                         <Content state={props.state}
-                                 dispatch={props.dispatch}
+                                 addPost={props.addPost}
+                                 changeLikesCount={props.changeLikesCount}
                                  changeShareStoryText={props.changeShareStoryText}/>
                         <Footer/>
                     </>}
