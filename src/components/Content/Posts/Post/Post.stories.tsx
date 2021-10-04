@@ -18,10 +18,6 @@ const post: PostType = {
     postId: v1(),
 }
 
-export const DefaultPost = () => <Post postId={post.postId}
-                                       postDate={post.postDate}
-                                       postLikes={post.postLikes}
-                                       postPhoto={post.postPhoto}
-                                       postText={post.postText}
+export const DefaultPost = () => <Post postInfo={post}
                                        dispatch={action('changeLikesCount')}
 />

@@ -49,11 +49,7 @@ export const Posts: React.FC<PostsPropsType> = (props) => {
                 {postsForRender.map((post) => {
                     return (
                         <div key={post.postId}>
-                            <Post postText={post.postText}
-                                  postPhoto={post.postPhoto}
-                                  postDate={post.postDate}
-                                  postLikes={post.postLikes}
-                                  postId={post.postId}
+                            <Post postInfo={post}
                                   dispatch={props.dispatch}/>
                         </div>
                     )
