@@ -2,6 +2,8 @@ import {PostType} from "../components/Content/Posts/Post/Post";
 import {ChatType} from "../components/Content/Dialogs/Chat/Chat";
 import {v1} from "uuid";
 import {OpenDialogPropsType} from "../components/Content/Dialogs/OpenDialog/OpenDialog";
+import {postsReducer} from "./postsReducer";
+import {shareStoryReducer} from "./shareStoryReducer";
 
 //types
 export type bestPostType = {
@@ -160,7 +162,7 @@ export const store: storeType = {
             ],
         },
     },
-    _renderEntireTree(store) {
+    _renderEntireTree() {
         console.log('state was changed')
     },
     changeShareStoryText(shareStoryText) {
@@ -174,27 +176,8 @@ export const store: storeType = {
         return this._state
     },
     dispatch(action: actionsType) {
-        switch (action.type) {
-            case "ADD-POST":
-                const newPost: PostType = {
-                    postText: action.postMessage,
-                    postPhoto: 'https://helo',
-                    postDate: `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}}`,
-                    postLikes: 0,
-                    postId: v1()
-                }
-                this._state.postsPage.posts.push(newPost)
-                this._renderEntireTree(this)
-                break;
-            case "CHANGE-LIKES-COUNT":
-                const obj = this._state.postsPage.posts.find((post) => post.postId === action.postId)
-                if (obj) {
-                    action.value ? obj.postLikes++ : obj.postLikes--
-                    this._renderEntireTree(this);
-                }
-                break
-            default:
-                break
-        }
+        store._state.postsPage = postsReducer(store._state.postsPage, action)
+        store._state.postsPage = shareStoryReducer(store._state.postsPage, action)
+        store._renderEntireTree(this)
     }
 }
