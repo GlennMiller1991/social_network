@@ -7,7 +7,7 @@ type LikesCountPropsType = {
     changeLikesCount: (value: boolean) => void
 }
 
-export const LikesCount: React.FC<LikesCountPropsType> = (props) => {
+const LikesCountSecret: React.FC<LikesCountPropsType> = (props) => {
 
     //return
     return (
@@ -18,3 +18,4 @@ export const LikesCount: React.FC<LikesCountPropsType> = (props) => {
         </div>
     )
 }
+export const LikesCount = React.memo(LikesCountSecret)

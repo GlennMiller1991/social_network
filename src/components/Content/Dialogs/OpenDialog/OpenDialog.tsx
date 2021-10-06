@@ -9,12 +9,13 @@ export type OpenDialogPropsType = {
 }
 
 //components
-export const OpenDialog: React.FC<OpenDialogPropsType> = (props) => {
+const OpenDialogSecret: React.FC<OpenDialogPropsType> = (props) => {
     return (
         <div className={styles.openDialog}>
-        <NavLink to={`/dialogs/${props.id}`}>
-    {props.name}
-    </NavLink>
-    </div>
-);
+            <NavLink to={`/dialogs/${props.id}`}>
+                {props.name}
+            </NavLink>
+        </div>
+    )
 }
+export const OpenDialog = React.memo(OpenDialogSecret)

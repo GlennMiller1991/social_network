@@ -2,8 +2,7 @@ import React from 'react'
 import {tagType} from "../../../../../redux/store";
 
 type TagPropsType = tagType
-
-export const Tag: React.FC<TagPropsType> = (props) => {
+const TagSecret: React.FC<TagPropsType> = (props) => {
 
     //styles
     const tagStyle = {
@@ -15,3 +14,4 @@ export const Tag: React.FC<TagPropsType> = (props) => {
         <span style={tagStyle}>{props.name} </span>
     );
 }
+export const Tag = React.memo(TagSecret)

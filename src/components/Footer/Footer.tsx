@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import classes from './Footer.module.css';
 
 
-export const Footer = () => {
+const FooterSecret = () => {
     return (
         <div id={classes.footer}>
             <ul>
@@ -24,3 +24,4 @@ export const Footer = () => {
         </div>
     );
 }
+export const Footer = React.memo(FooterSecret)

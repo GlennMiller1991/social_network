@@ -18,7 +18,7 @@ export type PostPropsType = {
 }
 
 //components
-export const Post: React.FC<PostPropsType> = (props) => {
+const PostSecret: React.FC<PostPropsType> = (props) => {
 
     //return
     return (
@@ -36,3 +36,4 @@ export const Post: React.FC<PostPropsType> = (props) => {
         </div>
     );
 }
+export const Post = React.memo(PostSecret)

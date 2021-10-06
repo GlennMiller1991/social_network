@@ -7,7 +7,7 @@ type TagsPropsType = {
     tags: Array<tagType>
 }
 
-export const Tags: React.FC<TagsPropsType> = (props) => {
+ const TagsSecret: React.FC<TagsPropsType> = (props) => {
 
     return (
         <div>
@@ -15,3 +15,4 @@ export const Tags: React.FC<TagsPropsType> = (props) => {
         </div>
     );
 }
+export const Tags = React.memo(TagsSecret)

@@ -10,8 +10,7 @@ type BestPostsPropsType = {
     bestPosts: Array<postType>
 }
 
-
-export const BestPosts: React.FC<BestPostsPropsType> = (props) => {
+const BestPostsSecret: React.FC<BestPostsPropsType> = (props) => {
     return (
         <div className={styles.posts}>
             {props.bestPosts.map(bestPost => {
@@ -21,3 +20,4 @@ export const BestPosts: React.FC<BestPostsPropsType> = (props) => {
         </div>
     );
 }
+export const BestPosts = React.memo(BestPostsSecret)

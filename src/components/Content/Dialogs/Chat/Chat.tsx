@@ -12,7 +12,7 @@ type ChatPropsType = {
 }
 
 //components
-export const Chat: React.FC<ChatPropsType> = (props) => {
+const ChatSecret: React.FC<ChatPropsType> = (props) => {
 
     //callbacks
     const mappedMessages = props.messages.map((m) => {
@@ -43,3 +43,4 @@ export const Chat: React.FC<ChatPropsType> = (props) => {
         </div>
     );
 }
+export const Chat = React.memo(ChatSecret)

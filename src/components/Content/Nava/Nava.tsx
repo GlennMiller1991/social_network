@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styles from "./Nava.module.css";
 
-export const Nava = () => {
+const NavaSecret = () => {
+
     return (
         <div id={styles.nava}>
             <div className={styles.button}>
@@ -44,3 +45,4 @@ export const Nava = () => {
         </div>
     );
 }
+export const Nava = React.memo(NavaSecret)

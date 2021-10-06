@@ -12,11 +12,11 @@ type PostsPropsType = {
 
 
 //components
-export const Posts: React.FC<PostsPropsType> = (props) => {
+const PostsSecret: React.FC<PostsPropsType> = (props) => {
     //initial data
     const [sort, setSort] = useState<string>('date')
 
-    //calbacks
+    //callbacks
     const onChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
         setSort(event.currentTarget.value)
     }
@@ -58,3 +58,4 @@ export const Posts: React.FC<PostsPropsType> = (props) => {
         </div>
     );
 }
+export const Posts = React.memo(PostsSecret)

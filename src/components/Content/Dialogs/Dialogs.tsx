@@ -22,7 +22,7 @@ const filterMessages = (messages: Array<ChatType>, filter: FilterType): Array<Ch
 }
 
 //components
-export const Dialogs: React.FC<DialogsPropsType> = (props) => {
+const DialogsSecret: React.FC<DialogsPropsType> = (props) => {
 
     //initial states
     const [filter, setFilter] = useState<FilterType>('all');
@@ -62,3 +62,4 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         </div>
     );
 }
+export const Dialogs = React.memo(DialogsSecret)

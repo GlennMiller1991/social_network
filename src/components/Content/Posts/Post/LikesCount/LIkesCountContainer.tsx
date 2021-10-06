@@ -11,7 +11,7 @@ type LikesCountPropsType = {
     dispatch: (action: actionsType) => void
 }
 
-export const LikesCountContainer: React.FC<LikesCountPropsType> = (props) => {
+const LikesCountContainerSecret: React.FC<LikesCountPropsType> = (props) => {
 
     //callbacks
     const changeLikesCount = (change: boolean) => {
@@ -21,3 +21,4 @@ export const LikesCountContainer: React.FC<LikesCountPropsType> = (props) => {
     //return
     return <LikesCount likesCount={props.likesCount} changeLikesCount={changeLikesCount}/>
 }
+export const LikesCountContainer = React.memo(LikesCountContainerSecret)

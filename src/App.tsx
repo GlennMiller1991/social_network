@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, memo} from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Content} from "./components/Content/Content";
@@ -14,7 +14,7 @@ type AppPropsType = {
     dispatch: (action: actionsType) => void
 }
 
-function App(props: AppPropsType) {
+function AppSecret(props: AppPropsType) {
     const [way, setWay] = useState<wayType>(1)
 
     return (
@@ -30,5 +30,6 @@ function App(props: AppPropsType) {
         </HashRouter>
     );
 }
+const App = React.memo(AppSecret)
 
 export default App;

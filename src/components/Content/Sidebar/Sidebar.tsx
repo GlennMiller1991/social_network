@@ -8,7 +8,7 @@ type SidebarPropsType = {
     state: sideBarType
 }
 
-export const Sidebar: React.FC<SidebarPropsType> = (props) => {
+const SidebarSecret: React.FC<SidebarPropsType> = (props) => {
     return (
         <div id={styles.sidebar}>
             <BestPosts bestPosts={props.state.bestPosts}/>
@@ -16,3 +16,4 @@ export const Sidebar: React.FC<SidebarPropsType> = (props) => {
         </div>
     );
 }
+export const Sidebar = React.memo(SidebarSecret)

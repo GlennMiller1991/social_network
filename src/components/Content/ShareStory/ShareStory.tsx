@@ -11,7 +11,7 @@ type ShareStoryPropsType = {
 }
 
 //components
-export const ShareStory: React.FC<ShareStoryPropsType> = (props) => {
+const ShareStorySecret: React.FC<ShareStoryPropsType> = (props) => {
 
     //initial states
     const [error, setError] = useState<boolean>(false)
@@ -44,3 +44,4 @@ export const ShareStory: React.FC<ShareStoryPropsType> = (props) => {
         </div>
     )
 }
+export const ShareStory = React.memo(ShareStorySecret)

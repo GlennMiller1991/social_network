@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './Profile.module.css';
 
-export const Best = () => {
+const BestSecret = () => {
     return (
         <div>Best</div>
     )
 }
+export const Best = React.memo(BestSecret)

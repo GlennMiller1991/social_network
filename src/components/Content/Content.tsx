@@ -19,6 +19,7 @@ type ContentPropsType = {
 
 //components
 export const Content: React.FC<ContentPropsType> = (props) => {
+
     return (
         <div id={styles.content}>
             <div id={styles.nava}><Nava/></div>
