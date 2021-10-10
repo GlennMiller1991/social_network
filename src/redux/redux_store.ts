@@ -1,28 +1,36 @@
-import {combineReducers, createStore} from "redux";
-import {postsReducer} from "./postsReducer";
-import {shareStoryReducer} from "./shareStoryReducer";
-import {dialogsReducer} from "./dialogsReducer";
-import {sidebarReducer} from "./sidebarReducer";
+import {combineReducers, createStore, EmptyObject, Store} from "redux";
+import {addPostActionType, changeLikesCountActionType, postsPageType, postsReducer} from "./postsReducer";
+import {changeShareStoryTextActionType, shareStoryPageType, shareStoryReducer} from "./shareStoryReducer";
+import {dialogsPageType, dialogsReducer} from "./dialogsReducer";
+import {sidebarReducer, sideBarType} from "./sidebarReducer";
+import {
+    addCommentActionType,
+    changeNewCommentTextActionType,
+    ProfilePageType,
+    profileReducer
+} from "./profileReducer";
 
-//action types
-export type changeLikesCoundActionType = {
-    type: 'CHANGE-LIKES-COUNT'
-    value: boolean
-    postId: string
+//types
+export type stateType = {
+    postsPage: postsPageType
+    dialogsPage: dialogsPageType
+    shareStoryPage: shareStoryPageType
+    sideBar: sideBarType
+    profilePage: ProfilePageType
 }
-export type addPostActionType = {
-    type: 'ADD-POST'
-    postMessage: string
-}
-export type changeShareStoryTextActionType = {
-    type: 'CHANGE-SHARE-STORY-TEXT'
-    shareStoryText: string
-}
-
-export type actionsType = addPostActionType | changeLikesCoundActionType | changeShareStoryTextActionType
+export type StoreType = Store<EmptyObject & {
+    postsPage: postsPageType;
+    profilePage: never;
+    shareStoryPage: shareStoryPageType;
+    dialogsPage: dialogsPageType;
+    sideBar: sideBarType
+}, actionsType>
+export type actionsType = addPostActionType | changeLikesCountActionType |
+    changeShareStoryTextActionType | changeNewCommentTextActionType | addCommentActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,
+    profilePage: profileReducer,
     shareStoryPage: shareStoryReducer,
     dialogsPage: dialogsReducer,
     sideBar: sidebarReducer,

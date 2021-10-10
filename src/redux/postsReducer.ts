@@ -1,19 +1,35 @@
-import {postsPageType} from "./store";
 import {v1} from "uuid";
-import {PostType} from "../components/Content/Posts/Post/Post";
-import {actionsType, addPostActionType, changeLikesCoundActionType} from "./redux_store";
+import {actionsType} from "./redux_store";
 
+//constants
 const CHANGE_LIKES_COUNT = "CHANGE-LIKES-COUNT";
 const ADD_POST = "ADD-POST"
 
-export const changeLikesCountActionCreator = (change: boolean, postId: string): changeLikesCoundActionType => {
-    return {type: "CHANGE-LIKES-COUNT", postId: postId, value: change}
+//actions types
+export type changeLikesCountActionType = ReturnType<typeof changeLikesCountActionCreator>
+export type addPostActionType = ReturnType<typeof addPostActionCreator>
+
+//types
+export type PostType = {
+    postText: string
+    postPhoto: string
+    postDate: string
+    postLikes: number
+    postId: string
 }
-export const addPostActionCreator = (value: string): addPostActionType => {
-    return {type: 'ADD-POST', postMessage: value}
+export type postsPageType = {
+    posts: Array<PostType>
 }
 
-const initialState = {
+//action creators
+export const changeLikesCountActionCreator = (change: boolean, postId: string) => {
+    return {type: CHANGE_LIKES_COUNT, postId: postId, value: change} as const
+}
+export const addPostActionCreator = (value: string) => {
+    return {type: ADD_POST, postMessage: value} as const
+}
+
+const initialState: postsPageType = {
     posts: [
         {
             postText: 'Is there anybody going to listen to my story' +

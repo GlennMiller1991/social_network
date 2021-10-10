@@ -1,7 +1,7 @@
 import styles from "../Sidebar.module.css";
 import React from "react";
-import {tagType} from "../../../../redux/store";
 import {Tag} from "./Tag/Tag";
+import {tagType} from "../../../../redux/sidebarReducer";
 
 type TagsPropsType = {
     tags: Array<tagType>

@@ -1,24 +1,25 @@
 import React from 'react';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {dialogsPageType, postsPageType, shareStoryPageType, sideBarType, stateType} from './redux/store'
 import {store} from './redux/redux_store'
 import ReactDOM from "react-dom";
 import App from "./App";
-import {EmptyObject} from "redux";
+import {StoreContext} from './redux/StoreContext';
 
-const renderEntireTree = (state: EmptyObject & { postsPage: postsPageType; shareStoryPage: shareStoryPageType; dialogsPage: dialogsPageType; sideBar: sideBarType; }) => {
+const renderEntireTree = () => {
     ReactDOM.render(
         <React.StrictMode>
-            <App state={store.getState()}
-                 dispatch={store.dispatch.bind(store)}/>
+            <StoreContext.Provider value={store}>
+                <App state={store.getState()}
+                     dispatch={store.dispatch.bind(store)}/>
+            </StoreContext.Provider>
         </React.StrictMode>,
         document.getElementById('root')
     );
 }
 
-renderEntireTree(store.getState());
-store.subscribe(() => renderEntireTree(store.getState()))
+renderEntireTree();
+store.subscribe(() => renderEntireTree())
 
 // If you want to start measuring performance in your app, pass a function
 // tlog results (for example: reportWebVitals(console.log))

@@ -1,7 +1,8 @@
 import React from "react";
-import {Post, PostType} from "./Post";
+import {Post} from "./Post";
 import {v1} from "uuid";
 import {action} from "@storybook/addon-actions";
+import {PostType} from "../../../../redux/postsReducer";
 
 export default {
     title: 'Post',

@@ -1,7 +1,22 @@
-import {sideBarType} from "./store";
 import {v1} from "uuid";
 import {actionsType} from "./redux_store";
 
+
+//types
+export type bestPostType = {
+    text: string
+    id: string
+}
+export type tagType = {
+    name: string
+    priority: number
+}
+export type sideBarType = {
+    tags: Array<tagType>
+    bestPosts: Array<bestPostType>
+}
+
+//data
 const initialState = {
     tags: [
         {
@@ -42,6 +57,11 @@ const initialState = {
         {text: 'Best post', id: v1()},
     ],
 }
+
+//reducer
 export const sidebarReducer = (state: sideBarType = initialState, action: actionsType): sideBarType  => {
-    return state
+    switch (action.type) {
+        default:
+            return state
+    }
 }

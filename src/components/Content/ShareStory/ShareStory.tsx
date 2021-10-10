@@ -1,7 +1,6 @@
 import React, {ChangeEvent, LegacyRef, useState} from 'react';
 import styles from './ShareStory.module.css';
-import {shareStoryPageType} from "../../../redux/store";
-import {changeShareStoryTextActionCreator} from "../../../redux/shareStoryReducer";
+import {changeShareStoryTextActionCreator, shareStoryPageType} from "../../../redux/shareStoryReducer";
 import {addPostActionCreator} from "../../../redux/postsReducer";
 import {actionsType} from "../../../redux/redux_store";
 

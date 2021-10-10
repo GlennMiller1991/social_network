@@ -1,9 +1,24 @@
-import React from 'react';
-import styles from './Profile.module.css';
+import React, {ChangeEvent} from 'react';
+import {ProfilePageType} from "../../../redux/profileReducer";
+import {Comment} from "./Comment/Comment";
 
-const ProfileSecret = () => {
+type ProfilePropsType = {
+    onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => void
+    onClickCallback: () => void
+    state: ProfilePageType
+}
+
+const ProfileSecret: React.FC<ProfilePropsType> = (props) => {
     return (
-        <div>Profile</div>
+        <div>
+            Commentaries
+            {props.state.comments.map(com => <Comment state={com}/>)}
+            <div>
+                <input onChange={props.onChangeCallback} value={props.state.newComm}/> new comment<hr/>
+                <button onClick={props.onClickCallback}>post</button>
+            </div>
+        </div>
     )
 }
 export const Profile = React.memo(ProfileSecret)
+

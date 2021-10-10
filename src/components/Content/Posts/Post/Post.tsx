@@ -1,17 +1,10 @@
 import React from "react";
 import styles from './Post.module.css';
-import {LikesCount} from "./LikesCount/LikesCount";
 import {actionsType} from "../../../../redux/redux_store";
 import {LikesCountContainer} from "./LikesCount/LIkesCountContainer";
+import {PostType} from "../../../../redux/postsReducer";
 
 //types
-export type PostType = {
-    postText: string
-    postPhoto: string
-    postDate: string
-    postLikes: number
-    postId: string
-}
 export type PostPropsType = {
     postInfo: PostType
     dispatch: (action: actionsType) => void

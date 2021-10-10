@@ -1,5 +1,5 @@
 import React from 'react'
-import {tagType} from "../../../../../redux/store";
+import {tagType} from "../../../../../redux/sidebarReducer";
 
 type TagPropsType = tagType
 const TagSecret: React.FC<TagPropsType> = (props) => {

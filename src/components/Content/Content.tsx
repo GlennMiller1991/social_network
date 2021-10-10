@@ -7,9 +7,8 @@ import {Dialogs} from "./Dialogs/Dialogs";
 import {Redirect, Route} from 'react-router-dom';
 import {Best} from "./Best/Best";
 import {ShareStory} from "./ShareStory/ShareStory";
-import {Profile} from "./Profile/Profile";
-import {stateType} from "../../redux/store";
-import {actionsType} from "../../redux/redux_store";
+import {ProfileContainer} from "./Profile/ProfileContainer";
+import {actionsType, stateType} from "../../redux/redux_store";
 
 //types
 type ContentPropsType = {
@@ -32,7 +31,8 @@ export const Content: React.FC<ContentPropsType> = (props) => {
                     <Route path='/best' component={Best}/>
                     <Route path='/share' render={() => <ShareStory state={props.state.shareStoryPage}
                                                                    dispatch={props.dispatch}/>}/>
-                    <Route path='/profile' component={Profile}/>
+                    <Route path='/profile' render={() => <ProfileContainer state={props.state.profilePage}
+                                                                  dispatch={props.dispatch}/>}/>
                     <Route path='/dialogs'
                            render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>

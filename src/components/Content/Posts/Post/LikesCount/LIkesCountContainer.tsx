@@ -1,5 +1,4 @@
 import React from "react";
-import styles from './LikesCount.module.css'
 import {actionsType} from "../../../../../redux/redux_store";
 import {changeLikesCountActionCreator} from "../../../../../redux/postsReducer";
 import {LikesCount} from "./LikesCount";

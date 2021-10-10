@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import classes from './Posts.module.css';
 import {Post} from "./Post/Post";
 import {actionsType} from "../../../redux/redux_store";
-import {postsPageType} from "../../../redux/store";
+import {postsPageType} from "../../../redux/postsReducer";
 
 //types
 type PostsPropsType = {

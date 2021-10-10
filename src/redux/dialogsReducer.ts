@@ -1,6 +1,24 @@
-import {dialogsPageType} from "./store";
 import {v1} from "uuid";
 import {actionsType} from "./redux_store";
+
+//types
+export type ChatType = {
+    id: string
+    author: 'you' | 'notYou'
+    message: string
+}
+export type OpenDialogType = {
+    id: string
+    name: string
+}
+export type dialogsPageType = {
+    chat: Array<ChatType>
+    dialogs: Array<OpenDialogType>
+}
+
+//action creators
+
+
 
 const initialState: dialogsPageType = {
     chat: [
@@ -29,6 +47,10 @@ const initialState: dialogsPageType = {
         {name: 'Andrey', id: v1()},
     ],
 }
+
 export const dialogsReducer = (state: dialogsPageType = initialState, action: actionsType): dialogsPageType => {
-    return state
+    switch (action.type) {
+        default:
+            return state
+    }
 }
