@@ -1,53 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './Dialogs.module.css'
 import {Chat} from "./Chat/Chat";
 import {OpenDialog} from "./OpenDialog/OpenDialog";
-import {ChatType, dialogsPageType} from "../../../redux/dialogsReducer";
+import {dialogsPageType} from "../../../redux/dialogsReducer";
 
 //types
-type FilterType = 'you' | 'notYou' | 'all'
 type DialogsPropsType = {
     state: dialogsPageType
-}
-
-//callbacks
-const filterMessages = (messages: Array<ChatType>, filter: FilterType): Array<ChatType> => {
-    if (filter === 'all') {
-        return messages;
-    } else {
-        return messages.filter((m) => {
-            return m.author === filter;
-        });
-    }
+    setFilter: (filterValue: string) => void
 }
 
 //components
 const DialogsSecret: React.FC<DialogsPropsType> = (props) => {
 
-    //initial states
-    const [filter, setFilter] = useState<FilterType>('all');
-
-    //callbacks
-    const setNotYou = () => {
-        setFilter('notYou');
-    }
-    const setYou = () => {
-        setFilter('you');
-    }
-    const setAll = () => {
-        setFilter('all');
-    }
-
-    //filter
-    const filteredMessages = filterMessages(props.state.chat, filter);
-
     //return
     return (
         <div className={styles.container}>
             <div className={styles.filter}>
-                <div onClick={setYou}>you</div>
-                <div onClick={setNotYou}>notYou</div>
-                <div onClick={setAll}>all</div>
+                <div onClick={() => props.setFilter('you')}>you</div>
+                <div onClick={() => props.setFilter('notYou')}>notYou</div>
+                <div onClick={() => props.setFilter('all')}>all</div>
             </div>
             <div className={styles.openDialogs}>
                 {props.state.dialogs.map((dialog) => {
@@ -57,7 +29,7 @@ const DialogsSecret: React.FC<DialogsPropsType> = (props) => {
                 })}
             </div>
             <div className={styles.dialogs}>
-                <Chat messages={filteredMessages}/>
+                <Chat messages={props.state.chat}/>
             </div>
         </div>
     );

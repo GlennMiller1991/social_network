@@ -1,41 +1,35 @@
-import React, {ChangeEvent} from 'react';
-import classes from './Posts.module.css';
+import React, {ChangeEvent} from "react";
+import classes from "./Posts.module.css";
 import {Post} from "./Post/Post";
-import {filterPostsActionCreator} from "../../../redux/postsReducer";
-import {StoreContext} from "../../../redux/StoreContext";
+import {postsPageType} from "../../../redux/postsReducer";
 
-//components
-const PostsSecret: React.FC = () => {
+export type PostsPropsType = {
+    state: postsPageType
+    onChangeFilterHandler: (event: ChangeEvent<HTMLSelectElement>) => void
+    changeLikesCount: (change: boolean, postId: string) => void
+}
+
+export const Posts: React.FC<PostsPropsType> = (props) => {
 
     //return
     return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    const onChangeHandler = (event: ChangeEvent<HTMLSelectElement>) => {
-                        store.dispatch(filterPostsActionCreator(event.currentTarget.value))
-                    }
+        <div>
+            Sorted by
+            <select value={props.state.filter} onChange={props.onChangeFilterHandler}>
+                <option value={'date'}>date</option>
+                <option value={'rate'}>rate</option>
+                <option value={'reverse rate'}>reverse rate</option>
+            </select>
+            <div id={classes.posts}>
+                {props.state.posts.map((post) => {
                     return (
-                        <div>
-                            Sorted by
-                            <select value={store.getState().postsPage.filter} onChange={onChangeHandler}>
-                                <option value={'date'}>date</option>
-                                <option value={'rate'}>rate</option>
-                                <option value={'reverse rate'}>reverse rate</option>
-                            </select>
-                            <div id={classes.posts}>
-                                {store.getState().postsPage.posts.map((post) => {
-                                    return (
-                                        <div key={post.postId}>
-                                            <Post postInfo={post}
-                                                  dispatch={store.dispatch}/>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        </div>)
-                }
-            }</StoreContext.Consumer>
-    );
+                        <div key={post.postId}>
+                            <Post postInfo={post}
+                                  changeLikesCount={props.changeLikesCount}/>
+                        </div>
+                    )
+                })}
+            </div>
+        </div>
+    )
 }
-export const Posts = React.memo(PostsSecret)

@@ -1,13 +1,12 @@
 import React from "react";
 import styles from './Post.module.css';
-import {actionsType} from "../../../../redux/redux_store";
-import {LikesCountContainer} from "./LikesCount/LIkesCountContainer";
 import {PostType} from "../../../../redux/postsReducer";
+import {LikesCount} from "./LikesCount/LikesCount";
 
 //types
 export type PostPropsType = {
     postInfo: PostType
-    dispatch: (action: actionsType) => void
+    changeLikesCount: (change: boolean, postId: string) => void
 }
 
 //components
@@ -19,9 +18,9 @@ const PostSecret: React.FC<PostPropsType> = (props) => {
             <div className={styles.text}>
                 <div className={styles.postText}>{props.postInfo.postText}</div>
                 <div className={styles.postDate}>{props.postInfo.postDate}</div>
-                <LikesCountContainer likesCount={props.postInfo.postLikes}
-                                     dispatch={props.dispatch}
-                                     postId={props.postInfo.postId}/>
+                <LikesCount postId={props.postInfo.postId}
+                            likesCount={props.postInfo.postLikes}
+                            changeLikesCount={props.changeLikesCount}/>
             </div>
             <div className={styles.image}>
                 <img src={props.postInfo.postPhoto} alt='not available'/>

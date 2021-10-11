@@ -1,45 +1,29 @@
-import React, {ChangeEvent, LegacyRef, useState} from 'react';
+import React, {ChangeEvent, LegacyRef} from 'react';
 import styles from './ShareStory.module.css';
-import {changeShareStoryTextActionCreator, shareStoryPageType} from "../../../redux/shareStoryReducer";
-import {addPostActionCreator} from "../../../redux/postsReducer";
-import {actionsType} from "../../../redux/redux_store";
+import {shareStoryPageType} from "../../../redux/shareStoryReducer";
 
 type ShareStoryPropsType = {
-    dispatch: (action: actionsType) => void
     state: shareStoryPageType
+    onClickCallback: (formText: string) => void
+    onChangeCallback: (event: ChangeEvent<HTMLTextAreaElement>) => void
 }
 
 //components
 const ShareStorySecret: React.FC<ShareStoryPropsType> = (props) => {
-
-    //initial states
-    const [error, setError] = useState<boolean>(false)
-
     const ref: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
-
-    //callbacks
-    const onClickCallback = () => {
-        props.dispatch(addPostActionCreator(ref.current ? ref.current.value : ''))
-        props.dispatch(changeShareStoryTextActionCreator(''))
-    }
-
-    const onChangeHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeShareStoryTextActionCreator(event.currentTarget.value))
-    }
 
     //return
     return (
         <div>
             <textarea placeholder={'Share your story with us'}
                       value={props.state.storyText}
-                      onChange={onChangeHandler}
+                      onChange={(event) => props.onChangeCallback(event)}
                       maxLength={1000}
                       ref={ref}
-                      className={styles.txt}></textarea>
-            <button onClick={onClickCallback}
+                      className={styles.txt}> </textarea>
+            <button onClick={() => props.onClickCallback(ref.current ? ref.current.value : '')}
                     className={styles.btn}>Send
             </button>
-            {error && <div className={styles.error}>error</div>}
         </div>
     )
 }

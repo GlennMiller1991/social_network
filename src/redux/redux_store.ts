@@ -7,7 +7,7 @@ import {
     postsReducer
 } from "./postsReducer";
 import {changeShareStoryTextActionType, shareStoryPageType, shareStoryReducer} from "./shareStoryReducer";
-import {dialogsPageType, dialogsReducer} from "./dialogsReducer";
+import {dialogsPageType, dialogsReducer, filterMessagesActionType} from "./dialogsReducer";
 import {sidebarReducer, sideBarType} from "./sidebarReducer";
 import {
     addCommentActionType,
@@ -33,7 +33,7 @@ export type StoreType = Store<EmptyObject & {
 }, actionsType>
 export type actionsType = addPostActionType | changeLikesCountActionType |
     changeShareStoryTextActionType | changeNewCommentTextActionType |
-    addCommentActionType | filterPostsActionType
+    addCommentActionType | filterPostsActionType | filterMessagesActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,

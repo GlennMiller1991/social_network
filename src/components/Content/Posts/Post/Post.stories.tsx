@@ -20,5 +20,5 @@ const post: PostType = {
 }
 
 export const DefaultPost = () => <Post postInfo={post}
-                                       dispatch={action('changeLikesCount')}
+                                       changeLikesCount={action('changeLikesCount')}
 />

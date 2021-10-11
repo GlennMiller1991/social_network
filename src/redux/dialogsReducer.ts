@@ -1,6 +1,9 @@
 import {v1} from "uuid";
 import {actionsType} from "./redux_store";
 
+//constants
+export const FILTER_MESSAGES = 'FILTER-MESSAGES'
+
 //types
 export type ChatType = {
     id: string
@@ -14,11 +17,19 @@ export type OpenDialogType = {
 export type dialogsPageType = {
     chat: Array<ChatType>
     dialogs: Array<OpenDialogType>
+    filter: string
 }
 
+//actions types
+export type filterMessagesActionType = ReturnType<typeof filterMessagesActionCreator>
+
 //action creators
-
-
+export const filterMessagesActionCreator = (value: string) => {
+    return {
+        type: FILTER_MESSAGES,
+        filterValue: value
+    } as const
+}
 
 const initialState: dialogsPageType = {
     chat: [
@@ -46,10 +57,24 @@ const initialState: dialogsPageType = {
         {name: 'Viktor', id: v1()},
         {name: 'Andrey', id: v1()},
     ],
+    filter: 'all'
 }
 
 export const dialogsReducer = (state: dialogsPageType = initialState, action: actionsType): dialogsPageType => {
     switch (action.type) {
+        case FILTER_MESSAGES:
+            switch (action.filterValue) {
+                case 'all':
+                    return state
+                case 'you' || 'notYou':
+                    return {
+                        ...state,
+                        chat: state.chat.filter(mes => mes.author === action.filterValue),
+                        filter: action.filterValue
+                    }
+                default:
+                    return state
+            }
         default:
             return state
     }
