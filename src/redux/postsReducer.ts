@@ -4,10 +4,12 @@ import {actionsType} from "./redux_store";
 //constants
 const CHANGE_LIKES_COUNT = "CHANGE-LIKES-COUNT";
 const ADD_POST = "ADD-POST"
+const FILTER = 'FILTER'
 
 //actions types
 export type changeLikesCountActionType = ReturnType<typeof changeLikesCountActionCreator>
 export type addPostActionType = ReturnType<typeof addPostActionCreator>
+export type filterPostsActionType = ReturnType<typeof filterPostsActionCreator>
 
 //types
 export type PostType = {
@@ -19,6 +21,7 @@ export type PostType = {
 }
 export type postsPageType = {
     posts: Array<PostType>
+    filter: string
 }
 
 //action creators
@@ -27,6 +30,13 @@ export const changeLikesCountActionCreator = (change: boolean, postId: string) =
 }
 export const addPostActionCreator = (value: string) => {
     return {type: ADD_POST, postMessage: value} as const
+}
+export const filterPostsActionCreator = (filterValue: string) => {
+    return {
+        type: FILTER,
+        filterValue: filterValue
+    } as const
+
 }
 
 const initialState: postsPageType = {
@@ -61,7 +71,8 @@ const initialState: postsPageType = {
             postDate: '08.23.2021',
             postLikes: 1,
             postId: v1()
-        }]
+        }],
+    filter: 'date'
 }
 
 export const postsReducer = (state: postsPageType = initialState, action: actionsType): postsPageType => {
@@ -84,6 +95,23 @@ export const postsReducer = (state: postsPageType = initialState, action: action
                 state.posts.push(newPost)
             }
             return state
+        case FILTER:
+            const postsForRender = state.posts
+            switch (action.filterValue) {
+                case "rate":
+                    postsForRender.sort((postA, postB) => {
+                        return postA.postLikes > postB.postLikes ? -1 : 1
+                    })
+                    return {posts: postsForRender, filter: 'rate'}
+                case "reverse rate":
+                    postsForRender.sort((postA, postB) => {
+                        return postA.postLikes > postB.postLikes ? 1 : -1
+                    })
+                    return {posts: postsForRender, filter: 'reverse rate'}
+                case 'date':
+                default:
+                    return {posts: postsForRender, filter: 'date'}
+            }
         default:
             return state
     }

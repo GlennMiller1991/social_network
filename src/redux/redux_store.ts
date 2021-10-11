@@ -1,5 +1,11 @@
 import {combineReducers, createStore, EmptyObject, Store} from "redux";
-import {addPostActionType, changeLikesCountActionType, postsPageType, postsReducer} from "./postsReducer";
+import {
+    addPostActionType,
+    changeLikesCountActionType,
+    filterPostsActionType,
+    postsPageType,
+    postsReducer
+} from "./postsReducer";
 import {changeShareStoryTextActionType, shareStoryPageType, shareStoryReducer} from "./shareStoryReducer";
 import {dialogsPageType, dialogsReducer} from "./dialogsReducer";
 import {sidebarReducer, sideBarType} from "./sidebarReducer";
@@ -20,13 +26,14 @@ export type stateType = {
 }
 export type StoreType = Store<EmptyObject & {
     postsPage: postsPageType;
-    profilePage: never;
+    profilePage: ProfilePageType;
     shareStoryPage: shareStoryPageType;
     dialogsPage: dialogsPageType;
     sideBar: sideBarType
 }, actionsType>
 export type actionsType = addPostActionType | changeLikesCountActionType |
-    changeShareStoryTextActionType | changeNewCommentTextActionType | addCommentActionType
+    changeShareStoryTextActionType | changeNewCommentTextActionType |
+    addCommentActionType | filterPostsActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,

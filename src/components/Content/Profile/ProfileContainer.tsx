@@ -2,30 +2,35 @@ import React, {ChangeEvent} from 'react';
 import {
     addCommentActionCreator,
     changeNewCommentTextActionCreator,
-    ProfilePageType
 } from "../../../redux/profileReducer";
-import {actionsType} from "../../../redux/redux_store";
-import {Comment} from "./Comment/Comment";
 import {Profile} from "./Profile";
+import {StoreContext} from "../../../redux/StoreContext";
 
+/*
 type ProfileContainerPropsType = {
     state: ProfilePageType
     dispatch: (action: actionsType) => void
-}
+}*/
 
-const ProfileContainerSecret: React.FC<ProfileContainerPropsType> = (props) => {
-    const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
-        props.dispatch(changeNewCommentTextActionCreator(event.currentTarget.value))
-    }
-    const onClickCallback = () => {
-        props.dispatch(addCommentActionCreator(props.state.newComm))
-        props.dispatch(changeNewCommentTextActionCreator(''))
-    }
-
+const ProfileContainerSecret: React.FC = () => {
     return (
-        <Profile onChangeCallback={onChangeCallback}
-                 onClickCallback={onClickCallback}
-                 state={props.state}/>
+        <StoreContext.Consumer>
+            {
+                (store) => {
+                    const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
+                        store.dispatch(changeNewCommentTextActionCreator(event.currentTarget.value))
+                    }
+                    const onClickCallback = () => {
+                        store.dispatch(addCommentActionCreator(store.getState().profilePage.newComm))
+                        store.dispatch(changeNewCommentTextActionCreator(''))
+                    }
+
+                    return <Profile onChangeCallback={onChangeCallback}
+                             onClickCallback={onClickCallback}
+                             state={store.getState().profilePage}/>
+            }
+            }
+        </StoreContext.Consumer>
     )
 }
 export const ProfileContainer = React.memo(ProfileContainerSecret)

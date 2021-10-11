@@ -26,13 +26,11 @@ export const Content: React.FC<ContentPropsType> = (props) => {
                 <div id={styles.general}>
                     <Route path={'/'} exact render={() => <Redirect to={'/main'}/>}/>
                     <Route path='/main'
-                           render={() => <Posts state={props.state.postsPage}
-                                                dispatch={props.dispatch}/>}/>
+                           render={() => <Posts/>}/>
                     <Route path='/best' component={Best}/>
                     <Route path='/share' render={() => <ShareStory state={props.state.shareStoryPage}
                                                                    dispatch={props.dispatch}/>}/>
-                    <Route path='/profile' render={() => <ProfileContainer state={props.state.profilePage}
-                                                                  dispatch={props.dispatch}/>}/>
+                    <Route path='/profile' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs'
                            render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                 </div>
