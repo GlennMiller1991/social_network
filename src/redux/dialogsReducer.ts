@@ -31,7 +31,7 @@ export const filterMessagesActionCreator = (value: string) => {
     } as const
 }
 
-const initialState: dialogsPageType = {
+export const initialState: dialogsPageType = {
     chat: [
         {
             id: v1(),
@@ -66,7 +66,13 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: ac
             switch (action.filterValue) {
                 case 'all':
                     return state
-                case 'you' || 'notYou':
+                case 'you':
+                    return {
+                        ...state,
+                        chat: state.chat.filter(mes => mes.author === action.filterValue),
+                        filter: action.filterValue
+                    }
+                case 'notYou':
                     return {
                         ...state,
                         chat: state.chat.filter(mes => mes.author === action.filterValue),

@@ -76,13 +76,14 @@ const initialState: postsPageType = {
 }
 
 export const postsReducer = (state: postsPageType = initialState, action: actionsType): postsPageType => {
+    let newState = {...state}
     switch (action.type) {
         case CHANGE_LIKES_COUNT:
-            const obj = state.posts.find((post) => post.postId === action.postId)
+            const obj = newState.posts.find((post) => post.postId === action.postId)
             if (obj) {
                 action.value ? obj.postLikes++ : obj.postLikes--
             }
-            return state
+            return newState
         case ADD_POST:
             if (action.postMessage.trim()) {
                 const newPost: PostType = {
@@ -92,9 +93,9 @@ export const postsReducer = (state: postsPageType = initialState, action: action
                     postLikes: 0,
                     postId: v1()
                 }
-                state.posts.push(newPost)
+                newState.posts.push(newPost)
             }
-            return state
+            return newState
         case FILTER:
             const postsForRender = state.posts
             switch (action.filterValue) {
@@ -113,6 +114,6 @@ export const postsReducer = (state: postsPageType = initialState, action: action
                     return {posts: postsForRender, filter: 'date'}
             }
         default:
-            return state
+            return newState
     }
 }
