@@ -1,37 +1,27 @@
-import React, {ChangeEvent} from 'react';
+import {ChangeEvent} from 'react';
 import {
     addCommentActionCreator,
     changeNewCommentTextActionCreator,
 } from "../../../redux/profileReducer";
 import {Profile} from "./Profile";
-import {StoreContext} from "../../../redux/StoreContext";
+import {actionsType, stateType} from "../../../redux/redux_store";
+import {connect} from "react-redux";
 
-/*
-type ProfileContainerPropsType = {
-    state: ProfilePageType
-    dispatch: (action: actionsType) => void
-}*/
-
-const ProfileContainerSecret: React.FC = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    const onChangeCallback = (event: ChangeEvent<HTMLInputElement>) => {
-                        store.dispatch(changeNewCommentTextActionCreator(event.currentTarget.value))
-                    }
-                    const onClickCallback = () => {
-                        store.dispatch(addCommentActionCreator(store.getState().profilePage.newComm))
-                        store.dispatch(changeNewCommentTextActionCreator(''))
-                    }
-
-                    return <Profile onChangeCallback={onChangeCallback}
-                             onClickCallback={onClickCallback}
-                             state={store.getState().profilePage}/>
-            }
-            }
-        </StoreContext.Consumer>
-    )
+const mapStateToProps = (state: stateType) => {
+    return {
+        state: state.profilePage
+    }
 }
-export const ProfileContainer = React.memo(ProfileContainerSecret)
+const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
+    return {
+        onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => {
+            dispatch(changeNewCommentTextActionCreator(event.currentTarget.value))
+        },
+        onClickCallback: (text: string) => {
+            dispatch(addCommentActionCreator(text))
+            dispatch(changeNewCommentTextActionCreator(''))
+        }
+    }
+}
 
+export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)

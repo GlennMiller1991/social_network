@@ -1,19 +1,14 @@
-import React, {useState, memo} from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Content} from "./components/Content/Content";
 import {Footer} from "./components/Footer/Footer";
 import {HashRouter} from "react-router-dom";
-import {actionsType, stateType} from "./redux/redux_store";
 
 //types
 export type wayType = 0 | 1
-type AppPropsType = {
-    state: stateType
-    dispatch: (action: actionsType) => void
-}
 
-function AppSecret(props: AppPropsType) {
+function AppSecret() {
     const [way, setWay] = useState<wayType>(1)
 
     return (
@@ -21,8 +16,7 @@ function AppSecret(props: AppPropsType) {
             <div id='appWrapper'>
                 {way === 0 ? <Header setWay={setWay}/> :
                     <>
-                        <Content state={props.state}
-                                 dispatch={props.dispatch}/>
+                        <Content/>
                         <Footer/>
                     </>}
             </div>

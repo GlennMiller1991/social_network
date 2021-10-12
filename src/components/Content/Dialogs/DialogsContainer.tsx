@@ -1,20 +1,19 @@
-import React from "react";
 import {Dialogs} from "./Dialogs";
-import {StoreContext} from "../../../redux/StoreContext";
 import {filterMessagesActionCreator} from "../../../redux/dialogsReducer";
+import {connect} from "react-redux";
+import {actionsType, stateType} from "../../../redux/redux_store";
 
-export const DialogsContainer = () => {
-    //return
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    const setFilter = (filterValue: string) => {
-                        store.dispatch(filterMessagesActionCreator(filterValue))
-                    }
-                    return <Dialogs state={store.getState().dialogsPage} setFilter={setFilter}/>
-                }
-            }
-        </StoreContext.Consumer>
-    )
+
+const mapStateToProps = (state: stateType) => {
+    return {
+        state: state.dialogsPage
+    }
 }
+const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
+    return {
+        setFilter: (filterValue: string) => {
+            dispatch(filterMessagesActionCreator(filterValue))
+        }
+    }
+}
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

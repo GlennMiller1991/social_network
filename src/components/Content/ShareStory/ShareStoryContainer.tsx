@@ -1,32 +1,24 @@
-import React, {ChangeEvent, LegacyRef} from "react";
+import {ChangeEvent} from "react";
 import {ShareStory} from "./ShareStory";
-import {StoreContext} from "../../../redux/StoreContext";
 import {addPostActionCreator} from "../../../redux/postsReducer";
 import {changeShareStoryTextActionCreator} from "../../../redux/shareStoryReducer";
+import {connect} from "react-redux";
+import {actionsType, stateType} from "../../../redux/redux_store";
 
-export const ShareStoryContainer = () => {
-
-    //return
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-
-                    //callbacks
-                    const onClickCallback = (formText: string) => {
-                        store.dispatch(addPostActionCreator(formText))
-                        store.dispatch(changeShareStoryTextActionCreator(''))
-                    }
-                    const onChangeCallback = (event: ChangeEvent<HTMLTextAreaElement>) => {
-                        store.dispatch(changeShareStoryTextActionCreator(event.currentTarget.value))
-                    }
-
-                    //return
-                    return <ShareStory state={store.getState().shareStoryPage}
-                                       onChangeCallback={onChangeCallback}
-                                       onClickCallback={onClickCallback}/>
-                }
-            }
-        </StoreContext.Consumer>
-    )
+const mapStateToProps = (state: stateType) => {
+    return {
+        state: state.shareStoryPage
+    }
 }
+const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
+    return {
+        onChangeCallback: (event: ChangeEvent<HTMLTextAreaElement>) => {
+            dispatch(changeShareStoryTextActionCreator(event.currentTarget.value))
+        },
+        onClickCallback: (formText: string) => {
+            dispatch(addPostActionCreator(formText))
+            dispatch(changeShareStoryTextActionCreator(''))
+        }
+    }
+}
+export const ShareStoryContainer = connect(mapStateToProps, mapDispatchToProps)(ShareStory)

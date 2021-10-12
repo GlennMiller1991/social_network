@@ -4,7 +4,7 @@ import {Comment} from "./Comment/Comment";
 
 type ProfilePropsType = {
     onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => void
-    onClickCallback: () => void
+    onClickCallback: (text: string) => void
     state: ProfilePageType
 }
 
@@ -15,7 +15,7 @@ const ProfileSecret: React.FC<ProfilePropsType> = (props) => {
             {props.state.comments.map(com => <Comment state={com}/>)}
             <div>
                 <input onChange={props.onChangeCallback} value={props.state.newComm}/> new comment<hr/>
-                <button onClick={props.onClickCallback}>post</button>
+                <button onClick={() => props.onClickCallback(props.state.newComm)}>post</button>
             </div>
         </div>
     )
