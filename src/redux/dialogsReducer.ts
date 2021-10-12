@@ -64,8 +64,6 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: ac
     switch (action.type) {
         case FILTER_MESSAGES:
             switch (action.filterValue) {
-                case 'all':
-                    return state
                 case 'you':
                     return {
                         ...state,
@@ -78,6 +76,7 @@ export const dialogsReducer = (state: dialogsPageType = initialState, action: ac
                         chat: state.chat.filter(mes => mes.author === action.filterValue),
                         filter: action.filterValue
                     }
+                case 'all':
                 default:
                     return state
             }

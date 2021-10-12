@@ -28,8 +28,7 @@ export type shareStoryPageType = {
 export const shareStoryReducer = (state: shareStoryPageType = initialState, action: actionsType) => {
     switch(action.type) {
         case CHANGE_SHARE_STORY_TEXT:
-            state.storyText = action.shareStoryText
-            return state
+            return {...state, storyText: action.shareStoryText}
         default:
             return state
     }

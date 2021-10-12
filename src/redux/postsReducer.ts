@@ -76,28 +76,28 @@ const initialState: postsPageType = {
 }
 
 export const postsReducer = (state: postsPageType = initialState, action: actionsType): postsPageType => {
-    let newState = {...state}
     switch (action.type) {
         case CHANGE_LIKES_COUNT:
-            const obj = newState.posts.find((post) => post.postId === action.postId)
-            if (obj) {
-                action.value ? obj.postLikes++ : obj.postLikes--
+            const mapPosts = (post: PostType) => {
+                return post.postId === action.postId ?
+                    (action.value ?
+                        {...post, postLikes: post.postLikes + 1} :
+                        {...post, postLikes: post.postLikes - 1}) :
+                    post
             }
-            return newState
+            return {...state, posts: state.posts.map(mapPosts)}
         case ADD_POST:
-            if (action.postMessage.trim()) {
-                const newPost: PostType = {
-                    postText: action.postMessage,
-                    postPhoto: 'https://helo',
+            return action.postMessage.trim() ? {
+                ...state, posts: [...state.posts, {
+                    postText: action.postMessage.trim(),
+                    postPhoto: 'https://vk.com',
                     postDate: `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}}`,
                     postLikes: 0,
                     postId: v1()
-                }
-                newState.posts.push(newPost)
-            }
-            return newState
+                }]
+            } : state
         case FILTER:
-            const postsForRender = state.posts
+            const postsForRender = {...state.posts}
             switch (action.filterValue) {
                 case "rate":
                     postsForRender.sort((postA, postB) => {
@@ -114,6 +114,6 @@ export const postsReducer = (state: postsPageType = initialState, action: action
                     return {posts: postsForRender, filter: 'date'}
             }
         default:
-            return newState
+            return state
     }
 }
