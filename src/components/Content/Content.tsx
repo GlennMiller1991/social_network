@@ -8,6 +8,7 @@ import {DialogsContainer} from "./Dialogs/DialogsContainer";
 import {ShareStoryContainer} from "./ShareStory/ShareStoryContainer";
 import {BestContainer} from "./Best/BestContainer";
 import {SidebarContainer} from "./Sidebar/SidebarContainer";
+import {UsersContainer} from "../Users/UsersContainer";
 
 //components
 export const Content: React.FC = () => {
@@ -23,6 +24,7 @@ export const Content: React.FC = () => {
                     <Route path='/share' render={() => <ShareStoryContainer/>}/>
                     <Route path='/profile' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>
             </div>
             <div id={styles.sidebar}>

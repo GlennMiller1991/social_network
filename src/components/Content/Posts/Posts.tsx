@@ -10,7 +10,7 @@ export type PostsPropsType = {
 }
 
 export const Posts: React.FC<PostsPropsType> = (props) => {
-
+    console.log('PostsSecret')
     //return
     return (
         <div>

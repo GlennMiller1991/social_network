@@ -1,0 +1,30 @@
+.page {
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    text-align: center;
+}
+
+.photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.subBtn, .unsubBtn {
+    width: 90px;
+    border-radius: 5px;
+    color: #edeef0;
+}
+
+.subBtn {
+    background-color: #055705;
+}
+.unsubBtn {
+    background-color: #490606;
+}
+
+.wrapper {
+}

@@ -32,7 +32,11 @@ const NavaSecret = () => {
                     DIALOGS
                 </NavLink>
             </div>
-            <div className={styles.button}></div>
+            <div className={styles.button}>
+                <NavLink activeClassName={styles.active}  to='/users'>
+                    USERS
+                </NavLink>
+            </div>
             <div className={styles.button}></div>
             <div className={styles.button}>
                 <NavLink className={styles.search}

@@ -11,7 +11,6 @@ export type PostPropsType = {
 
 //components
 const PostSecret: React.FC<PostPropsType> = (props) => {
-
     //return
     return (
         <div className={styles.post}>

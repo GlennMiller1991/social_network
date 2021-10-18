@@ -1,4 +1,3 @@
-import styles from "../Sidebar.module.css";
 import React from "react";
 import {Tag} from "./Tag/Tag";
 import {tagType} from "../../../../redux/sidebarReducer";
@@ -11,7 +10,7 @@ type TagsPropsType = {
 
     return (
         <div>
-            {props.tags.map((tag) => <Tag name={tag.name} priority={tag.priority}/>)}
+            {props.tags.map((tag, id) => <Tag key={id} name={tag.name} priority={tag.priority}/>)}
         </div>
     );
 }

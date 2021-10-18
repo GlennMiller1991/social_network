@@ -15,6 +15,7 @@ import {
     ProfilePageType,
     profileReducer
 } from "./profileReducer";
+import {followActionType, setUsersActionType, unfollowActionType, usersPageType, usersReducer} from "./usersReducer";
 
 //types
 export type stateType = {
@@ -23,17 +24,26 @@ export type stateType = {
     shareStoryPage: shareStoryPageType
     sideBar: sideBarType
     profilePage: ProfilePageType
+    usersPage: usersPageType,
 }
 export type StoreType = Store<EmptyObject & {
     postsPage: postsPageType;
     profilePage: ProfilePageType;
     shareStoryPage: shareStoryPageType;
     dialogsPage: dialogsPageType;
-    sideBar: sideBarType
+    sideBar: sideBarType,
+    usersPage: usersPageType,
 }, actionsType>
-export type actionsType = addPostActionType | changeLikesCountActionType |
-    changeShareStoryTextActionType | changeNewCommentTextActionType |
-    addCommentActionType | filterPostsActionType | filterMessagesActionType
+export type actionsType = addPostActionType
+    | changeLikesCountActionType
+    | changeShareStoryTextActionType
+    | changeNewCommentTextActionType
+    | addCommentActionType
+    | filterPostsActionType
+    | filterMessagesActionType
+    | followActionType
+    | unfollowActionType
+    | setUsersActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,
@@ -41,6 +51,7 @@ const reducers = combineReducers({
     shareStoryPage: shareStoryReducer,
     dialogsPage: dialogsReducer,
     sideBar: sidebarReducer,
+    usersPage: usersReducer,
 })
 
 export const store = createStore(reducers)

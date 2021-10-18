@@ -97,7 +97,7 @@ export const postsReducer = (state: postsPageType = initialState, action: action
                 }]
             } : state
         case FILTER:
-            const postsForRender = {...state.posts}
+            const postsForRender = [...state.posts]
             switch (action.filterValue) {
                 case "rate":
                     postsForRender.sort((postA, postB) => {
