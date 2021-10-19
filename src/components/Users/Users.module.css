@@ -3,7 +3,6 @@
     padding-right: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     text-align: center;
 }
 
@@ -27,4 +26,6 @@
 }
 
 .wrapper {
+    width: 25%;
+    padding-bottom: 5px;
 }
