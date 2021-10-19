@@ -1,4 +1,4 @@
-import {actionsType, stateType} from "./redux_store";
+import {actionsType} from "./redux_store";
 
 //constants
 const FOLLOW = 'FOLLOW'
@@ -7,12 +7,15 @@ const SET_USERS = 'SET-USERS'
 
 //types
 export type userType = {
-    id: string,
-    name: string,
-    location: string,
-    status: string,
-    photoUrl: string,
-    isFollowed: boolean
+    name: string
+    id: number
+    uniqueUrlName: null | string
+    followed: boolean
+    status: null | HTMLImageElement
+    photos: {
+        large: any
+        small: null
+    }
 }
 export type usersPageType = {
     users: userType[]
@@ -24,7 +27,7 @@ export type unfollowActionType = ReturnType<typeof unfollowAC>
 export type setUsersActionType = ReturnType<typeof setUsersAC>
 
 //actions creators
-export const followAC = (userId: string) => {
+export const followAC = (userId: number) => {
     return {
         type: FOLLOW,
         payload: {
@@ -32,7 +35,7 @@ export const followAC = (userId: string) => {
         }
     } as const
 }
-export const unfollowAC = (userId: string) => {
+export const unfollowAC = (userId: number) => {
     return {
         type: UNFOLLOW,
         payload: {
@@ -62,7 +65,7 @@ export const usersReducer = (state: usersPageType = initialState, action: action
                 users: state.users.map(user => {
                             return (
                                 user.id === action.payload.userId ?
-                                    {...user, isFollowed: true} :
+                                    {...user, followed: true} :
                                     user
                             )
                         }
@@ -74,7 +77,7 @@ export const usersReducer = (state: usersPageType = initialState, action: action
                 users: state.users.map(user => {
                         return (
                             user.id === action.payload.userId ?
-                                {...user, isFollowed: false} :
+                                {...user, followed: false} :
                                 user
                         )
                     }
