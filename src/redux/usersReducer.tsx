@@ -11,9 +11,9 @@ export type userType = {
     id: number
     uniqueUrlName: null | string
     followed: boolean
-    status: null | HTMLImageElement
+    status: null
     photos: {
-        large: any
+        large: null | HTMLImageElement
         small: null
     }
 }

@@ -21,56 +21,74 @@ export const Users: React.FC<UsersPropsType> = (props) => {
             if (res.status === 200) {
                 props.setUsers(res.data.items)
             } else {
-                /*props.setUsers([
+                props.setUsers([
                     {
-                        id: v1(),
+                        id: 1,
                         name: 'AlexisTheGreat',
-                        status: 'Looking for job',
-                        isFollowed: false,
-                        location: 'Moscow',
-                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                        status: null,
+                        followed: false,
+                        photos: {
+                            large: null,
+                            small: null,
+                        },
+                        uniqueUrlName: null,
                     },
                     {
-                        id: v1(),
+                        id: 2,
                         name: 'Alex',
-                        status: 'Looking for job',
-                        isFollowed: false,
-                        location: 'Moscow',
-                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                        status: null,
+                        followed: false,
+                        photos: {
+                            large: null,
+                            small: null,
+                        },
+                        uniqueUrlName: null,
                     },
                     {
-                        id: v1(),
+                        id: 3,
                         name: 'AlexisTheGreat',
-                        status: 'Looking for job',
-                        isFollowed: false,
-                        location: 'Moscow',
-                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                        status: null,
+                        followed: false,
+                        photos: {
+                            large: null,
+                            small: null,
+                        },
+                        uniqueUrlName: null,
                     },
                     {
-                        id: v1(),
+                        id: 4,
                         name: 'Alex',
-                        status: 'Looking for job',
-                        isFollowed: false,
-                        location: 'Moscow',
-                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                        status: null,
+                        followed: false,
+                        photos: {
+                            large: null,
+                            small: null,
+                        },
+                        uniqueUrlName: null,
                     },
                     {
-                        id: v1(),
+                        id: 5,
                         name: 'AlexisTheGreat',
-                        status: 'Looking for job',
-                        isFollowed: false,
-                        location: 'Moscow',
-                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                        status: null,
+                        followed: false,
+                        photos: {
+                            large: null,
+                            small: null,
+                        },
+                        uniqueUrlName: null,
                     },
                     {
-                        id: v1(),
+                        id: 6,
                         name: 'Alex',
-                        status: 'Looking for job',
-                        isFollowed: false,
-                        location: 'Moscow',
-                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                        status: null,
+                        followed: false,
+                        photos: {
+                            large: null,
+                            small: null,
+                        },
+                        uniqueUrlName: null,
                     },
-                ])*/
+                ])
             }
         })
     }
