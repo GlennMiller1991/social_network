@@ -10,7 +10,6 @@ type UsersPropsType = {
     unfollow: (userId: number) => void
     setUsers: (users: userType[]) => void
 }
-
 type responseType = {
     items: userType[]
     error: number | null
@@ -19,7 +18,60 @@ type responseType = {
 export const Users: React.FC<UsersPropsType> = (props) => {
     if (!props.state.users.length) {
         axios.get<responseType>('https://social-network.samuraijs.com/api/1.0/users').then((res) => {
-            props.setUsers(res.data.items)
+            if (res.status === 200) {
+                props.setUsers(res.data.items)
+            } else {
+                /*props.setUsers([
+                    {
+                        id: v1(),
+                        name: 'AlexisTheGreat',
+                        status: 'Looking for job',
+                        isFollowed: false,
+                        location: 'Moscow',
+                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                    },
+                    {
+                        id: v1(),
+                        name: 'Alex',
+                        status: 'Looking for job',
+                        isFollowed: false,
+                        location: 'Moscow',
+                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                    },
+                    {
+                        id: v1(),
+                        name: 'AlexisTheGreat',
+                        status: 'Looking for job',
+                        isFollowed: false,
+                        location: 'Moscow',
+                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                    },
+                    {
+                        id: v1(),
+                        name: 'Alex',
+                        status: 'Looking for job',
+                        isFollowed: false,
+                        location: 'Moscow',
+                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                    },
+                    {
+                        id: v1(),
+                        name: 'AlexisTheGreat',
+                        status: 'Looking for job',
+                        isFollowed: false,
+                        location: 'Moscow',
+                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                    },
+                    {
+                        id: v1(),
+                        name: 'Alex',
+                        status: 'Looking for job',
+                        isFollowed: false,
+                        location: 'Moscow',
+                        photoUrl: 'https://glennmiller.pythonanywhere.com/static/admin_ava.jpg'
+                    },
+                ])*/
+            }
         })
     }
 
