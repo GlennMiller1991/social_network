@@ -1,3 +1,31 @@
+.container {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    row-gap: 50px;
+}
+
+.changePage {
+    font-weight: unset;
+    padding-left: 40px;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+.lastPage {
+    font-weight: unset;
+    cursor: pointer;
+}
+
+.currentPage input {
+    size: auto;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
+    align-items: end;
+}
+
 .page {
     padding-left: 10px;
     padding-right: 10px;

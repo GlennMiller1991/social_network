@@ -4,6 +4,8 @@ import {actionsType} from "./redux_store";
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
+const CHANGE_USER_PAGE = 'CHANGE-USER-PAGE'
+const CHANGE_PAGE_FIELD_VALUE = 'CHANGE-PAGE-FIELD-VALUE'
 
 //types
 export type userType = {
@@ -18,13 +20,19 @@ export type userType = {
     }
 }
 export type usersPageType = {
-    users: userType[]
+    users: userType[],
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    pageFieldValue: string
 }
 
 //actions type
 export type followActionType = ReturnType<typeof followAC>
 export type unfollowActionType = ReturnType<typeof unfollowAC>
 export type setUsersActionType = ReturnType<typeof setUsersAC>
+export type changeUsersPageActionType = ReturnType<typeof changeUsersPageAC>
+export type changePageFieldValueActionType = ReturnType<typeof changePageFieldValueAC>
 
 //actions creators
 export const followAC = (userId: number) => {
@@ -43,18 +51,38 @@ export const unfollowAC = (userId: number) => {
         }
     } as const
 }
-export const setUsersAC = (users: userType[]) => {
+export const setUsersAC = (users: userType[], total: number) => {
     return {
         type: SET_USERS,
         payload: {
-            users: users
+            users: users,
+            totalUsersCount: total,
         }
     } as const
 }
-
+export const changeUsersPageAC = (pageNumber: number) => {
+    return {
+        type: CHANGE_USER_PAGE,
+        payload: {
+            currentPage: pageNumber,
+        }
+    } as const
+}
+export const changePageFieldValueAC = (value: string) => {
+    return {
+        type: CHANGE_PAGE_FIELD_VALUE,
+        payload: {
+            pageFieldValue: value
+        }
+    } as const
+}
 //initial state
 const initialState = {
-    users: []
+    users: [],
+    totalUsersCount: 0,
+    pageSize: 12,
+    currentPage: 1,
+    pageFieldValue: '1',
 }
 
 export const usersReducer = (state: usersPageType = initialState, action: actionsType) => {
@@ -63,13 +91,13 @@ export const usersReducer = (state: usersPageType = initialState, action: action
             return {
                 ...state,
                 users: state.users.map(user => {
-                            return (
-                                user.id === action.payload.userId ?
-                                    {...user, followed: true} :
-                                    user
-                            )
-                        }
-                    )
+                        return (
+                            user.id === action.payload.userId ?
+                                {...user, followed: true} :
+                                user
+                        )
+                    }
+                )
             }
         case UNFOLLOW:
             return {
@@ -87,6 +115,16 @@ export const usersReducer = (state: usersPageType = initialState, action: action
             return {
                 ...state,
                 ...action.payload
+            }
+        case CHANGE_USER_PAGE:
+            return {
+                ...state,
+                ...action.payload,
+            }
+        case CHANGE_PAGE_FIELD_VALUE:
+            return {
+                ...state,
+                ...action.payload,
             }
         default:
             return state

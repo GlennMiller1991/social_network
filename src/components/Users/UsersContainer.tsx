@@ -1,11 +1,22 @@
 import {connect} from "react-redux";
 import {Users} from "./Users";
 import {actionsType, stateType} from "../../redux/redux_store";
-import {followAC, setUsersAC, unfollowAC, userType} from "../../redux/usersReducer";
+import {
+    changePageFieldValueAC,
+    changeUsersPageAC,
+    followAC,
+    setUsersAC,
+    unfollowAC,
+    userType
+} from "../../redux/usersReducer";
 
 const mapStateToProps = (state: stateType) => {
     return {
-        state: state.usersPage
+        users: state.usersPage.users,
+        totalUsersCount: state.usersPage.totalUsersCount,
+        pageSize: state.usersPage.pageSize,
+        currentPage: state.usersPage.currentPage,
+        pageFieldValue: state.usersPage.pageFieldValue,
     }
 }
 const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
@@ -16,9 +27,15 @@ const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
         unfollow: (userId: number) => {
             dispatch(unfollowAC(userId))
         },
-        setUsers: (users: userType[]) => {
-            dispatch(setUsersAC(users))
+        setUsers: (users: userType[], totalUsersCount: number) => {
+            dispatch(setUsersAC(users, totalUsersCount))
         },
+        changeUsersPage: (pageNumber: number) => {
+            dispatch(changeUsersPageAC(pageNumber))
+        },
+        changePageFieldValue: (value: string) => {
+            dispatch(changePageFieldValueAC(value))
+        }
     }
 }
 export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
