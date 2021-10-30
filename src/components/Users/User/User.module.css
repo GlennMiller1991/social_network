@@ -1,0 +1,29 @@
+
+.photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.subBtn, .unsubBtn {
+    width: 90px;
+    border-radius: 5px;
+    color: #edeef0;
+}
+
+.subBtn {
+    background-color: #055705;
+}
+.unsubBtn {
+    background-color: #490606;
+}
+
+.wrapper {
+    width: 25%;
+    padding-bottom: 15px;
+}
+
+.name {
+    font-family: "Cambria Math", serif;
+    font-size: 1.1em;
+}

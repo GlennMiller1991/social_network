@@ -6,6 +6,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 const CHANGE_USER_PAGE = 'CHANGE-USER-PAGE'
 const CHANGE_PAGE_FIELD_VALUE = 'CHANGE-PAGE-FIELD-VALUE'
+const ENTER_PRESS = 'ENTER-PRESS'
 
 //types
 export type userType = {
@@ -15,7 +16,7 @@ export type userType = {
     followed: boolean
     status: null
     photos: {
-        large: null | HTMLImageElement
+        large: null | string | HTMLImageElement
         small: null
     }
 }
@@ -33,6 +34,7 @@ export type unfollowActionType = ReturnType<typeof unfollowAC>
 export type setUsersActionType = ReturnType<typeof setUsersAC>
 export type changeUsersPageActionType = ReturnType<typeof changeUsersPageAC>
 export type changePageFieldValueActionType = ReturnType<typeof changePageFieldValueAC>
+export type enterPressActionType = ReturnType<typeof enterPressAC>
 
 //actions creators
 export const followAC = (userId: number) => {
@@ -65,6 +67,7 @@ export const changeUsersPageAC = (pageNumber: number) => {
         type: CHANGE_USER_PAGE,
         payload: {
             currentPage: pageNumber,
+            pageFieldValue: pageNumber,
         }
     } as const
 }
@@ -76,10 +79,86 @@ export const changePageFieldValueAC = (value: string) => {
         }
     } as const
 }
+export const enterPressAC = (value: string) => {
+    return {
+        type: ENTER_PRESS,
+        payload: {
+            currentPage: Number(value),
+            pageFieldValue: value,
+        }
+    } as const
+}
 //initial state
 const initialState = {
-    users: [],
-    totalUsersCount: 0,
+    users: [
+        {
+        id: 1,
+        name: 'AlexisTheGreat',
+        status: null,
+        followed: false,
+        photos: {
+            large: null,
+            small: null,
+        },
+        uniqueUrlName: null,
+    },
+        {
+            id: 2,
+            name: 'Alex',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 3,
+            name: 'AlexisTheGreat',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 4,
+            name: 'Alex',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 5,
+            name: 'AlexisTheGreat',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 6,
+            name: 'Alex',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+    ],
+    totalUsersCount: 6,
     pageSize: 12,
     currentPage: 1,
     pageFieldValue: '1',
@@ -122,6 +201,11 @@ export const usersReducer = (state: usersPageType = initialState, action: action
                 ...action.payload,
             }
         case CHANGE_PAGE_FIELD_VALUE:
+            return {
+                ...state,
+                ...action.payload,
+            }
+        case ENTER_PRESS:
             return {
                 ...state,
                 ...action.payload,

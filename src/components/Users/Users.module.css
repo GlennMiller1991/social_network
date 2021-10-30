@@ -4,56 +4,10 @@
     row-gap: 50px;
 }
 
-.changePage {
-    font-weight: unset;
-    padding-left: 40px;
-    padding-right: 40px;
-    cursor: pointer;
-}
-
-.lastPage {
-    font-weight: unset;
-    cursor: pointer;
-}
-
-.currentPage input {
-    size: auto;
-}
-
-.pages {
-    display: flex;
-    justify-content: center;
-    align-items: end;
-}
-
 .page {
     padding-left: 10px;
     padding-right: 10px;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
-}
-
-.photo {
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-}
-
-.subBtn, .unsubBtn {
-    width: 90px;
-    border-radius: 5px;
-    color: #edeef0;
-}
-
-.subBtn {
-    background-color: #055705;
-}
-.unsubBtn {
-    background-color: #490606;
-}
-
-.wrapper {
-    width: 25%;
-    padding-bottom: 5px;
 }

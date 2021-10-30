@@ -38,13 +38,8 @@ const NavaSecret = () => {
                 </NavLink>
             </div>
             <div className={styles.button}></div>
-            <div className={styles.button}>
-                <NavLink className={styles.search}
-                        activeClassName={styles.active}
-                         to=''>
+            <div className={`${styles.button}`}>
                     SEARCH
-                </NavLink>
-                <div className={styles.searchBar}></div>
             </div>
         </div>
     );

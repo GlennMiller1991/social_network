@@ -17,7 +17,7 @@ import {
 } from "./profileReducer";
 import {
     changePageFieldValueActionType,
-    changeUsersPageActionType,
+    changeUsersPageActionType, enterPressActionType,
     followActionType,
     setUsersActionType,
     unfollowActionType,
@@ -54,6 +54,7 @@ export type actionsType = addPostActionType
     | setUsersActionType
     | changeUsersPageActionType
     | changePageFieldValueActionType
+    | enterPressActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,

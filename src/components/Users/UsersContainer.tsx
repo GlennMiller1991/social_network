@@ -1,14 +1,16 @@
 import {connect} from "react-redux";
-import {Users} from "./Users";
+import {responseType, Users} from "./Users";
 import {actionsType, stateType} from "../../redux/redux_store";
 import {
     changePageFieldValueAC,
-    changeUsersPageAC,
+    changeUsersPageAC, enterPressAC,
     followAC,
     setUsersAC,
     unfollowAC,
     userType
 } from "../../redux/usersReducer";
+import {KeyboardEvent} from 'react'
+import axios from "axios";
 
 const mapStateToProps = (state: stateType) => {
     return {
@@ -35,6 +37,9 @@ const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
         },
         changePageFieldValue: (value: string) => {
             dispatch(changePageFieldValueAC(value))
+        },
+        onEnterPressHandler: (value: string) => {
+            dispatch(enterPressAC(value))
         }
     }
 }
