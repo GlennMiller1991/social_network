@@ -16,6 +16,7 @@ import {
     profileReducer
 } from "./profileReducer";
 import {
+    changeLoadStatusActionType,
     changePageFieldValueActionType,
     changeUsersPageActionType, enterPressActionType,
     followActionType,
@@ -55,6 +56,7 @@ export type actionsType = addPostActionType
     | changeUsersPageActionType
     | changePageFieldValueActionType
     | enterPressActionType
+    | changeLoadStatusActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,

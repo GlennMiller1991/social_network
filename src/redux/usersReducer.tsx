@@ -7,6 +7,7 @@ const SET_USERS = 'SET-USERS'
 const CHANGE_USER_PAGE = 'CHANGE-USER-PAGE'
 const CHANGE_PAGE_FIELD_VALUE = 'CHANGE-PAGE-FIELD-VALUE'
 const ENTER_PRESS = 'ENTER-PRESS'
+const CHANGE_LOAD_STATUS = 'CHANGE-LOAD-STATUS'
 
 //types
 export type userType = {
@@ -25,7 +26,8 @@ export type usersPageType = {
     totalUsersCount: number,
     pageSize: number,
     currentPage: number,
-    pageFieldValue: string
+    pageFieldValue: string,
+    usersIsLoaded: boolean,
 }
 
 //actions type
@@ -35,6 +37,7 @@ export type setUsersActionType = ReturnType<typeof setUsers>
 export type changeUsersPageActionType = ReturnType<typeof changeUsersPage>
 export type changePageFieldValueActionType = ReturnType<typeof changePageFieldValue>
 export type enterPressActionType = ReturnType<typeof enterPress>
+export type changeLoadStatusActionType = ReturnType<typeof changeLoadStatus>
 
 //actions creators
 export const follow = (userId: number) => {
@@ -85,6 +88,14 @@ export const enterPress = (value: string) => {
         payload: {
             currentPage: Number(value),
             pageFieldValue: value,
+        }
+    } as const
+}
+export const changeLoadStatus = (usersIsLoaded: boolean) => {
+    return {
+        type: CHANGE_LOAD_STATUS,
+        payload: {
+            usersIsLoaded
         }
     } as const
 }
@@ -228,6 +239,7 @@ export const fakeState = {
     pageSize: 12,
     currentPage: 1,
     pageFieldValue: '1',
+    usersIsLoaded: true,
 }
 const initialState = {
     users: [],
@@ -235,6 +247,7 @@ const initialState = {
     pageSize: 12,
     currentPage: 1,
     pageFieldValue: '1',
+    usersIsLoaded: true,
 }
 export const usersReducer = (state: usersPageType = initialState, action: actionsType) => {
     switch (action.type) {
@@ -281,6 +294,11 @@ export const usersReducer = (state: usersPageType = initialState, action: action
             return {
                 ...state,
                 ...action.payload,
+            }
+        case CHANGE_LOAD_STATUS:
+            return {
+                ...state,
+                ...action.payload
             }
         default:
             return state

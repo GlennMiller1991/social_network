@@ -12,7 +12,8 @@ type PaginationContainerPropsType = {
     changePageFieldValue: (value: string) => void
     setUsers: (users: userType[], totalUsersCount: number) => void,
     changeUsersPage: (pageNumber: number) => void,
-    onEnterPressHandler: (value: string) => void
+    onEnterPressHandler: (value: string) => void,
+    changeLoadStatus: (usersIsLoaded: boolean) => void
 }
 export const PaginationContainer: React.FC<PaginationContainerPropsType> = (props) => {
     const pages = (totalUsersCount: number, pageSize: number) => {
@@ -24,10 +25,9 @@ export const PaginationContainer: React.FC<PaginationContainerPropsType> = (prop
             .get<responseType>(
                 `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${requiredPage}`
             ).then((res) => {
-            if (res.status === 200) {
-                props.setUsers(res.data.items, res.data.totalCount)
-            }
-
+            props.setUsers(res.data.items, res.data.totalCount)
+        }).catch(() => {
+            props.changeLoadStatus(true)
         })
     }, [props.pageSize])
     const onKeyPressHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
@@ -39,9 +39,9 @@ export const PaginationContainer: React.FC<PaginationContainerPropsType> = (prop
                 .get<responseType>(
                     `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${Number(value)}`
                 ).then((res) => {
-                if (res.status === 200) {
-                    props.setUsers(res.data.items, res.data.totalCount)
-                }
+                props.setUsers(res.data.items, res.data.totalCount)
+            }).catch(() => {
+                props.changeLoadStatus(true)
             })
         }
     }, [props.pageSize])

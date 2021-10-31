@@ -15,7 +15,9 @@ export type UsersPropsType = {
     setUsers: (users: userType[], totalUsersCount: number) => void,
     changeUsersPage: (pageNumber: number) => void,
     changePageFieldValue: (value: string) => void,
-    enterPress: (value: string) => void
+    enterPress: (value: string) => void,
+    usersIsLoaded?: boolean,
+    changeLoadStatus: (usersIsLoaded: boolean) => void,
 }
 
 export const Users: React.FC<UsersPropsType> = (props) => {
@@ -39,7 +41,8 @@ export const Users: React.FC<UsersPropsType> = (props) => {
                                  changePageFieldValue={props.changePageFieldValue}
                                  changeUsersPage={props.changeUsersPage}
                                  setUsers={props.setUsers}
-                                 onEnterPressHandler={props.enterPress}/>
+                                 onEnterPressHandler={props.enterPress}
+                                 changeLoadStatus={props.changeLoadStatus}/>
         </div>
     )
 }
