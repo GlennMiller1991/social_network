@@ -34,7 +34,9 @@ export const addPostActionCreator = (value: string) => {
 export const filterPostsActionCreator = (filterValue: string) => {
     return {
         type: FILTER,
-        filterValue: filterValue
+        payload: {
+            filter: filterValue
+        }
     } as const
 
 }
@@ -97,21 +99,9 @@ export const postsReducer = (state: postsPageType = initialState, action: action
                 }]
             } : state
         case FILTER:
-            const postsForRender = [...state.posts]
-            switch (action.filterValue) {
-                case "rate":
-                    postsForRender.sort((postA, postB) => {
-                        return postA.postLikes > postB.postLikes ? -1 : 1
-                    })
-                    return {posts: postsForRender, filter: 'rate'}
-                case "reverse rate":
-                    postsForRender.sort((postA, postB) => {
-                        return postA.postLikes > postB.postLikes ? 1 : -1
-                    })
-                    return {posts: postsForRender, filter: 'reverse rate'}
-                case 'date':
-                default:
-                    return {posts: postsForRender, filter: 'date'}
+            return {
+                ...state,
+                ...action.payload
             }
         default:
             return state

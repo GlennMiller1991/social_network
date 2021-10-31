@@ -10,7 +10,23 @@ export type PostsPropsType = {
 }
 
 export const Posts: React.FC<PostsPropsType> = (props) => {
-    console.log('PostsSecret')
+    // sort posts every rerender because post could be added or likes count could be changed
+    const postsForRender = props.state.posts
+    switch (props.state.filter) {
+        case "rate":
+            postsForRender.sort((postA, postB) => {
+                return postA.postLikes > postB.postLikes ? -1 : 1
+            })
+            break
+        case "reverse rate":
+            postsForRender.sort((postA, postB) => {
+                return postA.postLikes > postB.postLikes ? 1 : -1
+            })
+            break
+        case 'date':
+        default:
+            break
+    }
     //return
     return (
         <div>
@@ -21,7 +37,7 @@ export const Posts: React.FC<PostsPropsType> = (props) => {
                 <option value={'reverse rate'}>reverse rate</option>
             </select>
             <div id={classes.posts}>
-                {props.state.posts.map((post) => {
+                {postsForRender.map((post) => {
                     return (
                         <div key={post.postId}>
                             <Post postInfo={post}
