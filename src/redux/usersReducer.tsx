@@ -29,15 +29,15 @@ export type usersPageType = {
 }
 
 //actions type
-export type followActionType = ReturnType<typeof followAC>
-export type unfollowActionType = ReturnType<typeof unfollowAC>
-export type setUsersActionType = ReturnType<typeof setUsersAC>
-export type changeUsersPageActionType = ReturnType<typeof changeUsersPageAC>
-export type changePageFieldValueActionType = ReturnType<typeof changePageFieldValueAC>
-export type enterPressActionType = ReturnType<typeof enterPressAC>
+export type followActionType = ReturnType<typeof follow>
+export type unfollowActionType = ReturnType<typeof unfollow>
+export type setUsersActionType = ReturnType<typeof setUsers>
+export type changeUsersPageActionType = ReturnType<typeof changeUsersPage>
+export type changePageFieldValueActionType = ReturnType<typeof changePageFieldValue>
+export type enterPressActionType = ReturnType<typeof enterPress>
 
 //actions creators
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {
         type: FOLLOW,
         payload: {
@@ -45,7 +45,7 @@ export const followAC = (userId: number) => {
         }
     } as const
 }
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
         type: UNFOLLOW,
         payload: {
@@ -53,7 +53,7 @@ export const unfollowAC = (userId: number) => {
         }
     } as const
 }
-export const setUsersAC = (users: userType[], total: number) => {
+export const setUsers = (users: userType[], total: number) => {
     return {
         type: SET_USERS,
         payload: {
@@ -62,7 +62,7 @@ export const setUsersAC = (users: userType[], total: number) => {
         }
     } as const
 }
-export const changeUsersPageAC = (pageNumber: number) => {
+export const changeUsersPage = (pageNumber: number) => {
     return {
         type: CHANGE_USER_PAGE,
         payload: {
@@ -71,7 +71,7 @@ export const changeUsersPageAC = (pageNumber: number) => {
         }
     } as const
 }
-export const changePageFieldValueAC = (value: string) => {
+export const changePageFieldValue = (value: string) => {
     return {
         type: CHANGE_PAGE_FIELD_VALUE,
         payload: {
@@ -79,7 +79,7 @@ export const changePageFieldValueAC = (value: string) => {
         }
     } as const
 }
-export const enterPressAC = (value: string) => {
+export const enterPress = (value: string) => {
     return {
         type: ENTER_PRESS,
         payload: {

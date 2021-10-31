@@ -1,14 +1,13 @@
 import {connect} from "react-redux";
-import {Users} from "./Users";
-import {actionsType, stateType} from "../../../redux/redux_store";
+import {stateType} from "../../../redux/redux_store";
 import {
-    changePageFieldValueAC,
-    changeUsersPageAC, enterPressAC,
-    followAC,
-    setUsersAC,
-    unfollowAC,
-    userType
+    changePageFieldValue,
+    changeUsersPage, enterPress,
+    follow,
+    setUsers,
+    unfollow,
 } from "../../../redux/usersReducer";
+import {UsersSideEffectContainer} from "./UsersSideEffectContainer";
 
 const mapStateToProps = (state: stateType) => {
     return {
@@ -19,26 +18,11 @@ const mapStateToProps = (state: stateType) => {
         pageFieldValue: state.usersPage.pageFieldValue,
     }
 }
-const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: userType[], totalUsersCount: number) => {
-            dispatch(setUsersAC(users, totalUsersCount))
-        },
-        changeUsersPage: (pageNumber: number) => {
-            dispatch(changeUsersPageAC(pageNumber))
-        },
-        changePageFieldValue: (value: string) => {
-            dispatch(changePageFieldValueAC(value))
-        },
-        onEnterPressHandler: (value: string) => {
-            dispatch(enterPressAC(value))
-        }
-    }
-}
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export const UsersContainer = connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    changeUsersPage,
+    changePageFieldValue,
+    enterPress,
+})(UsersSideEffectContainer)
