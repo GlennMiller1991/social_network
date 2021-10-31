@@ -104,13 +104,19 @@ test('filterPosts must be correct', () => {
         filterPostsActionCreator('reverse rate')
     )
     expect(objToTest.filter).toBe('reverse rate')
+    expect(objToTest.posts.length).toBe(3)
+    expect(objToTest.posts[1].postId).toEqual(initialState.posts[1].postId)
     objToTest = postsReducer(initialState,
         filterPostsActionCreator('rate')
     )
     expect(objToTest.filter).toBe('rate')
+    expect(objToTest.posts.length).toBe(3)
+    expect(objToTest.posts[1].postId).toEqual(initialState.posts[1].postId)
     objToTest = postsReducer(initialState,
         filterPostsActionCreator('date')
     )
     expect(objToTest.filter).toBe('date')
+    expect(objToTest.posts.length).toBe(3)
+    expect(objToTest.posts[1].postId).toEqual(initialState.posts[1].postId)
 })
 

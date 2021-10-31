@@ -21,13 +21,15 @@ export type dialogsPageType = {
 }
 
 //actions types
-export type filterMessagesActionType = ReturnType<typeof filterMessagesActionCreator>
+export type filterMessagesActionType = ReturnType<typeof filterMessages>
 
 //action creators
-export const filterMessagesActionCreator = (value: string) => {
+export const filterMessages = (value: string) => {
     return {
         type: FILTER_MESSAGES,
-        filterValue: value
+        payload: {
+            filter: value
+        }
     } as const
 }
 
@@ -63,22 +65,9 @@ export const initialState: dialogsPageType = {
 export const dialogsReducer = (state: dialogsPageType = initialState, action: actionsType): dialogsPageType => {
     switch (action.type) {
         case FILTER_MESSAGES:
-            switch (action.filterValue) {
-                case 'you':
-                    return {
-                        ...state,
-                        chat: state.chat.filter(mes => mes.author === action.filterValue),
-                        filter: action.filterValue
-                    }
-                case 'notYou':
-                    return {
-                        ...state,
-                        chat: state.chat.filter(mes => mes.author === action.filterValue),
-                        filter: action.filterValue
-                    }
-                case 'all':
-                default:
-                    return state
+            return {
+                ...state,
+                ...action.payload
             }
         default:
             return state

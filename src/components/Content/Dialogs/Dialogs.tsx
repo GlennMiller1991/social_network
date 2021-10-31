@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import styles from './Dialogs.module.css'
 import {Chat} from "./Chat/Chat";
 import {OpenDialog} from "./OpenDialog/OpenDialog";
@@ -7,19 +7,28 @@ import {dialogsPageType} from "../../../redux/dialogsReducer";
 //types
 type DialogsPropsType = {
     state: dialogsPageType
-    setFilter: (filterValue: string) => void
+    filterMessages: (filterValue: string) => void
 }
 
 //components
 const DialogsSecret: React.FC<DialogsPropsType> = (props) => {
+    // filter chat messages every rerender, cause message could be added
+    // or filter could be changed
+    // but useMemo looking for dependencies
+    let chatMessagesForRender = useMemo(() => {
+            return props.state.filter !== 'all' ?
+                props.state.chat.filter(mes => mes.author === props.state.filter) :
+                props.state.chat
+        },
+        [props.state.chat, props.state.filter])
 
     //return
     return (
         <div className={styles.container}>
             <div className={styles.filter}>
-                <div onClick={() => props.setFilter('you')}>you</div>
-                <div onClick={() => props.setFilter('notYou')}>notYou</div>
-                <div onClick={() => props.setFilter('all')}>all</div>
+                <div onClick={() => props.filterMessages('you')}>you</div>
+                <div onClick={() => props.filterMessages('notYou')}>notYou</div>
+                <div onClick={() => props.filterMessages('all')}>all</div>
             </div>
             <div className={styles.openDialogs}>
                 {props.state.dialogs.map((dialog) => {
@@ -29,7 +38,7 @@ const DialogsSecret: React.FC<DialogsPropsType> = (props) => {
                 })}
             </div>
             <div className={styles.dialogs}>
-                <Chat messages={props.state.chat}/>
+                <Chat messages={chatMessagesForRender}/>
             </div>
         </div>
     );
