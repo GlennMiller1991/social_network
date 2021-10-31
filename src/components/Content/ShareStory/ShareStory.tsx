@@ -2,7 +2,7 @@ import React, {ChangeEvent, LegacyRef} from 'react';
 import styles from './ShareStory.module.css';
 import {shareStoryPageType} from "../../../redux/shareStoryReducer";
 
-type ShareStoryPropsType = {
+export type ShareStoryPropsType = {
     state: shareStoryPageType
     onClickCallback: (formText: string) => void
     onChangeCallback: (event: ChangeEvent<HTMLTextAreaElement>) => void

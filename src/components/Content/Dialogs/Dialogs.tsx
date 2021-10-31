@@ -5,7 +5,7 @@ import {OpenDialog} from "./OpenDialog/OpenDialog";
 import {dialogsPageType} from "../../../redux/dialogsReducer";
 
 //types
-type DialogsPropsType = {
+export type DialogsPropsType = {
     state: dialogsPageType
     filterMessages: (filterValue: string) => void
 }

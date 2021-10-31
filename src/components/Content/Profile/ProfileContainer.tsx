@@ -3,9 +3,9 @@ import {
     addCommentActionCreator,
     changeNewCommentTextActionCreator,
 } from "../../../redux/profileReducer";
-import {Profile} from "./Profile";
 import {actionsType, stateType} from "../../../redux/redux_store";
 import {connect} from "react-redux";
+import {ProfileSideEffectContainer} from "./ProfileSideEffectContainer";
 
 const mapStateToProps = (state: stateType) => {
     return {
@@ -24,4 +24,4 @@ const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
     }
 }
 
-export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(Profile)
+export const ProfileContainer = connect(mapStateToProps, mapDispatchToProps)(ProfileSideEffectContainer)

@@ -1,9 +1,9 @@
 import {ChangeEvent} from "react";
-import {ShareStory} from "./ShareStory";
 import {addPostActionCreator} from "../../../redux/postsReducer";
 import {changeShareStoryTextActionCreator} from "../../../redux/shareStoryReducer";
 import {connect} from "react-redux";
 import {actionsType, stateType} from "../../../redux/redux_store";
+import {ShareStorySideEffectContainer} from "./ShareStorySideEffectContainer";
 
 const mapStateToProps = (state: stateType) => {
     return {
@@ -21,4 +21,4 @@ const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
         }
     }
 }
-export const ShareStoryContainer = connect(mapStateToProps, mapDispatchToProps)(ShareStory)
+export const ShareStoryContainer = connect(mapStateToProps, mapDispatchToProps)(ShareStorySideEffectContainer)

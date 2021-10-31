@@ -16,6 +16,7 @@ export class UsersSideEffectContainer extends React.Component<UsersPropsType> {
 
     //life cycle
     componentDidMount() {
+        document.title = 'Users Page'
         axios
             .get<responseType>(
                 `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`

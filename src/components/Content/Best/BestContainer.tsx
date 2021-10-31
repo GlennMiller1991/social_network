@@ -1,11 +1,6 @@
 import {connect} from "react-redux";
-import {Best} from "./Best";
-import {actionsType, stateType} from "../../../redux/redux_store";
+import {BestSideEffectContainer} from "./BestSideEffectContainer";
 
-const mapStateToProps = (state: stateType) => {
-
-}
-const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
-
-}
-export const BestContainer = connect(mapStateToProps, mapDispatchToProps)(Best)
+const mapStateToProps = () => {}
+const mapDispatchToProps = () => {}
+export const BestContainer = connect(mapStateToProps, mapDispatchToProps)(BestSideEffectContainer)

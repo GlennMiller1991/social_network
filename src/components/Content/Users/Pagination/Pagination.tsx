@@ -11,7 +11,6 @@ type PaginationSecretPropsType = {
 }
 
 const PaginationSecret: React.FC<PaginationSecretPropsType> = (props) => {
-    console.log('from PaginationSecret')
     return (
         <div className={styles.pages}>
                     <span className={styles.changePage}

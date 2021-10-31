@@ -1,7 +1,7 @@
-import {Dialogs} from "./Dialogs";
 import {filterMessages} from "../../../redux/dialogsReducer";
 import {connect} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
+import {DialogsSideEffectContainer} from "./DialogsSideEffectContainer";
 
 
 const mapStateToProps = (state: stateType) => {
@@ -9,4 +9,4 @@ const mapStateToProps = (state: stateType) => {
         state: state.dialogsPage
     }
 }
-export const DialogsContainer = connect(mapStateToProps, {filterMessages})(Dialogs)
+export const DialogsContainer = connect(mapStateToProps, {filterMessages})(DialogsSideEffectContainer)

@@ -1,8 +1,8 @@
 import {ChangeEvent} from 'react';
 import {changeLikesCountActionCreator, filterPostsActionCreator} from "../../../redux/postsReducer";
-import {Posts} from "./Posts";
 import {connect} from "react-redux";
 import {actionsType, stateType} from "../../../redux/redux_store";
+import {PostsSideEffectContainer} from "./PostsSideEffectContainer";
 
 const mapStateToProps = (state: stateType) => {
     return {
@@ -20,4 +20,4 @@ const mapDispatchToProps = (dispatch: (obj: actionsType) => void ) => {
     }
 }
 
-export const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(Posts)
+export const PostsContainer = connect(mapStateToProps, mapDispatchToProps)(PostsSideEffectContainer)

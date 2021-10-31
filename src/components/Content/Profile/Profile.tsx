@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import {ProfilePageType} from "../../../redux/profileReducer";
 import {Comment} from "./Comment/Comment";
 
-type ProfilePropsType = {
+export type ProfilePropsType = {
     onChangeCallback: (event: ChangeEvent<HTMLInputElement>) => void
     onClickCallback: (text: string) => void
     state: ProfilePageType
