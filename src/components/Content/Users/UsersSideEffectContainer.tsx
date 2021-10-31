@@ -1,5 +1,5 @@
 import React from "react";
-import {userType} from "../../../redux/usersReducer";
+import {fakeState, userType} from "../../../redux/usersReducer";
 import axios from "axios";
 import {Users, UsersPropsType} from "./Users";
 
@@ -20,27 +20,26 @@ export class UsersSideEffectContainer extends React.Component<UsersPropsType> {
             .get<responseType>(
                 `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
             ).then((res) => {
-            console.log(res)
-            if (res.status === 200) {
-                this.props.setUsers(res.data.items, res.data.totalCount)
-            }
+            this.props.setUsers(res.data.items, res.data.totalCount)
+        }).catch(() => {
+            this.props.setUsers(fakeState.users, fakeState.totalUsersCount)
         })
     }
 
-    //callbacks
+//callbacks
     render() {
         return (
             <Users users={this.props.users}
                    totalUsersCount={this.props.totalUsersCount}
                    pageSize={this.props.pageSize}
-                       currentPage={this.props.currentPage}
-                       pageFieldValue={this.props.pageFieldValue}
-                       follow={this.props.follow}
-                       unfollow = {this.props.unfollow}
-                       setUsers = {this.props.setUsers}
-                       changeUsersPage = {this.props.changeUsersPage}
-                       changePageFieldValue = {this.props.changePageFieldValue}
-                       enterPress={this.props.enterPress}/>
-    )
+                   currentPage={this.props.currentPage}
+                   pageFieldValue={this.props.pageFieldValue}
+                   follow={this.props.follow}
+                   unfollow={this.props.unfollow}
+                   setUsers={this.props.setUsers}
+                   changeUsersPage={this.props.changeUsersPage}
+                   changePageFieldValue={this.props.changePageFieldValue}
+                   enterPress={this.props.enterPress}/>
+        )
     }
 }

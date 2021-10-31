@@ -89,19 +89,19 @@ export const enterPress = (value: string) => {
     } as const
 }
 //initial state
-const initialState = {
+export const fakeState = {
     users: [
         {
-        id: 1,
-        name: 'AlexisTheGreat',
-        status: null,
-        followed: false,
-        photos: {
-            large: null,
-            small: null,
+            id: 1,
+            name: 'AlexisTheGreat',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
         },
-        uniqueUrlName: null,
-    },
         {
             id: 2,
             name: 'Alex',
@@ -157,13 +157,85 @@ const initialState = {
             },
             uniqueUrlName: null,
         },
+        {
+            id: 7,
+            name: 'Katya',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 8,
+            name: 'DedMaximusYoYOY',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 9,
+            name: 'Gerda',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 10,
+            name: 'Harold from Rivia',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 11,
+            name: 'AsterixusJunior',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
+        {
+            id: 12,
+            name: 'Usmanov Sergey Victorovich',
+            status: null,
+            followed: false,
+            photos: {
+                large: null,
+                small: null,
+            },
+            uniqueUrlName: null,
+        },
     ],
     totalUsersCount: 6,
     pageSize: 12,
     currentPage: 1,
     pageFieldValue: '1',
 }
-
+const initialState = {
+    users: [],
+    totalUsersCount: 0,
+    pageSize: 12,
+    currentPage: 1,
+    pageFieldValue: '1',
+}
 export const usersReducer = (state: usersPageType = initialState, action: actionsType) => {
     switch (action.type) {
         case FOLLOW:
