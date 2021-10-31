@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {responseType, Users} from "./Users";
-import {actionsType, stateType} from "../../redux/redux_store";
+import {Users} from "./Users";
+import {actionsType, stateType} from "../../../redux/redux_store";
 import {
     changePageFieldValueAC,
     changeUsersPageAC, enterPressAC,
@@ -8,9 +8,7 @@ import {
     setUsersAC,
     unfollowAC,
     userType
-} from "../../redux/usersReducer";
-import {KeyboardEvent} from 'react'
-import axios from "axios";
+} from "../../../redux/usersReducer";
 
 const mapStateToProps = (state: stateType) => {
     return {

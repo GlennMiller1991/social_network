@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./User.module.css";
-import anonym from "../../../static/anonym.jpg";
-import {userType} from "../../../redux/usersReducer";
+import anonym from "../../../../static/anonym.jpg";
+import {userType} from "../../../../redux/usersReducer";
 
 type UserPropsType = userType & {
     follow: (userId: number) => void

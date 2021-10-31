@@ -11,6 +11,7 @@ export type PostPropsType = {
 
 //components
 const PostSecret: React.FC<PostPropsType> = (props) => {
+    console.log(`post #${props.postInfo.postId} rerender`)
     //return
     return (
         <div className={styles.post}>

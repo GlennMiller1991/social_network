@@ -9,7 +9,7 @@ export type PostsPropsType = {
     changeLikesCount: (change: boolean, postId: string) => void
 }
 
-export const Posts: React.FC<PostsPropsType> = (props) => {
+const PostsSecret: React.FC<PostsPropsType> = (props) => {
     // sort posts every rerender because post could be added or likes count could be change d
     const postsForRender = props.state.posts
     switch (props.state.filter) {
@@ -49,3 +49,5 @@ export const Posts: React.FC<PostsPropsType> = (props) => {
         </div>
     )
 }
+
+export const Posts = React.memo(PostsSecret)

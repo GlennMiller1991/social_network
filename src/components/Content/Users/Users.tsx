@@ -1,5 +1,5 @@
 import React from "react";
-import {userType} from "../../redux/usersReducer";
+import {userType} from "../../../redux/usersReducer";
 import styles from './Users.module.css'
 import axios from "axios";
 import {MouseEvent, KeyboardEvent} from "react";

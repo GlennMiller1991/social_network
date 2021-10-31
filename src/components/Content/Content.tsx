@@ -8,7 +8,7 @@ import {DialogsContainer} from "./Dialogs/DialogsContainer";
 import {ShareStoryContainer} from "./ShareStory/ShareStoryContainer";
 import {BestContainer} from "./Best/BestContainer";
 import {SidebarContainer} from "./Sidebar/SidebarContainer";
-import {UsersContainer} from "../Users/UsersContainer";
+import {UsersContainer} from "./Users/UsersContainer";
 
 //components
 export const Content: React.FC = () => {

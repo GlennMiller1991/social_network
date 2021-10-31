@@ -2,7 +2,7 @@ import React, {KeyboardEvent, MouseEvent} from "react";
 import styles from "./Pagination.module.css";
 import axios from "axios";
 import {responseType} from "../Users";
-import {userType} from "../../../redux/usersReducer";
+import {userType} from "../../../../redux/usersReducer";
 
 type PaginationSecretPropsType = {
     pageSize: number,
