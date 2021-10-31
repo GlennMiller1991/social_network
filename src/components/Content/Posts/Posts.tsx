@@ -10,7 +10,7 @@ export type PostsPropsType = {
 }
 
 export const Posts: React.FC<PostsPropsType> = (props) => {
-    // sort posts every rerender because post could be added or likes count could be changed
+    // sort posts every rerender because post could be added or likes count could be change d
     const postsForRender = props.state.posts
     switch (props.state.filter) {
         case "rate":
