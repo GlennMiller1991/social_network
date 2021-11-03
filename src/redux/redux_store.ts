@@ -10,10 +10,10 @@ import {changeShareStoryTextActionType, shareStoryPageType, shareStoryReducer} f
 import {dialogsPageType, dialogsReducer, filterMessagesActionType} from "./dialogsReducer";
 import {sidebarReducer, sideBarType} from "./sidebarReducer";
 import {
-    addCommentActionType,
+    addCommentActionType, changeLoadUserStatusActionType,
     changeNewCommentTextActionType,
     ProfilePageType,
-    profileReducer
+    profileReducer, setUserActionType
 } from "./profileReducer";
 import {
     changeLoadStatusActionType,
@@ -57,6 +57,8 @@ export type actionsType = addPostActionType
     | changePageFieldValueActionType
     | enterPressActionType
     | changeLoadStatusActionType
+    | setUserActionType
+    | changeLoadUserStatusActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,

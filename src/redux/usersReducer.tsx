@@ -18,7 +18,7 @@ export type userType = {
     status: null
     photos: {
         large: null | string | HTMLImageElement
-        small: null
+        small: null | string | HTMLImageElement
     }
 }
 export type usersPageType = {

@@ -20,7 +20,8 @@ export type UsersPropsType = {
     changeLoadStatus: (usersIsLoaded: boolean) => void,
 }
 
-export const Users: React.FC<UsersPropsType> = (props) => {
+const UsersSecret: React.FC<UsersPropsType> = (props) => {
+    console.log('from users')
     return (
         <div className={styles.container}>
             <div className={styles.page}>
@@ -46,3 +47,5 @@ export const Users: React.FC<UsersPropsType> = (props) => {
         </div>
     )
 }
+
+export const Users = React.memo(UsersSecret)

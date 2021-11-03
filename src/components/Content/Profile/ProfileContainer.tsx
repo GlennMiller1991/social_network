@@ -1,7 +1,7 @@
 import {ChangeEvent} from 'react';
 import {
-    addCommentActionCreator,
-    changeNewCommentTextActionCreator,
+    addCommentActionCreator, changeLoadUserStatus,
+    changeNewCommentTextActionCreator, fullUserType, setUser,
 } from "../../../redux/profileReducer";
 import {actionsType, stateType} from "../../../redux/redux_store";
 import {connect} from "react-redux";
@@ -20,6 +20,12 @@ const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
         onClickCallback: (text: string) => {
             dispatch(addCommentActionCreator(text))
             dispatch(changeNewCommentTextActionCreator(''))
+        },
+        setUserHandler: (user: fullUserType) => {
+            dispatch(setUser(user))
+        },
+        changeLoadUser: (value: boolean) => {
+            dispatch(changeLoadUserStatus(value))
         }
     }
 }

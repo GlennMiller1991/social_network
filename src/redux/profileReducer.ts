@@ -4,6 +4,31 @@ import {actionsType} from "./redux_store";
 //constants
 const CHANGE_NEW_COMMENT_TEXT = 'CHANGE-NEW-COMMENT-TEXT'
 const ADD_COMMENT = 'ADD-COMMENT'
+const SET_USER = 'SET-USER'
+const CHANGE_LOAD_USER_STATUS = 'CHANGE-LOAD-USER-STATUS'
+
+//types
+export type fullUserType = null | {
+    aboutMe: string,
+    contacts: {
+        facebook: null | string,
+        website: null | string,
+        vk: null | string,
+        twitter: null | string,
+        instagram: null | string,
+        youtube: null | string,
+        github: null | string,
+        mainLink: null | string,
+    },
+    lookingForAJob: boolean,
+    lookingForAJobDescription: string,
+    fullName: string,
+    userId: number,
+    photos: {
+        small: null | string | HTMLImageElement,
+        large: null | string | HTMLImageElement,
+    }
+}
 
 //action creators
 export const changeNewCommentTextActionCreator = (newComm: string) => {
@@ -18,6 +43,22 @@ export const addCommentActionCreator = (text: string) => {
         comment: text
     } as const
 }
+export const setUser = (user: fullUserType) => {
+    return {
+        type: SET_USER,
+        payload: {
+            currentUserData: user,
+        }
+    } as const
+}
+export const changeLoadUserStatus = (loadUserStatus: boolean) => {
+    return {
+        type: CHANGE_LOAD_USER_STATUS,
+        payload: {
+            loadUserStatus
+        }
+    } as const
+}
 
 //types
 export type commentType = {
@@ -27,13 +68,19 @@ export type commentType = {
     answer: string
 }
 export type ProfilePageType = {
-    comments: commentType[]
-    newComm: string
+    currentUserId: null | number,
+    currentUserData: fullUserType,
+    loadUserStatus: boolean,
+    comments: commentType[],
+    newComm: string,
 }
 
 //actions types
 export type addCommentActionType = ReturnType<typeof addCommentActionCreator>
 export type changeNewCommentTextActionType = ReturnType<typeof changeNewCommentTextActionCreator>
+export type setUserActionType = ReturnType<typeof setUser>
+export type changeLoadUserStatusActionType = ReturnType<typeof changeLoadUserStatus>
+
 
 //data
 const comments: commentType[] = [
@@ -57,12 +104,15 @@ const comments: commentType[] = [
     }
 ]
 const initialState = {
+    currentUserId: 1456,
+    currentUserData: null,
+    loadUserStatus: true,
     comments: comments,
     newComm: ''
 }
 
 //reducer
-export const profileReducer = (state:ProfilePageType = initialState, action: actionsType) => {
+export const profileReducer = (state: ProfilePageType = initialState, action: actionsType) => {
     switch (action.type) {
         case CHANGE_NEW_COMMENT_TEXT:
             return {...state, newComm: action.newComm}
@@ -73,6 +123,13 @@ export const profileReducer = (state:ProfilePageType = initialState, action: act
                     id: v1(),
                     postId: v1()
                 }]
+            }
+        case CHANGE_LOAD_USER_STATUS:
+        case SET_USER:
+            debugger
+            return {
+                ...state,
+                ...action.payload,
             }
         default:
             return state
