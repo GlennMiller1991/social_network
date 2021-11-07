@@ -23,7 +23,13 @@ export const PaginationContainer: React.FC<PaginationContainerPropsType> = React
         props.changeUsersPage(requiredPage)
         axios
             .get<responseType>(
-                `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${requiredPage}`
+                `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${requiredPage}`,
+                {
+                    withCredentials: true,
+                    headers: {
+                        'API-KEY': '686ffc4e-9713-4acd-8b49-1b6f4dcbd337',
+                    }
+                }
             ).then((res) => {
             props.setUsers(res.data.items, res.data.totalCount)
         }).catch(() => {
