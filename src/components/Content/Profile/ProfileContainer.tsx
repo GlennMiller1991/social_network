@@ -1,10 +1,8 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
 import {Profile} from "./Profile";
-import axios from "axios";
 import {
     addCommentActionCreator,
     changeNewCommentTextActionCreator,
-    fullUserType,
     ProfilePageType,
     setUser
 } from "../../../redux/profileReducer";
@@ -13,8 +11,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {authType} from "../../../redux/authReducer";
+import {profileAPI} from "../../../api/profileAPI";
 
-type responseProfileType = fullUserType
 type PathParamsType = {
     userId: string,
 }
@@ -37,26 +35,22 @@ const ProfileSideEffectContainer: React.FC<RouteComponentProps<PathParamsType>> 
         useEffect(() => {
             document.title = 'Profile Page'
             const userId = props.match.params.userId ?
-                props.match.params.userId :
+                Number(props.match.params.userId) :
                 authState.isAuth ? authState.id : null
             if (userId) {
-                axios
-                    .get<responseProfileType>(
-                        `https://social-network.samuraijs.com/api/1.0/profile/${userId}`,
-                        {
-                            withCredentials: true,
-                            headers: {
-                                'API-KEY': '686ffc4e-9713-4acd-8b49-1b6f4dcbd337',
-                            }
-                        }
-                    ).then((res) => {
-                    if (res.data !== null) {
-                        dispatch(setUser(res.data))
+                profileAPI.getProfile(userId)
+                .then((data) => {
+                    if (data !== null) {
+                        dispatch(setUser(data))
                         setIsLoad(false)
                     }
                 })
             }
-        }, [])
+        }, [
+            dispatch,
+            props.match.params.userId,
+            authState.isAuth,
+            authState.id])
 
         return (
             <>

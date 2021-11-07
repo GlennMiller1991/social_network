@@ -1,7 +1,7 @@
 import React from "react";
 import {userType} from "../../../redux/usersReducer";
 import styles from './Users.module.css'
-import {User, UserContainer} from "./User/User";
+import {UserContainer} from "./User/User";
 import {PaginationContainer} from "./Pagination/PaginationContainer";
 
 
@@ -27,14 +27,14 @@ const UsersSecret: React.FC<UsersPropsType> = (props) => {
         <div className={styles.container}>
             <div className={styles.page}>
                 {props.users.map(user => <UserContainer key={user.id}
-                                               id={user.id}
-                                               name={user.name}
-                                               followed={user.followed}
-                                               status={user.status}
-                                               photos={user.photos}
-                                               uniqueUrlName={user.uniqueUrlName}
-                                               follow={props.follow}
-                                               unfollow={props.unfollow}/>)}
+                                                        id={user.id}
+                                                        name={user.name}
+                                                        followed={user.followed}
+                                                        status={user.status}
+                                                        photos={user.photos}
+                                                        uniqueUrlName={user.uniqueUrlName}
+                                                        follow={props.follow}
+                                                        unfollow={props.unfollow}/>)}
             </div>
             <PaginationContainer pageFieldValue={props.pageFieldValue}
                                  pageSize={props.pageSize}

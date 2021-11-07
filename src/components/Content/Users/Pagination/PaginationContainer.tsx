@@ -1,8 +1,7 @@
 import React, {KeyboardEvent, MouseEvent, useCallback} from 'react'
 import {userType} from "../../../../redux/usersReducer";
 import {Pagination} from "./Pagination";
-import axios from "axios";
-import {responseType} from "../UsersSideEffectContainer";
+import {usersAPI} from "../../../../api/usersAPI";
 
 type PaginationContainerPropsType = {
     pageSize: number,
@@ -21,36 +20,28 @@ export const PaginationContainer: React.FC<PaginationContainerPropsType> = React
     }
     const onClickHandler = useCallback((e: MouseEvent<HTMLSpanElement>, requiredPage: number) => {
         props.changeUsersPage(requiredPage)
-        axios
-            .get<responseType>(
-                `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${requiredPage}`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': '686ffc4e-9713-4acd-8b49-1b6f4dcbd337',
-                    }
-                }
-            ).then((res) => {
-            props.setUsers(res.data.items, res.data.totalCount)
-        }).catch(() => {
-            props.changeLoadStatus(true)
-        })
-    }, [props.pageSize])
+        usersAPI.getUsers(props.pageSize, requiredPage)
+            .then(data => {
+                props.setUsers(data.items, data.totalCount)
+            })
+            .catch(() => {
+                props.changeLoadStatus(true)
+            })
+    }, [props.pageSize, props.setUsers, props.changeLoadStatus])
     const onKeyPressHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
         console.log('from onKeyPressHandler')
         if (e.key === 'Enter') {
             const value = e.currentTarget.value
             props.onEnterPressHandler(value)
-            axios
-                .get<responseType>(
-                    `https://social-network.samuraijs.com/api/1.0/users?count=${props.pageSize}&page=${Number(value)}`
-                ).then((res) => {
-                props.setUsers(res.data.items, res.data.totalCount)
-            }).catch(() => {
-                props.changeLoadStatus(true)
-            })
+            usersAPI.getUsers(props.pageSize, Number(value))
+                .then(data => {
+                    props.setUsers(data.items, data.totalCount)
+                })
+                .catch(() => {
+                    props.changeLoadStatus(true)
+                })
         }
-    }, [props.pageSize])
+    }, [props.pageSize, props.setUsers, props.changeLoadStatus])
     return (
         <Pagination totalPages={pages(props.totalUsersCount, props.pageSize)}
                     currentPage={props.currentPage}

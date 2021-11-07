@@ -2,15 +2,9 @@ import React, {useCallback} from "react";
 import styles from "./User.module.css";
 import anonym from "../../../../static/anonym.jpg";
 import {userType} from "../../../../redux/usersReducer";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
+import {NavLink} from "react-router-dom";
+import {followAPI} from "../../../../api/followAPI";
 
-type responseFollowType = {
-    data: {},
-    messages: string[],
-    fieldsErrors: string[],
-    resultCode: number,
-}
 type UserPropsType = userType & {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
@@ -19,29 +13,14 @@ type UserPropsType = userType & {
 export const UserContainer: React.FC<UserPropsType> = React.memo((props) => {
     const {follow, unfollow, ...restProps} = props
     const followSideEffect = useCallback((userId: number) => {
-        axios
-            .post<responseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
-                {},
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': '686ffc4e-9713-4acd-8b49-1b6f4dcbd337'
-                    }
-                })
-            .then(response => {
-                props.follow(userId)
+        followAPI.follow(userId)
+            .then(() => {
+                follow(userId)
             })
-    }, [props.follow])
+    }, [follow])
     const unfollowSideEffect = useCallback((userId: number) => {
-        axios
-            .delete<responseFollowType>(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': '686ffc4e-9713-4acd-8b49-1b6f4dcbd337'
-                    }
-                })
-            .then(response => {
+        followAPI.unfollow(userId)
+            .then(() => {
                 unfollow(userId)
             })
     }, [unfollow])
@@ -56,8 +35,8 @@ export const User: React.FC<UserPropsType> = React.memo((props) => {
             <div className={styles.visual}>
                 <div><NavLink to={`/profile/${props.id}`}><img className={styles.photo}
                     //@ts-ignore
-                          src={props.photos.large || anonym}
-                          alt={'there is no foto'}/></NavLink></div>
+                                                               src={props.photos.large || anonym}
+                                                               alt={'there is no foto'}/></NavLink></div>
                 <div className={styles.name}>
                     {
                         props.name.length > 10 ?

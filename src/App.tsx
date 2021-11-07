@@ -4,22 +4,12 @@ import {Header} from "./components/Header/Header";
 import {Content} from "./components/Content/Content";
 import {Footer} from "./components/Footer/Footer";
 import {HashRouter} from "react-router-dom";
-import axios from "axios";
 import {useDispatch} from "react-redux";
 import {setAuthData} from "./redux/authReducer";
+import {authAPI} from "./api/authAPI";
 
 //types
 export type wayType = 0 | 1
-type responseAuthType = {
-    data: {
-        id: number,
-        login: string,
-        email: string,
-    },
-    messages: string[],
-    fieldsErrors: string[],
-    resultCode: number,
-}
 
 function AppSecret() {
     //first enter?
@@ -29,24 +19,15 @@ function AppSecret() {
 
     //auth user
     useEffect(() => {
-        axios
-            .get<responseAuthType>(
-                `https://social-network.samuraijs.com/api/1.0/auth/me`,
-                {
-                    withCredentials: true,
-                    headers: {
-                        'API-KEY': '686ffc4e-9713-4acd-8b49-1b6f4dcbd337',
-                    }
-                }
-            )
+        authAPI.checkAuth()
             .then(response => {
-                    if (!response.data.resultCode) {
-                        const {id, login, email} = response.data.data
+                    if (!response.resultCode) {
+                        const {id, login, email} = response.data
                         dispatch(setAuthData(id, login, email))
                     }
                 }
             )
-    }, [])
+    }, [dispatch])
 
     return (
         <HashRouter>
