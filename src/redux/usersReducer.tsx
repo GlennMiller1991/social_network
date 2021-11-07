@@ -261,7 +261,7 @@ export const usersReducer = (state: usersPageType = initialState, action: action
                                 user
                         )
                     }
-                )
+                ),
             }
         case UNFOLLOW:
             return {

@@ -1,8 +1,9 @@
 import React from "react";
 import {userType} from "../../../redux/usersReducer";
 import styles from './Users.module.css'
-import {User} from "./User/User";
+import {User, UserContainer} from "./User/User";
 import {PaginationContainer} from "./Pagination/PaginationContainer";
+
 
 export type UsersPropsType = {
     users: userType[],
@@ -25,7 +26,7 @@ const UsersSecret: React.FC<UsersPropsType> = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.page}>
-                {props.users.map(user => <User key={user.id}
+                {props.users.map(user => <UserContainer key={user.id}
                                                id={user.id}
                                                name={user.name}
                                                followed={user.followed}
