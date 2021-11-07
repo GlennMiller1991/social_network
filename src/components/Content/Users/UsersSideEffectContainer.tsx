@@ -11,9 +11,6 @@ export type responseType = {
 }
 
 export class UsersSideEffectContainer extends React.Component<UsersPropsType> {
-    constructor(props: UsersPropsType) {
-        super(props)
-    }
 
     //life cycle
     componentDidMount() {
@@ -23,7 +20,6 @@ export class UsersSideEffectContainer extends React.Component<UsersPropsType> {
                 `https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
             ).then((res) => {
             this.props.setUsers(res.data.items, res.data.totalCount)
-            this.props.changeLoadStatus(false)
         })
 
     }

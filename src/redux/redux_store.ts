@@ -25,6 +25,7 @@ import {
     usersPageType,
     usersReducer
 } from "./usersReducer";
+import {authReducer, authType, setAuthDataActionType} from "./authReducer";
 
 //types
 export type stateType = {
@@ -34,6 +35,7 @@ export type stateType = {
     sideBar: sideBarType
     profilePage: ProfilePageType
     usersPage: usersPageType,
+    authState: authType,
 }
 export type StoreType = Store<EmptyObject & {
     postsPage: postsPageType;
@@ -59,6 +61,7 @@ export type actionsType = addPostActionType
     | changeLoadStatusActionType
     | setUserActionType
     | changeLoadUserStatusActionType
+    | setAuthDataActionType
 
 const reducers = combineReducers({
     postsPage: postsReducer,
@@ -67,6 +70,7 @@ const reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sideBar: sidebarReducer,
     usersPage: usersReducer,
+    authState: authReducer,
 })
 
 export const store = createStore(reducers)

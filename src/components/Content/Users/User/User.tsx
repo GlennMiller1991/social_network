@@ -9,12 +9,13 @@ type UserPropsType = userType & {
     unfollow: (userId: number) => void
 }
 const UserSecret: React.FC<UserPropsType> = (props) => {
+    console.log('from user')
     return (
         <div key={props.id} className={styles.wrapper}>
             <div className={styles.visual}>
                 <div><NavLink to={`/profile/${props.id}`}><img className={styles.photo}
                     //@ts-ignore
-                          src={props.photos?.large || anonym}
+                          src={props.photos.large || anonym}
                           alt={'there is no foto'}/></NavLink></div>
                 <div className={styles.name}>
                     {

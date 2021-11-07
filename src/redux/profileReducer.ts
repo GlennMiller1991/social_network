@@ -118,18 +118,20 @@ export const profileReducer = (state: ProfilePageType = initialState, action: ac
             return {...state, newComm: action.newComm}
         case ADD_COMMENT:
             return {
-                ...state, comments: [...state.comments, {
+                ...state,
+                comments: [...state.comments, {
                     text: action.comment,
                     id: v1(),
                     postId: v1()
-                }]
+                }],
+                newComm: ''
             }
         case CHANGE_LOAD_USER_STATUS:
         case SET_USER:
-            debugger
             return {
                 ...state,
                 ...action.payload,
+                loadUserStatus: false,
             }
         default:
             return state

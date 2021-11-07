@@ -22,7 +22,7 @@ export const Content: React.FC = () => {
                     <Route path='/main' render={() => <PostsContainer/>}/>
                     <Route path='/best' render={() => <BestContainer/>}/>
                     <Route path='/share' render={() => <ShareStoryContainer/>}/>
-                    <Route path='/profile' render={() => <ProfileContainer/>}/>
+                    <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
                 </div>

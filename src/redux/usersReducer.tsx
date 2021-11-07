@@ -278,7 +278,8 @@ export const usersReducer = (state: usersPageType = initialState, action: action
         case SET_USERS:
             return {
                 ...state,
-                ...action.payload
+                ...action.payload,
+                usersIsLoaded: false,
             }
         case CHANGE_USER_PAGE:
             return {

@@ -4,7 +4,7 @@
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     grid-template-rows: 100px;
-    font-family: "Trebuchet MS", "Lucida Sans";
+    font-family: "Trebuchet MS", "Lucida Sans", sans-serif;
     font-size: 20px;
     justify-items: center;
     align-items: center;
@@ -47,6 +47,17 @@
     transform: scale(1.3);
 }
 
-.search {
-
+.loginButton {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
+
+.login {
+    color: #962626;
+}
+
+.greeting {
+    font-size: 1rem;
+}
+

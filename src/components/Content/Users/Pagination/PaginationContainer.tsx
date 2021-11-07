@@ -15,7 +15,7 @@ type PaginationContainerPropsType = {
     onEnterPressHandler: (value: string) => void,
     changeLoadStatus: (usersIsLoaded: boolean) => void
 }
-export const PaginationContainer: React.FC<PaginationContainerPropsType> = (props) => {
+export const PaginationContainer: React.FC<PaginationContainerPropsType> = React.memo((props) => {
     const pages = (totalUsersCount: number, pageSize: number) => {
         return Math.ceil(totalUsersCount / pageSize)
     }
@@ -53,4 +53,4 @@ export const PaginationContainer: React.FC<PaginationContainerPropsType> = (prop
                     onKeyPressHandler={onKeyPressHandler}
                     onClickHandler={onClickHandler}/>
     )
-}
+})
