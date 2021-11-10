@@ -10,7 +10,9 @@ export class UsersSideEffectContainer extends React.Component<UsersPropsType> {
         document.title = 'Users Page'
         usersAPI.getUsers(this.props.pageSize, this.props.currentPage)
             .then(data => {
-                this.props.setUsers(data.items, data.totalCount)
+                this.props.setUsers(data.items.map(item => {
+                    return {...item, waitForChangingStatus: true}
+                }), data.totalCount)
             })
     }
 

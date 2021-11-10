@@ -16,9 +16,12 @@ export const PageLoader = React.memo(() => {
             transform: `rotate(${seconds * 0.0083333333}deg`
         }
         useEffect(() => {
-            setInterval(() => {
+            const intervalId = setInterval(() => {
                 setSeconds(seconds => seconds + 1)
             }, 4)
+            return () => {
+                clearInterval(intervalId)
+            }
         }, [])
         return (
             <div className="clock">

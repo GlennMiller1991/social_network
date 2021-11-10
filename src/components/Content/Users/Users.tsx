@@ -34,7 +34,8 @@ const UsersSecret: React.FC<UsersPropsType> = (props) => {
                                                         photos={user.photos}
                                                         uniqueUrlName={user.uniqueUrlName}
                                                         follow={props.follow}
-                                                        unfollow={props.unfollow}/>)}
+                                                        unfollow={props.unfollow}
+                                                        waitForChangingStatus={user.waitForChangingStatus}/>)}
             </div>
             <PaginationContainer pageFieldValue={props.pageFieldValue}
                                  pageSize={props.pageSize}

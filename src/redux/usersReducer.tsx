@@ -19,7 +19,8 @@ export type userType = {
     photos: {
         large: null | string | HTMLImageElement
         small: null | string | HTMLImageElement
-    }
+    },
+    waitForChangingStatus: boolean,
 }
 export type usersPageType = {
     users: userType[],
@@ -98,148 +99,6 @@ export const changeLoadStatus = (usersIsLoaded: boolean) => {
             usersIsLoaded
         }
     } as const
-}
-//initial state
-export const fakeState = {
-    users: [
-        {
-            id: 1,
-            name: 'AlexisTheGreat',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 2,
-            name: 'Alex',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 3,
-            name: 'AlexisTheGreat',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 4,
-            name: 'Alex',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 5,
-            name: 'AlexisTheGreat',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 6,
-            name: 'Alex',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 7,
-            name: 'Katya',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 8,
-            name: 'DedMaximusYoYOY',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 9,
-            name: 'Gerda',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 10,
-            name: 'Harold from Rivia',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 11,
-            name: 'AsterixusJunior',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-        {
-            id: 12,
-            name: 'Usmanov Sergey Victorovich',
-            status: null,
-            followed: false,
-            photos: {
-                large: null,
-                small: null,
-            },
-            uniqueUrlName: null,
-        },
-    ],
-    totalUsersCount: 6,
-    pageSize: 12,
-    currentPage: 1,
-    pageFieldValue: '1',
-    usersIsLoaded: true,
 }
 const initialState = {
     users: [],

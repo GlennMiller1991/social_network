@@ -4,6 +4,7 @@ import anonym from "../../../../static/anonym.jpg";
 import {userType} from "../../../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import {followAPI} from "../../../../api/followAPI";
+DODELAY DISABLED BUTTONS ON CHANGE SUBSCRIBE STATUS
 
 type UserPropsType = userType & {
     follow: (userId: number) => void
@@ -46,9 +47,11 @@ export const User: React.FC<UserPropsType> = React.memo((props) => {
                 </div>
                 <div>{props.followed ?
                     <button className={styles.unsubBtn}
-                            onClick={() => props.unfollow(props.id)}>unsubscribe</button> :
+                            onClick={() => props.unfollow(props.id)}
+                            disabled={props.waitForChangingStatus}>unsubscribe</button> :
                     <button className={styles.subBtn}
-                            onClick={() => props.follow(props.id)}>subscribe</button>}
+                            onClick={() => props.follow(props.id)}
+                            disabled={props.waitForChangingStatus}>subscribe</button>}
                 </div>
             </div>
         </div>
