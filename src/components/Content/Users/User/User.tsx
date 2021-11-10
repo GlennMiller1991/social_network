@@ -4,7 +4,7 @@ import anonym from "../../../../static/anonym.jpg";
 import {userType} from "../../../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import {followAPI} from "../../../../api/followAPI";
-DODELAY DISABLED BUTTONS ON CHANGE SUBSCRIBE STATUS
+//DODELAY DISABLED BUTTONS ON CHANGE SUBSCRIBE STATUS
 
 type UserPropsType = userType & {
     follow: (userId: number) => void
