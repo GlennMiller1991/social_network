@@ -2,7 +2,7 @@ import {connect} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
 import {
     changeLoadStatus,
-    changePageFieldValue,
+    changePageFieldValue, changeSubBtn,
     changeUsersPage, enterPress,
     follow,
     setUsers,
@@ -28,4 +28,5 @@ export const UsersContainer = connect(mapStateToProps, {
     changePageFieldValue,
     enterPress,
     changeLoadStatus,
+    changeSubBtn,
 })(UsersSideEffectContainer)

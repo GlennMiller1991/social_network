@@ -19,6 +19,7 @@ export type UsersPropsType = {
     enterPress: (value: string) => void,
     usersIsLoaded?: boolean,
     changeLoadStatus: (usersIsLoaded: boolean) => void,
+    changeSubBtn: (userId: number, value: boolean) => void,
 }
 
 const UsersSecret: React.FC<UsersPropsType> = (props) => {
@@ -35,7 +36,8 @@ const UsersSecret: React.FC<UsersPropsType> = (props) => {
                                                         uniqueUrlName={user.uniqueUrlName}
                                                         follow={props.follow}
                                                         unfollow={props.unfollow}
-                                                        waitForChangingStatus={user.waitForChangingStatus}/>)}
+                                                        waitForChangingStatus={user.waitForChangingStatus}
+                                                        changeSubBtn={props.changeSubBtn}/>)}
             </div>
             <PaginationContainer pageFieldValue={props.pageFieldValue}
                                  pageSize={props.pageSize}

@@ -8,6 +8,7 @@ const CHANGE_USER_PAGE = 'CHANGE-USER-PAGE'
 const CHANGE_PAGE_FIELD_VALUE = 'CHANGE-PAGE-FIELD-VALUE'
 const ENTER_PRESS = 'ENTER-PRESS'
 const CHANGE_LOAD_STATUS = 'CHANGE-LOAD-STATUS'
+const CHANGE_SUB_BTN = 'CHANGE-SUB-BTN'
 
 //types
 export type userType = {
@@ -39,8 +40,18 @@ export type changeUsersPageActionType = ReturnType<typeof changeUsersPage>
 export type changePageFieldValueActionType = ReturnType<typeof changePageFieldValue>
 export type enterPressActionType = ReturnType<typeof enterPress>
 export type changeLoadStatusActionType = ReturnType<typeof changeLoadStatus>
+export type changeSubBtnActionType = ReturnType<typeof changeSubBtn>
 
 //actions creators
+export const changeSubBtn = (userId: number, value: boolean) => {
+    return {
+        type: CHANGE_SUB_BTN,
+        payload: {
+            userId,
+            value,
+        }
+    } as const
+}
 export const follow = (userId: number) => {
     return {
         type: FOLLOW,
@@ -100,6 +111,8 @@ export const changeLoadStatus = (usersIsLoaded: boolean) => {
         }
     } as const
 }
+
+
 const initialState = {
     users: [],
     totalUsersCount: 0,
@@ -159,6 +172,16 @@ export const usersReducer = (state: usersPageType = initialState, action: action
             return {
                 ...state,
                 ...action.payload
+            }
+        case CHANGE_SUB_BTN:
+            return {
+                ...state,
+                users: state.users.map(
+                    user =>
+                        user.id === action.payload.userId ?
+                            {...user, waitForChangingStatus: action.payload.value} :
+                            user
+                )
             }
         default:
             return state

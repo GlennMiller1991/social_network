@@ -6,9 +6,14 @@
 }
 
 .subBtn, .unsubBtn {
+    transition: .5s;
     width: 90px;
     border-radius: 5px;
     color: #edeef0;
+}
+
+.subBtn:disabled, .unsubBtn:disabled {
+    opacity: 0.4;
 }
 
 .subBtn {

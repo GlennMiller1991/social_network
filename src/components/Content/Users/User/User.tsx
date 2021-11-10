@@ -4,25 +4,33 @@ import anonym from "../../../../static/anonym.jpg";
 import {userType} from "../../../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
 import {followAPI} from "../../../../api/followAPI";
-//DODELAY DISABLED BUTTONS ON CHANGE SUBSCRIBE STATUS
 
 type UserPropsType = userType & {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
+    changeSubBtn: (userId: number, value: boolean) => void
 }
 
 export const UserContainer: React.FC<UserPropsType> = React.memo((props) => {
     const {follow, unfollow, ...restProps} = props
     const followSideEffect = useCallback((userId: number) => {
+        props.changeSubBtn(props.id, true)
         followAPI.follow(userId)
             .then(() => {
                 follow(userId)
             })
+            .finally(() => {
+                props.changeSubBtn(props.id, false)
+            })
     }, [follow])
     const unfollowSideEffect = useCallback((userId: number) => {
+        props.changeSubBtn(props.id, true)
         followAPI.unfollow(userId)
             .then(() => {
                 unfollow(userId)
+            })
+            .finally(() => {
+                props.changeSubBtn(props.id, false)
             })
     }, [unfollow])
     return (

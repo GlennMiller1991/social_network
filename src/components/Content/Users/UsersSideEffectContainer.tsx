@@ -11,7 +11,7 @@ export class UsersSideEffectContainer extends React.Component<UsersPropsType> {
         usersAPI.getUsers(this.props.pageSize, this.props.currentPage)
             .then(data => {
                 this.props.setUsers(data.items.map(item => {
-                    return {...item, waitForChangingStatus: true}
+                    return {...item, waitForChangingStatus: false}
                 }), data.totalCount)
             })
     }
@@ -35,7 +35,8 @@ export class UsersSideEffectContainer extends React.Component<UsersPropsType> {
                                changePageFieldValue={this.props.changePageFieldValue}
                                enterPress={this.props.enterPress}
                                usersIsLoaded={this.props.usersIsLoaded}
-                               changeLoadStatus={this.props.changeLoadStatus}/>}
+                               changeLoadStatus={this.props.changeLoadStatus}
+                               changeSubBtn={this.props.changeSubBtn}/>}
             </>
         )
     }
