@@ -1,4 +1,6 @@
-import {actionsType} from "./redux_store";
+import {actionsType, dispatchType} from "./redux_store";
+import {usersAPI} from "../api/usersAPI";
+import {followAPI} from "../api/followAPI";
 
 //constants
 const FOLLOW = 'FOLLOW'
@@ -6,7 +8,6 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET-USERS'
 const CHANGE_USER_PAGE = 'CHANGE-USER-PAGE'
 const CHANGE_PAGE_FIELD_VALUE = 'CHANGE-PAGE-FIELD-VALUE'
-const ENTER_PRESS = 'ENTER-PRESS'
 const CHANGE_LOAD_STATUS = 'CHANGE-LOAD-STATUS'
 const CHANGE_SUB_BTN = 'CHANGE-SUB-BTN'
 
@@ -38,7 +39,6 @@ export type unfollowActionType = ReturnType<typeof unfollow>
 export type setUsersActionType = ReturnType<typeof setUsers>
 export type changeUsersPageActionType = ReturnType<typeof changeUsersPage>
 export type changePageFieldValueActionType = ReturnType<typeof changePageFieldValue>
-export type enterPressActionType = ReturnType<typeof enterPress>
 export type changeLoadStatusActionType = ReturnType<typeof changeLoadStatus>
 export type changeSubBtnActionType = ReturnType<typeof changeSubBtn>
 
@@ -94,15 +94,6 @@ export const changePageFieldValue = (value: string) => {
         }
     } as const
 }
-export const enterPress = (value: string) => {
-    return {
-        type: ENTER_PRESS,
-        payload: {
-            currentPage: Number(value),
-            pageFieldValue: value,
-        }
-    } as const
-}
 export const changeLoadStatus = (usersIsLoaded: boolean) => {
     return {
         type: CHANGE_LOAD_STATUS,
@@ -112,6 +103,54 @@ export const changeLoadStatus = (usersIsLoaded: boolean) => {
     } as const
 }
 
+//thunk and thunk creators
+export const getUsers = (pageSize: number, currentPage: number) => {
+    return (dispatch: dispatchType) => {
+        usersAPI.getUsers(pageSize, currentPage)
+            .then(data => {
+                dispatch(setUsers(data.items.map(item => {
+                        return {...item, waitForChangingStatus: false}
+                    }), data.totalCount)
+                )
+            })
+    }
+}
+export const renewUsers = (requiredPage: number, pageSize: number) => {
+    return (dispatch: dispatchType) => {
+        dispatch(changeUsersPage(requiredPage))
+        usersAPI.getUsers(pageSize, requiredPage)
+            .then(data => {
+                dispatch(setUsers(data.items, data.totalCount))
+            })
+            .catch(() => {
+                dispatch(changeLoadStatus(true))
+            })
+    }
+}
+export const followUser = (userId: number) => {
+    return (dispatch: dispatchType) => {
+        changeSubBtn(userId, true)
+        followAPI.follow(userId)
+            .then(() => {
+                follow(userId)
+            })
+            .finally(() => {
+                changeSubBtn(userId, false)
+            })
+    }
+}
+export const unfollowUser = (userId: number) => {
+    return (dispatch: dispatchType) => {
+        changeSubBtn(userId, true)
+        followAPI.unfollow(userId)
+            .then(() => {
+                unfollow(userId)
+            })
+            .finally(() => {
+                changeSubBtn(userId, false)
+            })
+    }
+}
 
 const initialState = {
     users: [],
@@ -159,11 +198,6 @@ export const usersReducer = (state: usersPageType = initialState, action: action
                 ...action.payload,
             }
         case CHANGE_PAGE_FIELD_VALUE:
-            return {
-                ...state,
-                ...action.payload,
-            }
-        case ENTER_PRESS:
             return {
                 ...state,
                 ...action.payload,

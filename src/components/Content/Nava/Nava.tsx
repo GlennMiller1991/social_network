@@ -1,9 +1,7 @@
 import React from "react";
 import {NavLink} from "react-router-dom";
 import styles from "./Nava.module.css";
-import {useSelector} from "react-redux";
-import {stateType} from "../../../redux/redux_store";
-import {authType} from "../../../redux/authReducer";
+import {LoginButton} from "./LoginButton/LoginButton";
 
 const NavaSecret = () => {
 
@@ -47,21 +45,3 @@ const NavaSecret = () => {
 }
 export const Nava = React.memo(NavaSecret)
 
-export const LoginButton = React.memo(() => {
-    const authState = useSelector<stateType, authType>(state => state.authState)
-    return (
-        <div className={`${styles.button}`}>
-            {
-                authState.isAuth ?
-                    <div className={styles.loginButton}>
-                        <div className={styles.greeting}>In As</div>
-                        <div className={styles.login}>{authState.login?.slice(0, 5) + '...'}</div>
-                    </div> :
-                    <NavLink activeClassName={styles.active}
-                             to='/login'>
-                        LOGIN
-                    </NavLink>
-            }
-        </div>
-    )
-})

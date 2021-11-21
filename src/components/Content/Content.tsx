@@ -9,6 +9,7 @@ import {ShareStoryContainer} from "./ShareStory/ShareStoryContainer";
 import {BestContainer} from "./Best/BestContainer";
 import {SidebarContainer} from "./Sidebar/SidebarContainer";
 import {UsersContainer} from "./Users/UsersContainer";
+import {Login} from "./Login/Login";
 
 //components
 export const Content: React.FC = () => {
@@ -25,6 +26,7 @@ export const Content: React.FC = () => {
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/login' render={() => <Login/>}/>
                 </div>
             </div>
             <div id={styles.sidebar}>

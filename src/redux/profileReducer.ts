@@ -1,5 +1,6 @@
 import {v1} from "uuid";
-import {actionsType} from "./redux_store";
+import {actionsType, dispatchType} from "./redux_store";
+import {profileAPI} from "../api/profileAPI";
 
 //constants
 const CHANGE_NEW_COMMENT_TEXT = 'CHANGE-NEW-COMMENT-TEXT'
@@ -59,6 +60,8 @@ export const changeLoadUserStatus = (loadUserStatus: boolean) => {
         }
     } as const
 }
+
+// thunks
 
 //types
 export type commentType = {

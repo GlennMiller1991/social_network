@@ -1,4 +1,4 @@
-import {combineReducers, createStore, EmptyObject, Store} from "redux";
+import {applyMiddleware, combineReducers, createStore, EmptyObject, Store} from "redux";
 import {
     addPostActionType,
     changeLikesCountActionType,
@@ -18,7 +18,7 @@ import {
 import {
     changeLoadStatusActionType,
     changePageFieldValueActionType, changeSubBtnActionType,
-    changeUsersPageActionType, enterPressActionType,
+    changeUsersPageActionType,
     followActionType,
     setUsersActionType,
     unfollowActionType,
@@ -26,8 +26,10 @@ import {
     usersReducer
 } from "./usersReducer";
 import {authReducer, authType, setAuthDataActionType} from "./authReducer";
+import thunk from "redux-thunk";
 
 //types
+export type dispatchType = typeof store.dispatch
 export type stateType = {
     postsPage: postsPageType
     dialogsPage: dialogsPageType
@@ -57,7 +59,6 @@ export type actionsType = addPostActionType
     | setUsersActionType
     | changeUsersPageActionType
     | changePageFieldValueActionType
-    | enterPressActionType
     | changeLoadStatusActionType
     | setUserActionType
     | changeLoadUserStatusActionType
@@ -74,7 +75,7 @@ const reducers = combineReducers({
     authState: authReducer,
 })
 
-export const store = createStore(reducers)
+export const store = createStore(reducers, applyMiddleware(thunk))
 
 // @ts-ignore
 window.store = store

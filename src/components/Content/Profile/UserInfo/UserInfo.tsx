@@ -19,15 +19,15 @@ export const UserInfo: React.FC<UserInfoPropsType> = React.memo((props) => {
                              alt={'there is no foto'}/></div>
                     <div className={styles.textContainer}>
                         <ul className={styles.text}>
-                            <li>{props.user.userId}</li>
-                            <li>{props.user.fullName}</li>
-                            <li>{props.user.aboutMe}</li>
-                            <li>{props.user.lookingForAJobDescription}</li>
-                            {props.user.contacts.vk && <li>{props.user.contacts.vk}</li>}
-                            {props.user.contacts.github && <li>{props.user.contacts.github}</li>}
-                            {props.user.contacts.instagram && <li>{props.user.contacts.instagram}</li>}
-                            {props.user.contacts.website && <li>{props.user.contacts.website}</li>}
-                            {props.user.contacts.facebook && <li>{props.user.contacts.facebook}</li>}
+                            {props.user.userId && <li>{props.user.userId}<hr/></li>}
+                            {props.user.fullName && <li>{props.user.fullName}<hr/></li>}
+                            {props.user.aboutMe && <li>{props.user.aboutMe}<hr/></li>}
+                            {props.user.lookingForAJobDescription && <li>{props.user.lookingForAJobDescription}<hr/></li>}
+                            {props.user.contacts.vk && <li>{props.user.contacts.vk}<hr/></li>}
+                            {props.user.contacts.github && <li>{props.user.contacts.github}<hr/></li>}
+                            {props.user.contacts.instagram && <li>{props.user.contacts.instagram}<hr/></li>}
+                            {props.user.contacts.website && <li>{props.user.contacts.website}<hr/></li>}
+                            {props.user.contacts.facebook && <li>{props.user.contacts.facebook}<hr/></li>}
                         </ul>
                     </div>
                 </div>

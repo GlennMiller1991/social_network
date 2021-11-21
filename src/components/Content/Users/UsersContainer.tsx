@@ -1,12 +1,9 @@
 import {connect} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
 import {
-    changeLoadStatus,
     changePageFieldValue, changeSubBtn,
-    changeUsersPage, enterPress,
-    follow,
-    setUsers,
-    unfollow,
+    follow, followUser, getUsers, renewUsers,
+    unfollow, unfollowUser,
 } from "../../../redux/usersReducer";
 import {UsersSideEffectContainer} from "./UsersSideEffectContainer";
 
@@ -21,12 +18,9 @@ const mapStateToProps = (state: stateType) => {
     }
 }
 export const UsersContainer = connect(mapStateToProps, {
-    follow,
-    unfollow,
-    setUsers,
-    changeUsersPage,
     changePageFieldValue,
-    enterPress,
-    changeLoadStatus,
-    changeSubBtn,
+    getUsers,
+    renewUsers,
+    followUser,
+    unfollowUser,
 })(UsersSideEffectContainer)

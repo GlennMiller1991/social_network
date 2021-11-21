@@ -1,42 +1,14 @@
-import React, {useCallback} from "react";
+import React from "react";
 import styles from "./User.module.css";
 import anonym from "../../../../static/anonym.jpg";
 import {userType} from "../../../../redux/usersReducer";
 import {NavLink} from "react-router-dom";
-import {followAPI} from "../../../../api/followAPI";
 
 type UserPropsType = userType & {
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    changeSubBtn: (userId: number, value: boolean) => void
+    followUser: (userId: number) => void,
+    unfollowUser: (userId: number) => void,
 }
 
-export const UserContainer: React.FC<UserPropsType> = React.memo((props) => {
-    const {follow, unfollow, ...restProps} = props
-    const followSideEffect = useCallback((userId: number) => {
-        props.changeSubBtn(props.id, true)
-        followAPI.follow(userId)
-            .then(() => {
-                follow(userId)
-            })
-            .finally(() => {
-                props.changeSubBtn(props.id, false)
-            })
-    }, [follow])
-    const unfollowSideEffect = useCallback((userId: number) => {
-        props.changeSubBtn(props.id, true)
-        followAPI.unfollow(userId)
-            .then(() => {
-                unfollow(userId)
-            })
-            .finally(() => {
-                props.changeSubBtn(props.id, false)
-            })
-    }, [unfollow])
-    return (
-        <User follow={followSideEffect} unfollow={unfollowSideEffect} {...restProps}/>
-    )
-})
 export const User: React.FC<UserPropsType> = React.memo((props) => {
     console.log('from user')
     return (
@@ -45,7 +17,8 @@ export const User: React.FC<UserPropsType> = React.memo((props) => {
                 <div><NavLink to={`/profile/${props.id}`}><img className={styles.photo}
                     //@ts-ignore
                                                                src={props.photos.large || anonym}
-                                                               alt={'there is no foto'}/></NavLink></div>
+                                                               alt={'there is no foto'}/>
+                </NavLink></div>
                 <div className={styles.name}>
                     {
                         props.name.length > 10 ?
@@ -55,10 +28,10 @@ export const User: React.FC<UserPropsType> = React.memo((props) => {
                 </div>
                 <div>{props.followed ?
                     <button className={styles.unsubBtn}
-                            onClick={() => props.unfollow(props.id)}
+                            onClick={() => props.unfollowUser(props.id)}
                             disabled={props.waitForChangingStatus}>unsubscribe</button> :
                     <button className={styles.subBtn}
-                            onClick={() => props.follow(props.id)}
+                            onClick={() => props.followUser(props.id)}
                             disabled={props.waitForChangingStatus}>subscribe</button>}
                 </div>
             </div>

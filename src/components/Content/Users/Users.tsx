@@ -1,7 +1,7 @@
 import React from "react";
 import {userType} from "../../../redux/usersReducer";
 import styles from './Users.module.css'
-import {UserContainer} from "./User/User";
+import {User} from "./User/User";
 import {PaginationContainer} from "./Pagination/PaginationContainer";
 
 
@@ -11,15 +11,11 @@ export type UsersPropsType = {
     pageSize: number,
     currentPage: number,
     pageFieldValue: string,
-    follow: (userId: number) => void
-    unfollow: (userId: number) => void
-    setUsers: (users: userType[], totalUsersCount: number) => void,
-    changeUsersPage: (pageNumber: number) => void,
     changePageFieldValue: (value: string) => void,
-    enterPress: (value: string) => void,
-    usersIsLoaded?: boolean,
-    changeLoadStatus: (usersIsLoaded: boolean) => void,
-    changeSubBtn: (userId: number, value: boolean) => void,
+    getUsers: (pageSize: number, currentPage: number) => void,
+    renewUsers: (requiredPage: number, pageSize: number) => void,
+    followUser: (userId: number) => void,
+    unfollowUser: (userId: number) => void,
 }
 
 const UsersSecret: React.FC<UsersPropsType> = (props) => {
@@ -27,27 +23,23 @@ const UsersSecret: React.FC<UsersPropsType> = (props) => {
     return (
         <div className={styles.container}>
             <div className={styles.page}>
-                {props.users.map(user => <UserContainer key={user.id}
+                {props.users.map(user => <User key={user.id}
                                                         id={user.id}
                                                         name={user.name}
                                                         followed={user.followed}
                                                         status={user.status}
                                                         photos={user.photos}
                                                         uniqueUrlName={user.uniqueUrlName}
-                                                        follow={props.follow}
-                                                        unfollow={props.unfollow}
                                                         waitForChangingStatus={user.waitForChangingStatus}
-                                                        changeSubBtn={props.changeSubBtn}/>)}
+                                                        followUser={props.followUser}
+                                                        unfollowUser={props.unfollowUser}/>)}
             </div>
             <PaginationContainer pageFieldValue={props.pageFieldValue}
                                  pageSize={props.pageSize}
                                  totalUsersCount={props.totalUsersCount}
                                  currentPage={props.currentPage}
                                  changePageFieldValue={props.changePageFieldValue}
-                                 changeUsersPage={props.changeUsersPage}
-                                 setUsers={props.setUsers}
-                                 onEnterPressHandler={props.enterPress}
-                                 changeLoadStatus={props.changeLoadStatus}/>
+                                 renewUsers={props.renewUsers}/>
         </div>
     )
 }

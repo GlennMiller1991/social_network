@@ -7,14 +7,17 @@ type PaginationSecretPropsType = {
     pageFieldValue: string,
     changePageFieldValue: (value: string) => void
     onKeyPressHandler: (e: KeyboardEvent<HTMLInputElement>) => void,
-    onClickHandler: (e: MouseEvent<HTMLSpanElement>, requiredPage: number) => void
+    onClickHandler: (e: MouseEvent<HTMLSpanElement>, requiredPage: number) => void,
 }
 
 const PaginationSecret: React.FC<PaginationSecretPropsType> = (props) => {
     return (
         <div className={styles.pages}>
                     <span className={styles.changePage}
-                          onClick={(e) => props.onClickHandler(e, props.currentPage - 1)}>
+                          onClick={(e) => props.onClickHandler(
+                              e,
+                              props.currentPage - 1
+                          )}>
                         Previous
                     </span>
             <span className={styles.currentPage}>
