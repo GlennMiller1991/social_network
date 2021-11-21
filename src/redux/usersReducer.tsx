@@ -129,25 +129,25 @@ export const renewUsers = (requiredPage: number, pageSize: number) => {
 }
 export const followUser = (userId: number) => {
     return (dispatch: dispatchType) => {
-        changeSubBtn(userId, true)
+        dispatch(changeSubBtn(userId, true))
         followAPI.follow(userId)
             .then(() => {
-                follow(userId)
+                dispatch(follow(userId))
             })
             .finally(() => {
-                changeSubBtn(userId, false)
+                dispatch(changeSubBtn(userId, false))
             })
     }
 }
 export const unfollowUser = (userId: number) => {
     return (dispatch: dispatchType) => {
-        changeSubBtn(userId, true)
+        dispatch(changeSubBtn(userId, true))
         followAPI.unfollow(userId)
             .then(() => {
-                unfollow(userId)
+                dispatch(unfollow(userId))
             })
             .finally(() => {
-                changeSubBtn(userId, false)
+                dispatch(changeSubBtn(userId, false))
             })
     }
 }

@@ -13,7 +13,6 @@ type UserPropsType = userType & {
 
 export const User: React.FC<UserPropsType> = React.memo((props) => {
     console.log('from user')
-
     return (
         <div key={props.id} className={styles.wrapper}>
             <div className={styles.visual}>

@@ -2,7 +2,7 @@ import React from "react";
 import {fullUserType} from "../../../../redux/profileReducer";
 import anonym from "../../../../static/anonym.jpg";
 import styles from './UserInfo.module.css'
-import {PageLoader} from "../../../common/PageLoader/PageLoader";
+import {PageLoader} from "../../../common/visual/PageLoader/PageLoader";
 
 type UserInfoPropsType = {
     user: fullUserType

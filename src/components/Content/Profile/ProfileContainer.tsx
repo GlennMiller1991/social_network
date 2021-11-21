@@ -6,7 +6,7 @@ import {
     ProfilePageType,
     setUser
 } from "../../../redux/profileReducer";
-import {PageLoader} from "../../common/PageLoader/PageLoader";
+import {PageLoader} from "../../common/visual/PageLoader/PageLoader";
 import {useDispatch, useSelector} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
 import {RouteComponentProps, withRouter} from "react-router-dom";

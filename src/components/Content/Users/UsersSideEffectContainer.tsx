@@ -1,7 +1,6 @@
 import React from "react";
 import {Users, UsersPropsType} from "./Users";
-import {PageLoader} from "../../common/PageLoader/PageLoader";
-import {authType} from "../../../redux/authReducer";
+import {PageLoader} from "../../common/visual/PageLoader/PageLoader";
 
 type UsersSideEffectContainerPropsType = UsersPropsType & {
     usersIsLoaded: boolean,
