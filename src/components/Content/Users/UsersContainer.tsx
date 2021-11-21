@@ -1,9 +1,9 @@
 import {connect} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
 import {
-    changePageFieldValue, changeSubBtn,
-    follow, followUser, getUsers, renewUsers,
-    unfollow, unfollowUser,
+    changePageFieldValue,
+    followUser, getUsers, renewUsers,
+    unfollowUser,
 } from "../../../redux/usersReducer";
 import {UsersSideEffectContainer} from "./UsersSideEffectContainer";
 
@@ -15,6 +15,7 @@ const mapStateToProps = (state: stateType) => {
         currentPage: state.usersPage.currentPage,
         pageFieldValue: state.usersPage.pageFieldValue,
         usersIsLoaded: state.usersPage.usersIsLoaded,
+        authState: state.authState,
     }
 }
 export const UsersContainer = connect(mapStateToProps, {

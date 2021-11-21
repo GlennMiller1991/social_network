@@ -13,7 +13,11 @@ export const LoginButton = React.memo(() => {
                 authState.isAuth ?
                     <div className={styles.loginButton}>
                         <div className={styles.greeting}>In As</div>
-                        <div className={styles.login}>{authState.login?.slice(0, 5) + '...'}</div>
+                        <div className={styles.login}>
+                            <NavLink to={'/profile'}>
+                                <span>{authState.login?.slice(0, 5) + '...'}</span>
+                            </NavLink>
+                        </div>
                     </div> :
                     <NavLink activeClassName={styles.active}
                              to='/login'>

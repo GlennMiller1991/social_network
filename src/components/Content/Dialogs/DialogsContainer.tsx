@@ -6,7 +6,8 @@ import {DialogsSideEffectContainer} from "./DialogsSideEffectContainer";
 
 const mapStateToProps = (state: stateType) => {
     return {
-        state: state.dialogsPage
+        dialogState: state.dialogsPage,
+        authState: state.authState,
     }
 }
 export const DialogsContainer = connect(mapStateToProps, {filterMessages})(DialogsSideEffectContainer)

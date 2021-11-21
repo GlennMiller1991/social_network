@@ -7,7 +7,8 @@ import {ShareStorySideEffectContainer} from "./ShareStorySideEffectContainer";
 
 const mapStateToProps = (state: stateType) => {
     return {
-        state: state.shareStoryPage
+        shareStoryState: state.shareStoryPage,
+        authState: state.authState,
     }
 }
 const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {

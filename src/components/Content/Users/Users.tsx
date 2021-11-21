@@ -3,6 +3,7 @@ import {userType} from "../../../redux/usersReducer";
 import styles from './Users.module.css'
 import {User} from "./User/User";
 import {PaginationContainer} from "./Pagination/PaginationContainer";
+import {authType} from "../../../redux/authReducer";
 
 
 export type UsersPropsType = {
@@ -16,6 +17,7 @@ export type UsersPropsType = {
     renewUsers: (requiredPage: number, pageSize: number) => void,
     followUser: (userId: number) => void,
     unfollowUser: (userId: number) => void,
+    authState: authType,
 }
 
 const UsersSecret: React.FC<UsersPropsType> = (props) => {
@@ -24,15 +26,17 @@ const UsersSecret: React.FC<UsersPropsType> = (props) => {
         <div className={styles.container}>
             <div className={styles.page}>
                 {props.users.map(user => <User key={user.id}
-                                                        id={user.id}
-                                                        name={user.name}
-                                                        followed={user.followed}
-                                                        status={user.status}
-                                                        photos={user.photos}
-                                                        uniqueUrlName={user.uniqueUrlName}
-                                                        waitForChangingStatus={user.waitForChangingStatus}
-                                                        followUser={props.followUser}
-                                                        unfollowUser={props.unfollowUser}/>)}
+                                               id={user.id}
+                                               name={user.name}
+                                               followed={user.followed}
+                                               status={user.status}
+                                               photos={user.photos}
+                                               uniqueUrlName={user.uniqueUrlName}
+                                               waitForChangingStatus={user.waitForChangingStatus}
+                                               followUser={props.followUser}
+                                               unfollowUser={props.unfollowUser}
+                                               authState={props.authState}
+                />)}
             </div>
             <PaginationContainer pageFieldValue={props.pageFieldValue}
                                  pageSize={props.pageSize}

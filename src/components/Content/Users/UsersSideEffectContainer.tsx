@@ -1,6 +1,7 @@
 import React from "react";
 import {Users, UsersPropsType} from "./Users";
 import {PageLoader} from "../../common/PageLoader/PageLoader";
+import {authType} from "../../../redux/authReducer";
 
 type UsersSideEffectContainerPropsType = UsersPropsType & {
     usersIsLoaded: boolean,
@@ -30,6 +31,7 @@ export class UsersSideEffectContainer extends React.Component<UsersSideEffectCon
                                renewUsers={this.props.renewUsers}
                                followUser={this.props.followUser}
                                unfollowUser={this.props.unfollowUser}
+                               authState={this.props.authState}
                         />
                 }
             </>

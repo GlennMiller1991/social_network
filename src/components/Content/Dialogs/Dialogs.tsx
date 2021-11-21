@@ -3,10 +3,11 @@ import styles from './Dialogs.module.css'
 import {Chat} from "./Chat/Chat";
 import {OpenDialog} from "./OpenDialog/OpenDialog";
 import {dialogsPageType} from "../../../redux/dialogsReducer";
+import {authType} from "../../../redux/authReducer";
 
 //types
 export type DialogsPropsType = {
-    state: dialogsPageType
+    dialogState: dialogsPageType,
     filterMessages: (filterValue: string) => void
 }
 
@@ -16,11 +17,11 @@ const DialogsSecret: React.FC<DialogsPropsType> = (props) => {
     // or filter could be changed
     // but useMemo looking for dependencies
     let chatMessagesForRender = useMemo(() => {
-            return props.state.filter !== 'all' ?
-                props.state.chat.filter(mes => mes.author === props.state.filter) :
-                props.state.chat
+            return props.dialogState.filter !== 'all' ?
+                props.dialogState.chat.filter(mes => mes.author === props.dialogState.filter) :
+                props.dialogState.chat
         },
-        [props.state.chat, props.state.filter])
+        [props.dialogState.chat, props.dialogState.filter])
 
     //return
     return (
@@ -31,7 +32,7 @@ const DialogsSecret: React.FC<DialogsPropsType> = (props) => {
                 <div onClick={() => props.filterMessages('all')}>all</div>
             </div>
             <div className={styles.openDialogs}>
-                {props.state.dialogs.map((dialog) => {
+                {props.dialogState.dialogs.map((dialog) => {
                     return (
                         <OpenDialog key={dialog.id} id={dialog.id} name={dialog.name}/>
                     );
