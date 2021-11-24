@@ -9,7 +9,7 @@ type UserInfoPropsType = {
 }
 export const UserInfo: React.FC<UserInfoPropsType> = React.memo((props) => {
         console.log('from user info')
-        if (props.user !== null) {
+        if (props.user.userId !== -1) {
             return (
                 <div className={styles.wrapper}>
                     <div className={styles.photoWrapper}>

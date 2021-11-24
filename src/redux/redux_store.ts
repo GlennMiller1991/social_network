@@ -10,7 +10,7 @@ import {changeShareStoryTextActionType, shareStoryPageType, shareStoryReducer} f
 import {dialogsPageType, dialogsReducer, filterMessagesActionType} from "./dialogsReducer";
 import {sidebarReducer, sideBarType} from "./sidebarReducer";
 import {
-    addCommentActionType, changeLoadUserStatusActionType,
+    addCommentActionType, changeLoadUserStatus, changeLoadUserStatusActionType,
     changeNewCommentTextActionType,
     ProfilePageType,
     profileReducer, setUserActionType

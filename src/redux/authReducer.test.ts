@@ -10,7 +10,7 @@ beforeEach(() => {
     }
 })
 
-test('auth should be valid', () => {
+test('auth should be truth', () => {
     let newState = authReducer(initialState, setAuthData(1, 'Racoonister', 'example@mail.ru'))
 
     expect(newState.isAuth).toBe(true)

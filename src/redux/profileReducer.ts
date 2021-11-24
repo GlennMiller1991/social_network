@@ -1,6 +1,5 @@
 import {v1} from "uuid";
-import {actionsType, dispatchType} from "./redux_store";
-import {profileAPI} from "../api/profileAPI";
+import {actionsType} from "./redux_store";
 
 //constants
 const CHANGE_NEW_COMMENT_TEXT = 'CHANGE-NEW-COMMENT-TEXT'
@@ -9,7 +8,7 @@ const SET_USER = 'SET-USER'
 const CHANGE_LOAD_USER_STATUS = 'CHANGE-LOAD-USER-STATUS'
 
 //types
-export type fullUserType = null | {
+export type fullUserType = {
     aboutMe: string,
     contacts: {
         facebook: null | string,
@@ -106,9 +105,31 @@ const comments: commentType[] = [
         answer: v1()
     }
 ]
+
+export const testUser: fullUserType = {
+    aboutMe: 'some text',
+    contacts: {
+        facebook: null,
+        website: null,
+        vk: null,
+        twitter: null,
+        instagram: null,
+        youtube: null,
+        github: 'https://github.com/GlennMiller1991',
+        mainLink: null,
+    },
+    lookingForAJob: true,
+    lookingForAJobDescription: 'React-developer',
+    fullName: 'Alexander',
+    userId: -1,
+    photos: {
+        small: null,
+        large: null,
+    }
+}
 const initialState = {
     currentUserId: 1456,
-    currentUserData: null,
+    currentUserData: testUser,
     loadUserStatus: true,
     comments: comments,
     newComm: ''
@@ -130,6 +151,10 @@ export const profileReducer = (state: ProfilePageType = initialState, action: ac
                 newComm: ''
             }
         case CHANGE_LOAD_USER_STATUS:
+            return {
+                ...state,
+                ...action.payload,
+            }
         case SET_USER:
             return {
                 ...state,
