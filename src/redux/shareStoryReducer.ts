@@ -15,7 +15,7 @@ export const changeShareStoryTextActionCreator = (text: string) => {
 export type changeShareStoryTextActionType = ReturnType<typeof changeShareStoryTextActionCreator>
 
 //data
-const initialState = {
+const initialState: shareStoryPageType = {
     storyText: ''
 }
 
