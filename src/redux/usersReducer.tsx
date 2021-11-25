@@ -82,7 +82,7 @@ export const changeUsersPage = (pageNumber: number) => {
         type: CHANGE_USER_PAGE,
         payload: {
             currentPage: pageNumber,
-            pageFieldValue: pageNumber,
+            pageFieldValue: String(pageNumber),
         }
     } as const
 }
