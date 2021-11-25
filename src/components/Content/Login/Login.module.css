@@ -1,0 +1,99 @@
+.main {
+    background-color: inherit;
+    width: auto;
+    height: 400px;
+    border-radius: 1.5em;
+}
+
+.sign {
+    margin-right: 40px;
+    text-align: center;
+    padding-top: 40px;
+    color: #962626;
+    font-family: "Trebuchet MS", "Lucida Sans", sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+}
+
+.un {
+    text-align: center;
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: "Trebuchet MS", "Lucida Sans", sans-serif;
+}
+
+form.form1 {
+    padding-top: 40px;
+}
+
+.pass {
+    text-align: center;
+    width: 76%;
+    color: rgb(38, 50, 56);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background: rgba(136, 126, 126, 0.04);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.02);
+    margin-bottom: 50px;
+    margin-left: 46px;
+    text-align: center;
+    margin-bottom: 27px;
+    font-family: "Trebuchet MS", "Lucida Sans", sans-serif;
+}
+
+
+.un:focus, .pass:focus {
+    border: 2px solid rgba(0, 0, 0, 0.18) !important;
+
+}
+
+.submit {
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5em;
+    color: #fff;
+    background: #751c1c;
+    border: 0;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-family: "Trebuchet MS", "Lucida Sans", sans-serif;
+    margin-left: 36%;
+    font-size: 13px;
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.forgot {
+    text-align: center;
+    margin-right: 30px;
+    padding-top: 30px;
+    font-family: "Trebuchet MS", "Lucida Sans", sans-serif;
+}
+
+a {
+    text-align: center;
+    text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+    color: #962626;
+    text-decoration: none
+}
