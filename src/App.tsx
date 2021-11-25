@@ -35,7 +35,6 @@ function AppSecret() {
                 {way === 0 ? <Header setWay={setWay}/> :
                     <>
                         <Content/>
-                        <Footer/>
                     </>}
             </div>
         </HashRouter>

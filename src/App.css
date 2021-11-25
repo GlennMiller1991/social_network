@@ -6,7 +6,7 @@
 
 #appWrapper {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
   grid-template-rows: 1fr auto;
   background-color: #edeef0;

@@ -155,7 +155,7 @@ export const unfollowUser = (userId: number) => {
 const initialState = {
     users: [],
     totalUsersCount: 0,
-    pageSize: 12,
+    pageSize: 16,
     currentPage: 1,
     pageFieldValue: '1',
     usersIsLoaded: true,

@@ -9,7 +9,7 @@ import {
 import {PageLoader} from "../../common/visual/PageLoader/PageLoader";
 import {useDispatch, useSelector} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
-import {RouteComponentProps, withRouter} from "react-router-dom";
+import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
 import {authType} from "../../../redux/authReducer";
 import {profileAPI} from "../../../api/profileAPI";
 
@@ -39,12 +39,12 @@ const ProfileSideEffectContainer: React.FC<RouteComponentProps<PathParamsType>> 
                 authState.isAuth ? authState.id : null
             if (userId) {
                 profileAPI.getProfile(userId)
-                .then((data) => {
-                    if (data !== null) {
-                        dispatch(setUser(data))
-                        setIsLoad(false)
-                    }
-                })
+                    .then((data) => {
+                        if (data !== null) {
+                            dispatch(setUser(data))
+                            setIsLoad(false)
+                        }
+                    })
             }
         }, [
             dispatch,
@@ -55,11 +55,14 @@ const ProfileSideEffectContainer: React.FC<RouteComponentProps<PathParamsType>> 
         return (
             <>
                 {
-                    isLoad ?
-                        <PageLoader/> :
-                        <Profile onChangeCallback={onChangeCallback}
-                                 onClickCallback={onClickCallback}
-                                 state={state}/>
+                    authState.isAuth ?
+                        (                        isLoad ?
+                            <PageLoader/> :
+                            <Profile onChangeCallback={onChangeCallback}
+                                     onClickCallback={onClickCallback}
+                                     state={state}/>
+                        ):
+                        <Redirect to={'/login'}/>
                 }
             </>
         )
