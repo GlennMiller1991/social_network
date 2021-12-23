@@ -113,11 +113,11 @@ test('changing load status', () => {
 })
 
 test('change subscribe btn status while load', () => {
+    let newState = usersReducer(initialState, changeSubBtn(1, true))
     expect(initialState.users.length).toBe(6)
     expect(initialState.currentPage).toBe(1)
     expect(initialState.pageFieldValue).toBe('1')
     expect(initialState.users[0].waitForChangingStatus).toBe(false)
-    let newState = usersReducer(initialState, changeSubBtn(1, true))
 
     expect(newState.users.length).toBe(6)
     expect(newState.currentPage).toBe(1)

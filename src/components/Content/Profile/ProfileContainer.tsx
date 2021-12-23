@@ -9,9 +9,10 @@ import {
 import {PageLoader} from "../../common/visual/PageLoader/PageLoader";
 import {useDispatch, useSelector} from "react-redux";
 import {stateType} from "../../../redux/redux_store";
-import {Redirect, RouteComponentProps, withRouter} from "react-router-dom";
+import {RouteComponentProps, withRouter} from "react-router-dom";
 import {authType} from "../../../redux/authReducer";
 import {profileAPI} from "../../../api/profileAPI";
+import {withAuthRedirect} from "../../../hoc/AuthRedirect";
 
 type PathParamsType = {
     userId: string,
@@ -55,17 +56,14 @@ const ProfileSideEffectContainer: React.FC<RouteComponentProps<PathParamsType>> 
         return (
             <>
                 {
-                    authState.isAuth ?
-                        (                        isLoad ?
-                            <PageLoader/> :
-                            <Profile onChangeCallback={onChangeCallback}
-                                     onClickCallback={onClickCallback}
-                                     state={state}/>
-                        ):
-                        <Redirect to={'/login'}/>
+                    isLoad ?
+                        <PageLoader/> :
+                        <Profile onChangeCallback={onChangeCallback}
+                                 onClickCallback={onClickCallback}
+                                 state={state}/>
                 }
             </>
         )
     }
 )
-export const ProfileContainer = withRouter(ProfileSideEffectContainer)
+export const ProfileContainer = withAuthRedirect(withRouter(ProfileSideEffectContainer))
