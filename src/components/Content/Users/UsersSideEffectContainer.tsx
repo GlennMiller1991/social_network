@@ -5,16 +5,31 @@ import {PageLoader} from "../../common/visual/PageLoader/PageLoader";
 type UsersSideEffectContainerPropsType = UsersPropsType & {
     usersIsLoaded: boolean,
 }
-export class UsersSideEffectContainer extends React.Component<UsersSideEffectContainerPropsType> {
+
+type stateProps = {
+    intervalId: number,
+}
+
+export class UsersSideEffectContainer extends React.Component<UsersSideEffectContainerPropsType, stateProps> {
+    constructor(props: UsersSideEffectContainerPropsType) {
+        super(props);
+        this.state = {
+            intervalId: -1,
+        }
+    }
 
     //life cycle
     componentDidMount() {
-        document.title = 'Users Page'
-        this.props.getUsers(this.props.pageSize, this.props.currentPage)
+        document.title = 'Users page'
+        this.setState({intervalId: this.props.getUsers(this.props.pageSize, this.props.currentPage)})
     }
 
-//callbacks
-    render() {
+    componentWillUnmount() {
+        clearInterval(this.state.intervalId)
+    }
+
+     render() {
+        console.log('from usersSideEffectContainer')
         return (
             <>
                 {

@@ -13,7 +13,7 @@ export type UsersPropsType = {
     currentPage: number,
     pageFieldValue: string,
     changePageFieldValue: (value: string) => void,
-    getUsers: (pageSize: number, currentPage: number) => void,
+    getUsers: (pageSize: number, currentPage: number) => number,
     renewUsers: (requiredPage: number, pageSize: number) => void,
     followUser: (userId: number) => void,
     unfollowUser: (userId: number) => void,

@@ -106,13 +106,21 @@ export const changeLoadStatus = (usersIsLoaded: boolean) => {
 //thunk and thunk creators
 export const getUsers = (pageSize: number, currentPage: number) => {
     return (dispatch: dispatchType) => {
-        usersAPI.getUsers(pageSize, currentPage)
-            .then(data => {
-                dispatch(setUsers(data.items.map(item => {
-                        return {...item, waitForChangingStatus: false}
-                    }), data.totalCount)
-                )
-            })
+        const setIntervalId = setInterval(() => {
+            console.log('from interval')
+            usersAPI.getUsers(pageSize, currentPage)
+                .then(data => {
+                    clearInterval(setIntervalId)
+                    dispatch(setUsers(data.items.map(item => {
+                            return {...item, waitForChangingStatus: false}
+                        }), data.totalCount)
+                    )
+                })
+                .catch(err => {
+                    console.log(err.message)
+                })
+        }, 1000)
+        return Number(setIntervalId)
     }
 }
 export const renewUsers = (requiredPage: number, pageSize: number) => {

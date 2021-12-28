@@ -4,6 +4,7 @@ import {changeShareStoryTextActionCreator} from "../../../redux/shareStoryReduce
 import {connect} from "react-redux";
 import {actionsType, stateType} from "../../../redux/redux_store";
 import {ShareStorySideEffectContainer} from "./ShareStorySideEffectContainer";
+import {withAuthRedirect} from "../../common/hoc/withAuthRedirect";
 
 const mapStateToProps = (state: stateType) => {
     return {
@@ -22,4 +23,6 @@ const mapDispatchToProps = (dispatch: (action: actionsType) => void) => {
         }
     }
 }
-export const ShareStoryContainer = connect(mapStateToProps, mapDispatchToProps)(ShareStorySideEffectContainer)
+export const ShareStoryContainer = withAuthRedirect(
+    connect(mapStateToProps, mapDispatchToProps)(ShareStorySideEffectContainer)
+)

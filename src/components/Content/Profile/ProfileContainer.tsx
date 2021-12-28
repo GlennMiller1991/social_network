@@ -12,7 +12,7 @@ import {stateType} from "../../../redux/redux_store";
 import {RouteComponentProps, withRouter} from "react-router-dom";
 import {authType} from "../../../redux/authReducer";
 import {profileAPI} from "../../../api/profileAPI";
-import {withAuthRedirect} from "../../../hoc/AuthRedirect";
+import {withAuthRedirect} from "../../common/hoc/withAuthRedirect";
 
 type PathParamsType = {
     userId: string,

@@ -2,7 +2,6 @@ import React, {ChangeEvent, LegacyRef} from 'react';
 import styles from './ShareStory.module.css';
 import {shareStoryPageType} from "../../../redux/shareStoryReducer";
 import {authType} from "../../../redux/authReducer";
-import {Redirect} from "react-router-dom";
 
 export type ShareStoryPropsType = {
     shareStoryState: shareStoryPageType,
@@ -14,22 +13,20 @@ export type ShareStoryPropsType = {
 //components
 export const ShareStory: React.FC<ShareStoryPropsType> = React.memo((props) => {
     const ref: LegacyRef<HTMLTextAreaElement> | undefined = React.createRef()
-    const content = props.authState.isAuth ?
-        <div>
+
+    return (
+        <React.Fragment>
+            <div>
             <textarea placeholder={'Share your story with us'}
                       value={props.shareStoryState.storyText}
                       onChange={(event) => props.onChangeCallback(event)}
                       maxLength={1000}
                       ref={ref}
                       className={styles.txt}> </textarea>
-            <button onClick={() => props.onClickCallback(ref.current ? ref.current.value : '')}
-                    className={styles.btn}>Send
-            </button>
-        </div> :
-        <Redirect to={'/login'}/>
-    return (
-        <React.Fragment>
-            {content}
+                <button onClick={() => props.onClickCallback(ref.current ? ref.current.value : '')}
+                        className={styles.btn}>Send
+                </button>
+            </div>
         </React.Fragment>
     )
 })
