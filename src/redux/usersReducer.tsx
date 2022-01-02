@@ -107,7 +107,6 @@ export const changeLoadStatus = (usersIsLoaded: boolean) => {
 export const getUsers = (pageSize: number, currentPage: number) => {
     return (dispatch: dispatchType) => {
         const setIntervalId = setInterval(() => {
-            console.log('from interval')
             usersAPI.getUsers(pageSize, currentPage)
                 .then(data => {
                     clearInterval(setIntervalId)

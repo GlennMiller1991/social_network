@@ -1,15 +1,18 @@
 import {v1} from "uuid";
-import {actionsType} from "./redux_store";
+import {actionsType, dispatchType} from "./redux_store";
+import {profileAPI} from "../api/profileAPI";
 
 //constants
 const CHANGE_NEW_COMMENT_TEXT = 'CHANGE-NEW-COMMENT-TEXT'
 const ADD_COMMENT = 'ADD-COMMENT'
 const SET_USER = 'SET-USER'
 const CHANGE_LOAD_USER_STATUS = 'CHANGE-LOAD-USER-STATUS'
+const CHANGE_MY_STATUS = 'CHANGE_MY_STATUS'
 
 //types
 export type fullUserType = {
     aboutMe: string,
+    status: string,
     contacts: {
         facebook: null | string,
         website: null | string,
@@ -59,8 +62,41 @@ export const changeLoadUserStatus = (loadUserStatus: boolean) => {
         }
     } as const
 }
+export const changeMyStatus = (status: string) => {
+    return {
+        type: CHANGE_MY_STATUS,
+        payload: {
+            status
+        }
+    } as const
+}
 
-// thunks
+//thunks
+export const getProfile = (userId: number) => {
+    return (dispatch: dispatchType) => {
+        const setIntervalId = setInterval(() => {
+            profileAPI.getProfile(userId)
+                .then((data) => {
+                    clearInterval(setIntervalId)
+                    if (data !== null) {
+                        profileAPI.getStatus(userId)
+                            .then(statusData => {
+                                data.status = statusData ? statusData : ''
+                            })
+                            .catch(error => {
+                                data.status = 'Status was not found'
+                                console.log(error.message)
+                            })
+                            .finally(() => {
+                                dispatch(setUser(data))
+                            })
+                    }
+                })
+        }, 1000)
+        return Number(setIntervalId)
+    }
+}
+
 
 //types
 export type commentType = {
@@ -82,7 +118,7 @@ export type addCommentActionType = ReturnType<typeof addCommentActionCreator>
 export type changeNewCommentTextActionType = ReturnType<typeof changeNewCommentTextActionCreator>
 export type setUserActionType = ReturnType<typeof setUser>
 export type changeLoadUserStatusActionType = ReturnType<typeof changeLoadUserStatus>
-
+export type changeMyStatusActionType = ReturnType<typeof changeMyStatus>
 
 //data
 const comments: commentType[] = [
@@ -108,6 +144,7 @@ const comments: commentType[] = [
 
 export const testUser: fullUserType = {
     aboutMe: 'some text',
+    status: '',
     contacts: {
         facebook: null,
         website: null,
@@ -150,6 +187,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: ac
                 }],
                 newComm: ''
             }
+        case CHANGE_MY_STATUS:
         case CHANGE_LOAD_USER_STATUS:
             return {
                 ...state,

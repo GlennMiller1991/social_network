@@ -1,7 +1,7 @@
 import React, {ChangeEvent, useCallback, useEffect, useState} from 'react'
 import {Profile} from "./Profile";
 import {
-    addCommentActionCreator,
+    addCommentActionCreator, changeLoadUserStatus, changeMyStatus,
     changeNewCommentTextActionCreator,
     ProfilePageType,
     setUser
@@ -13,6 +13,7 @@ import {RouteComponentProps, withRouter} from "react-router-dom";
 import {authType} from "../../../redux/authReducer";
 import {profileAPI} from "../../../api/profileAPI";
 import {withAuthRedirect} from "../../common/hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type PathParamsType = {
     userId: string,
@@ -20,6 +21,7 @@ type PathParamsType = {
 const ProfileSideEffectContainer: React.FC<RouteComponentProps<PathParamsType>> = React.memo(
     (props) => {
         //props
+        const [renew, setRenew] = useState(false)
         const state = useSelector<stateType, ProfilePageType>(state => state.profilePage)
         const authState = useSelector<stateType, authType>(state => state.authState)
         const dispatch = useDispatch()
@@ -29,10 +31,11 @@ const ProfileSideEffectContainer: React.FC<RouteComponentProps<PathParamsType>> 
         const onClickCallback = useCallback((text: string) => {
             dispatch(addCommentActionCreator(text))
         }, [dispatch])
-
+        const changeMyStatusHandler = useCallback((status: string) => {
+            dispatch(changeMyStatus(status))
+        }, [dispatch])
         //initial state
         console.log('from profile container')
-        const [isLoad, setIsLoad] = useState(true)
         useEffect(() => {
             document.title = 'Profile Page'
             const userId = props.match.params.userId ?
@@ -42,28 +45,53 @@ const ProfileSideEffectContainer: React.FC<RouteComponentProps<PathParamsType>> 
                 profileAPI.getProfile(userId)
                     .then((data) => {
                         if (data !== null) {
-                            dispatch(setUser(data))
-                            setIsLoad(false)
+                            profileAPI.getStatus(userId)
+                                .then(statusData => {
+                                    data.status = statusData ? statusData : ''
+                                })
+                                .catch(error => {
+                                    data.status = 'Status was not found'
+                                    console.log(error.message)
+                                })
+                                .finally(() => {
+                                    dispatch(setUser(data))
+                                })
                         }
                     })
+                    .catch(err => {
+                        setTimeout(() => {
+                            console.log('from setTimeout')
+                            setRenew(!renew)
+                        }, 3000)
+                    })
+
+            }
+            return () => {
+                dispatch(changeLoadUserStatus(true))
             }
         }, [
             dispatch,
             props.match.params.userId,
             authState.isAuth,
-            authState.id])
+            authState.id,
+            renew])
 
         return (
             <>
                 {
-                    isLoad ?
+                    state.loadUserStatus ?
                         <PageLoader/> :
                         <Profile onChangeCallback={onChangeCallback}
                                  onClickCallback={onClickCallback}
-                                 state={state}/>
+                                 changeStatusHandler={changeMyStatusHandler}
+                                 state={state}
+                                 currentUser={authState.isAuth ? authState.id : -1}/>
                 }
             </>
         )
     }
 )
-export const ProfileContainer = withAuthRedirect(withRouter(ProfileSideEffectContainer))
+export const ProfileContainer = compose<React.ComponentType>(
+    withAuthRedirect,
+    withRouter
+)(ProfileSideEffectContainer)
