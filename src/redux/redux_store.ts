@@ -1,4 +1,5 @@
 import {applyMiddleware, combineReducers, createStore, EmptyObject, Store} from "redux";
+import {reducer as formReducer} from 'redux-form'
 import {
     addPostActionType,
     changeLikesCountActionType,
@@ -74,6 +75,7 @@ const reducers = combineReducers({
     sideBar: sidebarReducer,
     usersPage: usersReducer,
     authState: authReducer,
+    form: formReducer,
 })
 
 export const store = createStore(reducers, applyMiddleware(thunk))
