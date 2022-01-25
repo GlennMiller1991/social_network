@@ -11,7 +11,7 @@ import {changeShareStoryTextActionType, shareStoryPageType, shareStoryReducer} f
 import {dialogsPageType, dialogsReducer, filterMessagesActionType} from "./dialogsReducer";
 import {sidebarReducer, sideBarType} from "./sidebarReducer";
 import {
-    addCommentActionType, changeLoadUserStatus, changeLoadUserStatusActionType, changeMyStatusActionType,
+    addCommentActionType, changeLoadUserStatusActionType, changeMyStatusActionType,
     changeNewCommentTextActionType,
     ProfilePageType,
     profileReducer, setUserActionType
@@ -26,20 +26,14 @@ import {
     usersPageType,
     usersReducer
 } from "./usersReducer";
-import {authReducer, authType, setAuthDataActionType} from "./authReducer";
+import {authReducer, nullDataActionType, setAuthDataActionType} from "./authReducer";
 import thunk from "redux-thunk";
+import {appReducer, setErrorActionType} from "./appReducer";
 
 //types
 export type dispatchType = typeof store.dispatch
-export type stateType = {
-    postsPage: postsPageType
-    dialogsPage: dialogsPageType
-    shareStoryPage: shareStoryPageType
-    sideBar: sideBarType
-    profilePage: ProfilePageType
-    usersPage: usersPageType,
-    authState: authType,
-}
+export type stateType = ReturnType<typeof reducers>
+
 export type StoreType = Store<EmptyObject & {
     postsPage: postsPageType;
     profilePage: ProfilePageType;
@@ -49,6 +43,8 @@ export type StoreType = Store<EmptyObject & {
     usersPage: usersPageType,
 }, actionsType>
 export type actionsType = addPostActionType
+    | setErrorActionType
+    | nullDataActionType
     | changeLikesCountActionType
     | changeShareStoryTextActionType
     | changeNewCommentTextActionType
@@ -75,6 +71,7 @@ const reducers = combineReducers({
     sideBar: sidebarReducer,
     usersPage: usersReducer,
     authState: authReducer,
+    appState: appReducer,
     form: formReducer,
 })
 
