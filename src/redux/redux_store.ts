@@ -5,7 +5,7 @@ import {
     changeLikesCountActionType,
     filterPostsActionType,
     postsPageType,
-    postsReducer
+    postsReducer, setPostsActionType
 } from "./postsReducer";
 import {changeShareStoryTextActionType, shareStoryPageType, shareStoryReducer} from "./shareStoryReducer";
 import {dialogsPageType, dialogsReducer, filterMessagesActionType} from "./dialogsReducer";
@@ -28,7 +28,7 @@ import {
 } from "./usersReducer";
 import {authReducer, nullDataActionType, setAuthDataActionType} from "./authReducer";
 import thunk from "redux-thunk";
-import {appReducer, setErrorActionType} from "./appReducer";
+import {appReducer, initializingActionType, setErrorActionType} from "./appReducer";
 
 //types
 export type dispatchType = typeof store.dispatch
@@ -43,6 +43,8 @@ export type StoreType = Store<EmptyObject & {
     usersPage: usersPageType,
 }, actionsType>
 export type actionsType = addPostActionType
+    | initializingActionType
+    | setPostsActionType
     | setErrorActionType
     | nullDataActionType
     | changeLikesCountActionType

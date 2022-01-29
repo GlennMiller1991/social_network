@@ -1,36 +1,24 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import './App.css';
 import {Header} from "./components/Header/Header";
 import {Content} from "./components/Content/Content";
 import {HashRouter} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {checkMyAuth} from "./redux/authReducer";
+import {useSelector} from "react-redux";
 import {stateType} from "./redux/redux_store";
 import { ErrorMessage } from './components/ErrorMessage/ErrorMessage';
-
-//types
-export type wayType = 0 | 1
-
+import {appStateType} from "./redux/appReducer";
 function AppSecret() {
-    //first enter?
-    const [way, setWay] = useState<wayType>(1)
-    const dispatch = useDispatch()
-    const error = useSelector<stateType, string>(state => state.appState.error)
-
-    //auth user
-    useEffect(() => {
-        dispatch(checkMyAuth())
-    }, [dispatch])
+    const appState = useSelector<stateType, appStateType>(state => state.appState)
 
     return (
         <HashRouter>
             <div id='appWrapper'>
-                {way === 0 ? <Header setWay={setWay}/> :
+                {!appState.isInitialized ? <Header/> :
                     <>
                         <Content/>
                     </>}
                 {
-                    error && <ErrorMessage message={error}/>
+                    appState.error && <ErrorMessage message={appState.error}/>
                 }
             </div>
         </HashRouter>

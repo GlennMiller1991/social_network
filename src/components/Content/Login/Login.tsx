@@ -6,8 +6,9 @@ import {log} from "../../../redux/authReducer";
 import {WrappedFieldProps} from "redux-form/lib/Field";
 import {CustomFormPropsType} from "../ShareStory/ShareStoryContainer";
 import {requiredField} from "../../../utils/validators/validator";
+import {setError} from "../../../redux/appReducer";
 
-export const Login:React.FC = () => {
+export const Login: React.FC = () => {
     const dispatch = useDispatch()
     const onSubmitHandle = (formData: LoginFormPropsType) => {
         dispatch(log(true, formData))
@@ -24,7 +25,7 @@ type LoginFormPropsType = {
     email: string,
     password: string,
 }
-export const LoginForm:React.FC<InjectedFormProps<LoginFormPropsType>> = (props) => {
+export const LoginForm: React.FC<InjectedFormProps<LoginFormPropsType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit} className={styles.form1}>
             <Field className={styles.un}
@@ -53,11 +54,18 @@ export const LoginReduxForm = reduxForm<LoginFormPropsType>({
 })(LoginForm)
 
 const Input: React.FC<WrappedFieldProps & CustomFormPropsType> = React.memo((
-    {meta,
+    {
+        meta,
         input,
-        ...restProps}) => {
+        ...restProps
+    }) => {
+    console.log('from input')
+    const dispatch = useDispatch()
     const error = !!meta.error && !!meta.touched
-    restProps.className = restProps.className + (error ? ` ${styles.error}`: '')
+    if (error) {
+        restProps.className = restProps.className + ' ' + styles.error
+        dispatch(setError(meta.error))
+    }
     return (
         <div>
             <input {...input} {...restProps}/>

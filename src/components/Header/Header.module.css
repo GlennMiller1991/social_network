@@ -14,7 +14,7 @@
 
 #textContainer {
     width: 40%;
-    heigth: 20%;
+    height: 20%;
     color: white;
     text-align: center;
 }
@@ -26,6 +26,7 @@
 }
 
 #imgBtn {
+    cursor: pointer;
     width: 100%;
     height: 100%;
     border-radius: 50%;

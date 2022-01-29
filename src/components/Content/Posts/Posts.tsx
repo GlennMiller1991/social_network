@@ -17,15 +17,15 @@ const PostsSecret: React.FC<PostsPropsType> = (props) => {
         let tempPosts = props.state.posts
         switch (props.state.filter) {
             case "rate":
-                tempPosts.sort((postA, postB) => {
-                    return postA.postLikes > postB.postLikes ? -1 : 1
-                })
-                break
+                // tempPosts.sort((postA, postB) => {
+                //     return postA.postLikes > postB.postLikes ? -1 : 1
+                // })
+                // break
             case "reverse rate":
-                tempPosts.sort((postA, postB) => {
-                    return postA.postLikes > postB.postLikes ? 1 : -1
-                })
-                break
+                // tempPosts.sort((postA, postB) => {
+                //     return postA.postLikes > postB.postLikes ? 1 : -1
+                // })
+                // break
             case 'date':
             default:
                 break
@@ -45,7 +45,7 @@ const PostsSecret: React.FC<PostsPropsType> = (props) => {
             <div id={classes.posts}>
                 {postsForRender.map((post) => {
                     return (
-                        <div key={post.postId}>
+                        <div key={post.hash}>
                             <Post postInfo={post}
                                   changeLikesCount={props.changeLikesCount}/>
                         </div>

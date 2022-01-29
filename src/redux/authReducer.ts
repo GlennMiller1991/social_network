@@ -49,7 +49,7 @@ export const nullData = () => {
 }
 
 
-export const checkMyAuth = () => (dispatch: Dispatch<setAuthDataActionType | nullDataActionType>) => {
+export const checkMyAuth = () => (dispatch: Dispatch) => {
     authAPI.checkAuth()
         .then(response => {
                 console.log('from then', response)

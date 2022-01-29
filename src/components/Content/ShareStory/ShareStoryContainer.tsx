@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {addPostActionCreator} from "../../../redux/postsReducer";
 import {maxLength10, requiredField} from "../../../utils/validators/validator";
 import {WrappedFieldProps} from "redux-form/lib/Field";
+import {setError} from "../../../redux/appReducer";
 
 export const ShareStoryContainer: React.FC = withAuthRedirect(() => {
     const dispatch = useDispatch()
@@ -54,21 +55,18 @@ const TextArea: React.FC<WrappedFieldProps & CustomFormPropsType> = React.memo((
     {meta,
         input,
         ...restProps}) => {
+    const dispatch = useDispatch()
     const error = !!meta.error && !!meta.touched
-    restProps.className = restProps.className + (error ? ` ${styles.errorBorder}`: '')
+    if (error) {
+        restProps.className = restProps.className + ' ' + styles.errorBorder
+        dispatch(setError(meta.error))
+    }
     return (
         <div>
             <textarea {...input} {...restProps}/>
             <button type={'submit'}
                     className={styles.btn}>Send
             </button>
-            {
-                error &&
-                <>
-                    <br/>
-                    <span className={styles.error}>{meta.error}</span>
-                </>
-            }
         </div>
     )
 })
