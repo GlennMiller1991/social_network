@@ -1,17 +1,20 @@
-import {actionsType} from "./redux_store";
+import {actionsType, dispatchType} from "./redux_store";
+import {errorResponseType, successResponseType, vkWallGetResponseType} from "../api/vkAPI";
+import {defaultPageSize, setError} from "./appReducer";
 
 //constants
-const CHANGE_LIKES_COUNT = "CHANGE-LIKES-COUNT";
 const ADD_POST = "ADD-POST"
-const FILTER = 'FILTER'
+const CHANGE_PAGE_SIZE = 'CHANGE_PAGE_SIZE'
 const SET_POSTS = 'SET_POSTS'
+const CHANGE_FIELD_VALUE = 'CHANGE_FIELD_VALUE'
+const CHANGE_POSTS_PAGE = 'CHANGE_POSTS_PAGE'
 
 //actions types
-export type changeLikesCountActionType = ReturnType<typeof changeLikesCountActionCreator>
 export type addPostActionType = ReturnType<typeof addPostActionCreator>
-export type filterPostsActionType = ReturnType<typeof filterPostsActionCreator>
+export type filterPostsActionType = ReturnType<typeof changePageSizeActionCreator>
 export type setPostsActionType = ReturnType<typeof setPosts>
-
+export type changeFieldValueActionType = ReturnType<typeof changeFieldValue>
+export type changePostsPageActionType = ReturnType<typeof changePostsPage>
 //types
 export type PostType = {
     postText: string
@@ -55,67 +58,92 @@ export type vkPostType = {
         count: number,
     },
 }
+export type pageSizeType = 3 | 10 | 20
+
 export type postsPageType = {
     posts: Array<vkPostType>
-    filter: string
+    pageSize: pageSizeType,
+    count: number,
+    currentPage: number,
+    field: string,
 }
 
-//action creators
-export const changeLikesCountActionCreator = (change: boolean, postId: string) => {
-    return {type: CHANGE_LIKES_COUNT, postId: postId, value: change} as const
+export const changeFieldValue = (field: string) => {
+    return {
+        type: CHANGE_FIELD_VALUE,
+        payload: {
+            field
+        }
+    } as const
 }
 export const addPostActionCreator = (value: string) => {
     return {type: ADD_POST, postMessage: value} as const
 }
-export const filterPostsActionCreator = (filterValue: string) => {
+export const changePageSizeActionCreator = (pageSize: pageSizeType) => {
     return {
-        type: FILTER,
+        type: CHANGE_PAGE_SIZE,
         payload: {
-            filter: filterValue
+            pageSize,
         }
     } as const
 }
-export const setPosts = (posts: vkPostType[]) => {
+export const setPosts = (posts: vkPostType[], count: number) => {
     return {
         type: SET_POSTS,
         payload: {
             posts,
+            count,
         }
     } as const
+}
+export const changePostsPage = (pageNumber: number) => {
+    return {
+        type: CHANGE_POSTS_PAGE,
+        payload: {
+            currentPage: pageNumber,
+            field: String(pageNumber),
+        }
+    } as const
+}
+export const renewPosts = (requiredPage: number, pageSize: number, count?: number) => {
+    return (dispatch: dispatchType) => {
+        dispatch(changePostsPage(requiredPage))
+        //@ts-ignore
+        VK.Api.call('wall.get',
+            {v: 5.131, owner_id: -34215577, count: count? count: defaultPageSize, offset: (requiredPage - 1) * pageSize},
+            (res: vkWallGetResponseType) => {
+                if (res.hasOwnProperty('response')) {
+                    const response = res as successResponseType
+                    if (response.response.items.length) {
+                        dispatch(setPosts(response.response.items, response.response.count))
+                    }
+                } else if (res.hasOwnProperty('error')) {
+                    const response = res as errorResponseType
+                    if (response.error.error_msg) {
+                        dispatch(setError(response.error.error_msg))
+                    }
+                } else {
+                    dispatch(setError('unknown error'))
+                }
+            }
+        )
+    }
 }
 
 const initialState: postsPageType = {
     posts: [],
-    filter: 'date'
+    pageSize: defaultPageSize,
+    count: 0,
+    currentPage: 1,
+    field: '1',
 }
 
 export const postsReducer = (state: postsPageType = initialState, action: actionsType): postsPageType => {
     switch (action.type) {
         case SET_POSTS:
-            return {
-                ...state,
-                ...action.payload,
-            }
-        // case CHANGE_LIKES_COUNT:
-        //     const mapPosts = (post: PostType) => {
-        //         return post.postId === action.postId ?
-        //             (action.value ?
-        //                 {...post, postLikes: post.postLikes + 1} :
-        //                 {...post, postLikes: post.postLikes - 1}) :
-        //             post
-        //     }
-        //     return {...state, posts: state.posts.map(mapPosts)}
-        // case ADD_POST:
-        //     return action.postMessage.trim() ? {
-        //         ...state, posts: [...state.posts, {
-        //             postText: action.postMessage.trim(),
-        //             postPhoto: 'https://vk.com',
-        //             postDate: `${new Date().getDate()}.${new Date().getMonth()}.${new Date().getFullYear()}}`,
-        //             postLikes: 0,
-        //             postId: v1()
-        //         }]
-        //     } : state
-        case FILTER:
+        case CHANGE_POSTS_PAGE:
+        case CHANGE_PAGE_SIZE:
+        case CHANGE_FIELD_VALUE:
             return {
                 ...state,
                 ...action.payload

@@ -2,7 +2,7 @@ import {v1} from "uuid";
 import {
     addPostActionCreator,
     changeLikesCountActionCreator,
-    filterPostsActionCreator,
+    changePageSizeActionCreator,
     postsPageType,
     postsReducer
 } from "./postsReducer";
@@ -66,19 +66,19 @@ test('addPost must be correct', () => {
 })
 test('filterPosts must be correct', () => {
     let objToTest = postsReducer(initialState,
-        filterPostsActionCreator('reverse rate')
+        changePageSizeActionCreator('reverse rate')
     )
     expect(objToTest.filter).toBe('reverse rate')
     expect(objToTest.posts.length).toBe(3)
     expect(objToTest.posts[1].postId).toEqual(initialState.posts[1].postId)
     objToTest = postsReducer(initialState,
-        filterPostsActionCreator('rate')
+        changePageSizeActionCreator('rate')
     )
     expect(objToTest.filter).toBe('rate')
     expect(objToTest.posts.length).toBe(3)
     expect(objToTest.posts[1].postId).toEqual(initialState.posts[1].postId)
     objToTest = postsReducer(initialState,
-        filterPostsActionCreator('date')
+        changePageSizeActionCreator('date')
     )
     expect(objToTest.filter).toBe('date')
     expect(objToTest.posts.length).toBe(3)

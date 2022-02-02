@@ -1,57 +1,50 @@
-import React, {ChangeEvent, useMemo} from "react";
+import React, {ChangeEvent, useCallback} from "react";
 import classes from "./Posts.module.css";
 import {Post} from "./Post/Post";
-import {postsPageType} from "../../../redux/postsReducer";
+import {changeFieldValue, postsPageType, renewPosts} from "../../../redux/postsReducer";
+import {useDispatch, useSelector} from "react-redux";
+import {stateType} from "../../../redux/redux_store";
+import {PaginationContainer} from "../Users/Pagination/PaginationContainer";
 
 export type PostsPropsType = {
     state: postsPageType
     onChangeFilterHandler: (event: ChangeEvent<HTMLSelectElement>) => void
-    changeLikesCount: (change: boolean, postId: string) => void
 }
 
 const PostsSecret: React.FC<PostsPropsType> = (props) => {
-    console.log('from posts')
-    // sort posts every rerender because post could be added or likes count could be change d
-    const postsForRender = useMemo(() => {
-        console.log('from useMemo')
-        let tempPosts = props.state.posts
-        switch (props.state.filter) {
-            case "rate":
-                // tempPosts.sort((postA, postB) => {
-                //     return postA.postLikes > postB.postLikes ? -1 : 1
-                // })
-                // break
-            case "reverse rate":
-                // tempPosts.sort((postA, postB) => {
-                //     return postA.postLikes > postB.postLikes ? 1 : -1
-                // })
-                // break
-            case 'date':
-            default:
-                break
-        }
-        return tempPosts
-    }, [props.state.posts, props.state.filter])
-
+    const postsPage = useSelector<stateType, postsPageType>(state => state.postsPage)
+    const vkIsAuth = useSelector<stateType, boolean>(state => state.authState.vkIsAuth)
+    const dispatch = useDispatch()
+    const changePageFieldValue = useCallback((field) => {
+        dispatch(changeFieldValue(field))
+    }, [dispatch])
+    const renewItems = useCallback((requiredPage: number, pageSize: number) => {
+        dispatch(renewPosts(requiredPage, pageSize, postsPage.pageSize))
+    }, [dispatch, postsPage.pageSize])
     //return
     return (
         <div>
-            Sorted by
-            <select value={props.state.filter} onChange={props.onChangeFilterHandler}>
-                <option value={'date'}>date</option>
-                <option value={'rate'}>rate</option>
-                <option value={'reverse rate'}>reverse rate</option>
-            </select>
-            <div id={classes.posts}>
-                {postsForRender.map((post) => {
-                    return (
-                        <div key={post.hash}>
-                            <Post postInfo={post}
-                                  changeLikesCount={props.changeLikesCount}/>
-                        </div>
-                    )
-                })}
-            </div>
+            {vkIsAuth &&
+                <>
+                    <PaginationContainer pageSize={postsPage.pageSize}
+                                         className={classes.pagination}
+                                         currentPage={postsPage.currentPage}
+                                         pageFieldValue={postsPage.field}
+                                         totalUsersCount={postsPage.count}
+                                         changePageFieldValue={changePageFieldValue}
+                                         renewUsers={renewItems}/>
+                    <div id={classes.posts}>
+                        {props.state.posts.map((post) => {
+                            return (
+                                <div key={post.hash}>
+                                    <Post postInfo={post}/>
+                                    <hr/>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </>
+            }
         </div>
     )
 }

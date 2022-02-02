@@ -6,7 +6,6 @@ import {ProfileContainer} from "./Profile/ProfileContainer";
 import {PostsContainer} from "./Posts/PostsContainer";
 import {DialogsContainer} from "./Dialogs/DialogsContainer";
 import {ShareStoryContainer} from "./ShareStory/ShareStoryContainer";
-import {BestContainer} from "./Best/BestContainer";
 import {SidebarContainer} from "./Sidebar/SidebarContainer";
 import {UsersContainer} from "./Users/UsersContainer";
 
@@ -19,7 +18,6 @@ export const Content: React.FC = () => {
                 <div id={styles.general}>
                     <Route path={'/'} exact render={() => <Redirect to={'/main'}/>}/>
                     <Route path='/main' render={() => <PostsContainer/>}/>
-                    <Route path='/best' render={() => <BestContainer/>}/>
                     <Route path='/share' render={() => <ShareStoryContainer/>}/>
                     <Route path='/profile/:userId?' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>

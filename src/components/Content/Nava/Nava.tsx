@@ -19,11 +19,6 @@ const NavaSecret = () => {
                 </NavLink>
             </div>
             <div className={styles.button}>
-                <NavLink activeClassName={styles.active} to='/best'>
-                    BEST
-                </NavLink>
-            </div>
-            <div className={styles.button}>
                 <NavLink activeClassName={styles.active} to='/profile'>
                     PROFILE
                 </NavLink>
@@ -38,6 +33,7 @@ const NavaSecret = () => {
                     USERS
                 </NavLink>
             </div>
+            <div className={styles.button}></div>
             <div className={styles.button}></div>
             <LoginButton/>
         </div>

@@ -1,8 +1,7 @@
 import {applyMiddleware, combineReducers, createStore, EmptyObject, Store} from "redux";
 import {reducer as formReducer} from 'redux-form'
 import {
-    addPostActionType,
-    changeLikesCountActionType,
+    addPostActionType, changeFieldValueActionType, changePostsPageActionType,
     filterPostsActionType,
     postsPageType,
     postsReducer, setPostsActionType
@@ -26,7 +25,7 @@ import {
     usersPageType,
     usersReducer
 } from "./usersReducer";
-import {authReducer, nullDataActionType, setAuthDataActionType} from "./authReducer";
+import {authReducer, nullDataActionType, setAuthDataActionType, setVkIsAuthActionType} from "./authReducer";
 import thunk from "redux-thunk";
 import {appReducer, initializingActionType, setErrorActionType} from "./appReducer";
 
@@ -43,11 +42,13 @@ export type StoreType = Store<EmptyObject & {
     usersPage: usersPageType,
 }, actionsType>
 export type actionsType = addPostActionType
+    | setVkIsAuthActionType
+    | changePostsPageActionType
+    | changeFieldValueActionType
     | initializingActionType
     | setPostsActionType
     | setErrorActionType
     | nullDataActionType
-    | changeLikesCountActionType
     | changeShareStoryTextActionType
     | changeNewCommentTextActionType
     | addCommentActionType

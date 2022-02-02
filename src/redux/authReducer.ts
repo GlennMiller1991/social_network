@@ -5,26 +5,37 @@ import {setError} from "./appReducer";
 
 const SET_AUTH_DATA = 'SET-AUTH-DATA'
 const NULL_DATA = 'NULL_DATA'
+const SET_VK_IS_AUTH = 'SET_VK_IS_AUTH'
 
 export type authType = {
     id: null | number,
     login: null | string,
     email: null | string,
     isAuth: boolean,
+    vkIsAuth: boolean,
 }
 const initialState: authType = {
     id: null,
     login: null,
     email: null,
     isAuth: false,
+    vkIsAuth: false,
 }
 
 //actions types
 export type setAuthDataActionType = ReturnType<typeof setAuthData>
 export type nullDataActionType = ReturnType<typeof nullData>
+export type setVkIsAuthActionType = ReturnType<typeof setVkIsAuth>
 
 //action creators
-
+export const setVkIsAuth = (vkIsAuth: boolean) => {
+    return {
+        type: SET_VK_IS_AUTH,
+        payload: {
+            vkIsAuth,
+        }
+    } as const
+}
 export const setAuthData = (id: number, login: string, email: string) => {
     return {
         type: SET_AUTH_DATA,
@@ -80,6 +91,7 @@ export const log = (login: boolean, payload?: { email: string, password: string 
 
 export const authReducer = (state: authType = initialState, action: actionsType) => {
     switch (action.type) {
+        case SET_VK_IS_AUTH:
         case NULL_DATA:
             return {
                 ...state,

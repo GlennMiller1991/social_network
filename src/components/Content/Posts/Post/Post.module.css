@@ -1,53 +1,26 @@
 .post {
-    display: grid;
     width: 100%;
-    grid-template-columns: 5fr 2fr;
-    grid-template-areas:
-    'text image';
-    justify-items: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
 }
 
 .text {
     width: 100%;
-    padding-bottom: 15px;
-    grid-area: text;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr auto;
-    grid-template-areas:
-    'postText postText postText'
-    'postLikes postLikes postDate';
+    grid-template-rows: auto auto;
 }
 
-.image {
-    grid-area: image;
-    justify-self: start;
-    margin-left: 25px;
+.rest {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eec4c4;
+    margin-bottom: 5px;
+    color: #9a1c1c;
 }
 
-.image img {
-    width: 100px;
-    height: 100px;
-}
-
-.postText {
-    grid-area: postText;
-}
-
-.postAuthor {
-    grid-area: postAuthor;
-}
-
-.postDate {
-    grid-area: postDate;
-}
-
-.postLikes {
-    grid-area: postLikes;
-}
-
-.postRate > button {
-    width: 20px;
-    height: 20px;
-    border: 1px solid black;
+.rest * {
+    fill: #9a1c1c;
 }

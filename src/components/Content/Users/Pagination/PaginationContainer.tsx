@@ -8,6 +8,7 @@ type PaginationContainerPropsType = {
     totalUsersCount: number
     changePageFieldValue: (value: string) => void
     renewUsers: (requiredPage: number, pageSize: number) => void,
+    className?: string,
 }
 export const PaginationContainer: React.FC<PaginationContainerPropsType> = React.memo((props) => {
     const pages = (totalUsersCount: number, pageSize: number) => {
@@ -32,6 +33,8 @@ export const PaginationContainer: React.FC<PaginationContainerPropsType> = React
                     pageFieldValue={props.pageFieldValue}
                     changePageFieldValue={props.changePageFieldValue}
                     onKeyPressHandler={onKeyPressHandler}
-                    onClickHandler={onClickHandler}/>
+                    onClickHandler={onClickHandler}
+                    className={props.className? props.className: ''}
+                    />
     )
 })
